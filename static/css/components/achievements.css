@@ -16,7 +16,7 @@
   font-size: var(--font-size-3xl);
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  color: var(--color-text);
+  color: var(--color-white);
 }
 
 .achievements__grid {
@@ -47,7 +47,7 @@
 
 .achievement-card__label {
   font-size: var(--font-size-base);
-  color: var(--color-text);
+  color: var(--color-white);
   font-weight: 500;
 }
 

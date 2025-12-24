@@ -4,7 +4,6 @@
 
 /* ВЕЛИКІ елементи (секції) - з обмеженим blur та виразнішими тінями */
 .glass-section {
-  background: var(--glass-bg-elevated);
   border: 1px solid var(--glass-border-elevated);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow-elevated);

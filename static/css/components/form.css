@@ -10,7 +10,7 @@
   display: block;
   margin-bottom: var(--spacing-xs);
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-white);
 }
 
 .form-group input,
@@ -18,13 +18,13 @@
 .form-group textarea {
   width: 100%;
   padding: var(--spacing-sm);
-  border: 1.5px solid var(--input-border);
+  border: 1.5px solid var(--color-white);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-base);
   font-family: var(--font-family-base);
   min-height: 44px;
-  background-color: var(--input-bg);
-  color: var(--color-text);
+  background-color: var(--color-white);
+  color: var(--color-black);
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
@@ -39,7 +39,8 @@
 .form-group input.error,
 .form-group select.error,
 .form-group textarea.error {
-  border-color: var(--color-error);
+  border-color: var(--color-white);
+  background-color: var(--color-white);
 }
 
 .form-group input:disabled,
@@ -60,7 +61,7 @@
 .form-help {
   display: block;
   margin-top: var(--spacing-xs);
-  color: var(--color-text-muted);
+  color: var(--color-white);
   font-size: var(--font-size-sm);
 }
 

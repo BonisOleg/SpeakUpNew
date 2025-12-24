@@ -1,4 +1,4 @@
-<form class="trial-form" method="post" action="{% url 'leads:submit_trial_form' %}" hx-post="{% url 'leads:submit_trial_form' %}" hx-swap="outerHTML">
+<form class="trial-form trial-form--hero" method="post" action="{% url 'leads:submit_trial_form' %}" hx-post="{% url 'leads:submit_trial_form' %}" hx-swap="outerHTML">
   {% csrf_token %}
   <div class="form-group">
     {{ form.name }}
@@ -13,7 +13,7 @@
     {% endif %}
   </div>
   <button type="submit" class="button button--primary button--full">
-    Записатися на пробний урок
+    СПРОБУВАТИ
   </button>
 </form>
 

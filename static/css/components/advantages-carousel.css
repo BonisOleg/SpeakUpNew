@@ -65,12 +65,12 @@
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: var(--spacing-md);
-  color: var(--color-text);
+  color: var(--color-white);
 }
 
 .advantage-card__text {
   font-size: var(--font-size-base);
-  color: var(--color-text-muted);
+  color: var(--color-white);
   line-height: 1.6;
 }
 

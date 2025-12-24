@@ -56,7 +56,7 @@
   left: 50%;
   z-index: var(--z-speaky-layer, 0);
   width: 30rem; /* Fallback */
-  width: clamp(25rem, 30vw, 35rem);
+  width: clamp(46rem, 30vw, 35rem);
   height: auto;
   pointer-events: none;
 
@@ -85,29 +85,6 @@
   min-height: 100dvh;
 }
 
-/* Hero секція (оновлення для index.html) */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: var(--spacing-xl);
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: var(--font-size-3xl);
-  margin-bottom: var(--spacing-md);
-}
-
-.hero p {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-xl);
-  color: var(--color-text-muted);
-}
-
 /* iOS Safari специфічні фікси */
 @supports (-webkit-touch-callout: none) {
   .hero-background {
@@ -117,8 +94,7 @@
     height: calc(var(--parallax-vh, 1vh) * 120);
   }
 
-  .hero-content,
-  .hero {
+  .hero-content {
     min-height: 100dvh;
     min-height: calc(var(--parallax-vh, 1vh) * 100);
   }
@@ -141,18 +117,6 @@
     width: 18rem; /* Fallback */
     width: clamp(18rem, 50vw, 22rem);
     bottom: -10rem;
-  }
-
-  .hero {
-    padding: var(--spacing-lg) var(--spacing-md);
-  }
-
-  .hero h1 {
-    font-size: var(--font-size-2xl);
-  }
-
-  .hero p {
-    font-size: var(--font-size-base);
   }
 }
 

@@ -5,14 +5,12 @@
 .hero-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* Fallback */
-  min-height: 100dvh;
+  max-height: 50vh; /* Fallback */
+  max-height: 50dvh;
   padding: var(--section-padding-desktop);
   margin-bottom: var(--section-spacing-desktop);
-  text-align: center;
   contain: layout style;
+  overflow: hidden;
   width: 100%;
   max-width: min(var(--content-width-desktop), var(--content-max-width));
   margin-left: auto;
@@ -20,18 +18,35 @@
 }
 
 .hero-section__header {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .hero-section__header h1 {
-  font-size: var(--font-size-3xl);
-  margin-bottom: var(--spacing-md);
-  color: var(--color-text);
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* 40-56px */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* Загальний клас для червоних акцентів */
+.text-accent,
+.hero-section__price-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Зелений акцент для "БЕЗКОШТОВНО" */
+.hero-section__free-accent {
+  color: var(--color-success);
+  font-weight: 700;
 }
 
 .hero-section__header p {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem); /* 18-22px */
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-white);
 }
 
 .hero-section__cta {
@@ -39,25 +54,54 @@
   grid-template-columns: 1fr 1fr;
   gap: 0;
   width: 100%;
-  align-items: center;
+  margin-left: 15vw; /* Fallback */
+  margin-left: 15dvw; /* iOS Dynamic Viewport */
+  overflow: hidden;
 }
 
 .hero-section__form {
-  padding: var(--spacing-lg);
+  padding: 0;
+  width: 100%;
+  max-width: 400px;
+  justify-self: end;
+  margin-left: auto;
+}
+
+/* Перекриваємо glassmorphism для форми */
+.hero-section__form.glass-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .hero-section__image {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
+  width: 100%;
+  max-width: 70%;
+  justify-self: start;
+  margin-right: auto;
 }
 
 .hero-section__image img {
-  width: 100%;
+  width: 17vh;
+  max-width: 20vh;
   height: auto;
   object-fit: contain;
   display: block;
+}
+
+/* iOS Safari специфічні фікси */
+@supports (-webkit-touch-callout: none) {
+  .hero-section__cta {
+    margin-left: 15dvw;
+    /* Fallback для iOS < 15 */
+    margin-left: calc(var(--parallax-vh, 1vh) * 15);
+  }
 }
 
 /* Мобільна версія */
@@ -66,23 +110,27 @@
     padding: var(--section-padding-mobile);
     margin-bottom: var(--section-spacing-mobile);
     max-width: var(--content-width-mobile);
-  }
-
-  .hero-section__header h1 {
-    font-size: var(--font-size-2xl);
-  }
-
-  .hero-section__header p {
-    font-size: var(--font-size-base);
+    max-height: 50vh; /* Fallback */
+    max-height: 50dvh;
   }
 
   .hero-section__cta {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    gap: 0;
+    margin-left: 0;
+  }
+
+  .hero-section__form {
+    max-width: 100%;
+    justify-self: stretch;
+    margin-left: 0;
   }
 
   .hero-section__image {
-    order: -1; /* Зображення зверху на мобільному */
+    order: -1;
+    max-width: 100%;
+    justify-self: center;
+    margin-right: 0;
   }
 }
 

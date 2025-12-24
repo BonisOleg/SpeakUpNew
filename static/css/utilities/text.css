@@ -22,6 +22,17 @@
 .text-info { color: var(--color-info); }
 .text-muted { color: var(--color-text-muted); }
 
+/* Акцентний червоний колір (як у hero-section__price-accent) */
+.text-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Альтернативний варіант без font-weight */
+.text-accent-color {
+  color: var(--color-primary);
+}
+
 .font-normal { font-weight: 400; }
 .font-medium { font-weight: 500; }
 .font-semibold { font-weight: 600; }

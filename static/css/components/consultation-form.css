@@ -100,7 +100,7 @@
 
 .consultation-form__checkbox-wrapper label {
   font-size: var(--font-size-base);
-  color: var(--color-text);
+  color: var(--color-white);
   cursor: pointer;
 }
 

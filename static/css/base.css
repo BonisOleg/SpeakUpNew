@@ -17,9 +17,8 @@
   /* Чорно-білі: */
   --color-white: #FFFFFF;
   --color-black: #000000;
-  --color-text: #000000;
-  --color-text-inverse: #FFFFFF;
-  --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-text: #FFFFFF;
+  --color-text-muted: rgba(255, 255, 255, 0.8);
   --color-border: rgba(0, 0, 0, 0.1);
   --color-border-light: rgba(255, 255, 255, 0.2);
   --color-bg: #FFFFFF;
@@ -132,8 +131,8 @@
   --button-shadow-hover: 0 6px 20px rgba(220, 20, 60, 0.35);
 
   /* Form contrast */
-  --input-bg: rgba(255, 255, 255, 0.95);
-  --input-border: rgba(0, 0, 0, 0.2);
+  --input-bg: var(--color-white);
+  --input-border: var(--color-white);
 }
 
 /* Dark mode support */
@@ -173,7 +172,7 @@ body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: 1.5;
-  color: var(--color-text);
+  color: var(--color-white);
   background-color: var(--color-bg);
 
   /* Rule 32: overscroll-behavior */
@@ -285,6 +284,7 @@ input:-webkit-autofill:focus {
 /* Rule 43: text-wrap balance для заголовків */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
+  color: var(--color-white);
 }
 
 /* ==========================================================================

@@ -38,7 +38,7 @@
 .testimonial-card__name {
   font-size: var(--font-size-lg);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-white);
 }
 
 .testimonial-card__rating {
@@ -57,14 +57,14 @@
 
 .testimonial-card__text {
   font-size: var(--font-size-base);
-  color: var(--color-text);
+  color: var(--color-white);
   line-height: 1.6;
   flex: 1 0 0;
 }
 
 .testimonial-card__date {
   font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  color: var(--color-white);
 }
 
 /* Десктоп: 3 картки */

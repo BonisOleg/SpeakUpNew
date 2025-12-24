@@ -18,7 +18,117 @@
   margin-bottom: 0;
 }
 
-.trial-form--desktop .form-group__input {
-  min-height: 44px;
+/* Повністю переписані стилі для Hero форми */
+.trial-form--hero {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.trial-form--hero .form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.trial-form--hero .form-group:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.trial-form--hero .form-group input,
+.trial-form--hero .form-group input[type="text"],
+.trial-form--hero .form-group input[type="tel"],
+.trial-form--hero .form-group input.form-group__input {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-white);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-family-base);
+  color: var(--color-black);
+  min-height: 52px;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.trial-form--hero .form-group input:hover {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+}
+
+.trial-form--hero .form-group input:focus,
+.trial-form--hero .form-group input[type="text"]:focus,
+.trial-form--hero .form-group input[type="tel"]:focus,
+.trial-form--hero .form-group input.form-group__input:focus {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.trial-form--hero .form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.trial-form--hero .button {
+  min-height: 52px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 0.5rem;
+  padding: 0.875rem 2rem;
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trial-form--hero .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 20, 60, 0.4);
+  }
+}
+
+/* Помилки валідації для hero форми - позиціонування всередині інпута */
+.trial-form--hero .form-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  color: var(--color-error);
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 2;
+  background: transparent;
+  margin: 0;
+}
+
+.trial-form--hero .form-group:has(.form-error) input {
+  color: transparent;
+}
+
+.trial-form--hero .form-group:has(.form-error) input::placeholder {
+  opacity: 0;
+}
+
+/* Fallback для браузерів без підтримки :has() */
+@supports not selector(:has(*)) {
+  .trial-form--hero .form-group.has-error .form-error {
+    display: flex;
+  }
+
+  .trial-form--hero .form-group.has-error input {
+    color: transparent;
+  }
+
+  .trial-form--hero .form-group.has-error input::placeholder {
+    opacity: 0;
+  }
 }
 
