@@ -56,7 +56,7 @@
   left: 50%;
   z-index: var(--z-speaky-layer, 0);
   width: 30rem; /* Fallback */
-  width: clamp(46rem, 30vw, 35rem);
+  width: clamp(67rem, 30vw, 35rem);
   height: auto;
   pointer-events: none;
 
@@ -83,6 +83,8 @@
   z-index: var(--z-content, 1);
   min-height: 100vh; /* Fallback */
   min-height: 100dvh;
+  max-height: 350vh;
+  max-height: 320dvh;
 }
 
 /* iOS Safari специфічні фікси */

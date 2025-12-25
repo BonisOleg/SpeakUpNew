@@ -15,6 +15,8 @@
   max-width: min(var(--content-width-desktop), var(--content-max-width));
   margin-left: auto;
   margin-right: auto;
+  margin-top: 9vh;
+  margin-top: 9dvh;
 }
 
 .hero-section__header {
@@ -30,15 +32,36 @@
 }
 
 /* Загальний клас для червоних акцентів */
-.text-accent,
-.hero-section__price-accent {
+.text-accent {
   display: inline-block;
   color: var(--color-primary);
   font-weight: 700;
   background-color: var(--color-white);
-  padding: 0.1em 0.1em;
+  padding: 0.25em 0.5em;
   border-radius: var(--radius-md);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Золотий текст з блистками та білим контуром для "180 грн" */
+.hero-section__price-accent {
+  display: inline-block;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--color-white);
+  animation: glitter 3s ease-in-out infinite;
+}
+
+@keyframes glitter {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Зелений акцент для "БЕЗКОШТОВНО" */
@@ -144,9 +167,12 @@
   }
 
   /* Адаптивні капсули для акцентів на мобільних */
-  .hero-section__price-accent,
   .hero-section__free-accent {
     padding: 0.2em 0.4em;
+    font-size: 0.9em;
+  }
+
+  .hero-section__price-accent {
     font-size: 0.9em;
   }
 }

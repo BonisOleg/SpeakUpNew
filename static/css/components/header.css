@@ -5,15 +5,14 @@
   left: 0;
   right: 0;
   z-index: var(--z-header);
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
   padding: 0 var(--spacing-md);
   padding-top: max(10px, env(safe-area-inset-top, 10px));
   padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
-  box-shadow: none;
-  background: var(--color-bg);
+  box-sizing: border-box;
 }
 
 .header {
@@ -28,10 +27,44 @@
 .header__logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header__logo-image {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.header__menu--top .header__logo {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 100%;
+  align-self: stretch;
+}
+
+.header__menu--top .header__logo-image {
+  height: 5vh;
+  height: 5dvh;
+  width: auto;
+  object-fit: contain;
+}
+
+.header__logo:hover {
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+
+.header__logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* Форма в хедері (десктоп): */
@@ -51,14 +84,72 @@
   box-sizing: border-box;
 }
 
+.header__menu--top .trial-form--desktop {
+  display: flex;
+  gap: var(--menu-spacing-xs);
+  flex: 1 0 0;
+  align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.header__menu--top .trial-form--desktop .form-group {
+  margin: 0;
+  flex: 1 0 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .trial-form--desktop .form-group__input {
   border: 1px solid var(--color-white);
   background-color: var(--color-white);
   color: var(--color-black);
 }
 
+.header__menu--top .trial-form--desktop .form-group__input {
+  background-color: var(--color-white);
+  border: var(--menu-border-md) solid var(--color-white);
+  border-radius: var(--menu-radius-md);
+  padding: calc(0.875rem * var(--menu-scale)) calc(1rem * var(--menu-scale));
+  font-size: var(--menu-font-base);
+  font-family: var(--font-family-base);
+  color: var(--color-black);
+  min-height: var(--menu-size-lg);
+  width: 100%;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.header__menu--top .trial-form--desktop .form-group__input:focus {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 calc(4px * var(--menu-scale)) rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.header__menu--top .trial-form--desktop .form-group__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
 .trial-form--desktop .button--primary {
   flex-shrink: 0;
+}
+
+.header__menu--top .trial-form--desktop .button--primary {
+  flex-shrink: 0;
+  min-height: var(--menu-size-lg);
+  padding: calc(0.875rem * var(--menu-scale)) calc(1.5rem * var(--menu-scale));
+  font-size: var(--menu-font-base);
+  border-radius: var(--menu-radius-md);
+}
+
+.header__menu--top [data-header-expand].button--primary {
+  flex-shrink: 0;
+  min-height: var(--menu-size-lg);
+  padding: calc(0.875rem * var(--menu-scale)) calc(1.5rem * var(--menu-scale));
+  font-size: var(--menu-font-base);
+  border-radius: var(--menu-radius-md);
 }
 
 /* Кнопка на мобільних: */
@@ -84,8 +175,13 @@
 
   .header__nav {
     max-width: 900px;
-    padding: 0 var(--spacing-sm);
+    padding: 0 var(--menu-spacing-sm);
     box-shadow: none;
+  }
+
+  .header__nav--top {
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .mobile-nav-container {
@@ -126,16 +222,29 @@
 
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-pill);
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--menu-spacing-sm) var(--menu-spacing-lg);
   box-sizing: border-box;
   box-shadow: none;
+}
+
+/* Верхнє меню (як нижнє) */
+.header__nav--top {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-pill);
+  padding: var(--menu-spacing-sm) var(--menu-spacing-lg);
+  box-sizing: border-box;
+  box-shadow: none;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .header__menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
+  gap: var(--menu-spacing-xs);
   list-style: none;
   background: var(--color-gray-light);
   border-radius: var(--radius-pill);
@@ -146,16 +255,45 @@
   box-shadow: none;
   background-clip: padding-box;
   margin: 0;
+  padding-left: 0;
+  padding-inline-start: 0;
+  /* Повне прибирання резервованого місця під маркери списку */
+}
+
+.header__menu::marker {
+  display: none;
+  content: '';
+}
+
+.header__menu li::marker {
+  display: none;
+  content: '';
+}
+
+.header__menu--top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--menu-spacing-xs);
+  list-style: none;
+  background: var(--color-gray-light);
+  border-radius: var(--radius-pill);
+  padding: var(--menu-spacing-xs) var(--menu-spacing-sm);
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-clip: padding-box;
+  margin: 0;
 }
 
 .header__link {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--menu-spacing-xs) var(--menu-spacing-sm);
   color: var(--color-white);
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--menu-font-lg);
+  font-weight: 800;
   border-radius: var(--radius-pill);
   transition: all var(--transition-fast);
   white-space: nowrap;
@@ -177,10 +315,10 @@
 /* Бургер-меню (кнопка): */
 .burger-menu {
   z-index: 1001;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  max-width: 48px;
+  width: var(--menu-size-xl);
+  height: var(--menu-size-xl);
+  min-width: var(--menu-size-xl);
+  max-width: var(--menu-size-xl);
   padding: 0;
   background: var(--color-gray-light);
   border-radius: var(--radius-pill);
@@ -200,18 +338,18 @@
 .burger-menu__icon {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  width: 22px;
-  height: 18px;
+  gap: calc(5px * var(--menu-scale));
+  width: calc(22px * var(--menu-scale));
+  height: calc(18px * var(--menu-scale));
   justify-content: space-between;
   position: relative;
 }
 
 .burger-menu__line {
   width: 100%;
-  height: 2px;
+  height: var(--menu-border-md);
   background: var(--color-white);
-  border-radius: 2px;
+  border-radius: calc(2px * var(--menu-scale));
   transition: all var(--transition-fast);
 }
 
@@ -224,7 +362,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 22px;
+  width: calc(22px * var(--menu-scale));
   transform: translate(-50%, -50%) rotate(45deg);
   transform-origin: center;
 }
@@ -237,7 +375,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 22px;
+  width: calc(22px * var(--menu-scale));
   transform: translate(-50%, -50%) rotate(-45deg);
   transform-origin: center;
 }
@@ -317,10 +455,10 @@
 
 .burger-menu__link {
   display: block;
-  padding: var(--spacing-md);
+  padding: var(--menu-spacing-md);
   color: var(--color-white);
   text-decoration: none;
-  font-size: 16px;
+  font-size: calc(16px * var(--menu-scale));
   font-weight: 500;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
@@ -388,21 +526,30 @@
   }
 
   .header-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--z-header);
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
     padding-left: max(10px, env(safe-area-inset-left, 10px));
     padding-right: max(10px, env(safe-area-inset-right, 10px));
-    padding-top: max(10px, env(safe-area-inset-top, 10px));
-    padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
-    box-shadow: none;
-    overflow-x: hidden;
-    background: var(--color-bg);
+  }
+
+  .header__menu--top {
+    flex-wrap: wrap;
+    gap: var(--menu-spacing-xs);
+  }
+
+  .header__menu--top .header__logo {
+    height: 100%;
+    align-self: stretch;
+  }
+
+  .header__menu--top .header__logo-image {
+    height: 100%;
+  }
+
+  .header__menu--top .trial-form--desktop {
+    display: none;
+  }
+
+  .trial-form__trigger--mobile {
+    display: flex;
   }
 
   .header {
@@ -419,6 +566,16 @@
     border-radius: var(--radius-md);
   }
 
+  /* Виправлення асиметрії відступів на мобільних:
+     Прибрано горизонтальний padding з .header та .header__menu всередині .mobile-nav-container,
+     оскільки padding вже забезпечується контейнером. Це забезпечує симетричні
+     відступи зліва та справа між .header__nav та .burger-menu. */
+  .mobile-nav-container .header {
+    padding-left: 0;
+    padding-right: 0;
+    /* Вертикальний padding залишається: padding-top та padding-bottom з базового стилю */
+  }
+
   .header__nav {
     padding: 0;
     max-width: 100%;
@@ -431,8 +588,8 @@
   }
 
   .header__menu {
-    gap: 8px;
-    padding: 8px 16px;
+    gap: var(--menu-size-xs);
+    padding: var(--menu-size-xs) var(--menu-size-md);
     overflow-x: auto;
     justify-content: center;
     min-width: 0;
@@ -446,13 +603,33 @@
     -ms-overflow-style: none;
   }
 
+  /* Виправлення асиметрії: прибрати горизонтальний padding та резервоване місце під маркери */
+  .mobile-nav-container .header__menu {
+    padding: var(--menu-size-xs) 0 !important;
+    padding-inline-start: 0 !important;
+    padding-inline-end: 0 !important;
+    margin-left: 0;
+    /* Вертикальний padding залишається для відступів зверху/знизу */
+  }
+
+  /* Повне прибирання резервованого місця під маркери списку */
+  .mobile-nav-container .header__menu::marker {
+    display: none;
+    content: '';
+  }
+
+  .mobile-nav-container .header__menu li::marker {
+    display: none;
+    content: '';
+  }
+
   .header__menu::-webkit-scrollbar {
     display: none;
   }
 
   .header__link {
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: var(--menu-size-xs) var(--menu-size-sm);
+    font-size: var(--menu-font-xs);
   }
 
   /* Ховаємо деякі пункти на мобільних: */
@@ -463,7 +640,7 @@
   /* Бургер з'являється: */
   .burger-menu {
     display: flex;
-    flex: 0 0 48px;
+    flex: 0 0 var(--menu-size-xl);
     position: static;
   }
 
@@ -496,4 +673,151 @@
 /* Світла тема */
 [data-theme="light"] .burger-menu__dropdown {
   background: rgba(0, 0, 0, 0.85);
+}
+
+/* ===== ДИНАМІЧНА ФОРМА В ХЕДЕРІ ===== */
+
+/* Базові стилі для динамічних елементів */
+.header__dynamic-element {
+  transition: opacity 0.3s ease,
+              visibility 0.3s ease,
+              max-width 0.3s ease,
+              transform 0.3s ease;
+}
+
+/* Приховані елементи */
+.header__dynamic-element:not(.header__dynamic-element--visible) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  max-width: 0;
+  overflow: hidden;
+  transform: scale(0.95);
+  display: none !important;
+}
+
+/* Видимі елементи */
+.header__dynamic-element--visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  max-width: 100%;
+  transform: scale(1);
+}
+
+/* Специфічні display для різних типів елементів */
+.header__dynamic-element--visible[data-header-running-line],
+.header__dynamic-element--visible[data-header-success] {
+  display: flex;
+}
+
+.header__dynamic-element--visible[data-header-expand],
+.header__dynamic-element--visible[data-header-dynamic-form] {
+  display: flex;
+}
+
+/* Wrapper бігучої стрічки в хедері */
+[data-header-running-line] {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Анімація бігучої стрічки в хедері */
+[data-header-running-line] .running-line__content {
+  display: flex;
+  width: max-content;
+  animation: scroll-line 20s linear infinite;
+}
+
+[data-header-running-line] .running-line__text {
+  padding: 0 2rem;
+  white-space: nowrap;
+  font-size: var(--menu-font-base);
+  font-weight: 500;
+  color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-header-running-line] .running-line__content {
+    animation: none;
+  }
+}
+
+/* Форма в розгорнутому стані */
+[data-header-dynamic-form] {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* Повідомлення успіху */
+.header__success {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-sm);
+}
+
+.header__success-text {
+  color: var(--color-success);
+  font-weight: 600;
+  font-size: var(--menu-font-base);
+  animation: successPulse 0.5s ease;
+}
+
+@keyframes successPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Помилки як placeholder (червоний текст) */
+[data-header-field].field-error::placeholder {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+[data-header-field].field-error {
+  border-color: var(--color-error);
+  animation: fieldShake 0.4s ease;
+}
+
+/* Приховати стандартні повідомлення про помилки валідації для форми в хедері */
+[data-header-dynamic-form] .form-group .form-error {
+  display: none !important;
+}
+
+[data-header-dynamic-form] .form-group input:invalid,
+[data-header-dynamic-form] .form-group input:invalid:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+@keyframes fieldShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* Приховати на мобільних (залишити існуючу поведінку) */
+@media (width <= 767px) {
+  [data-header-dynamic],
+  [data-header-running-line],
+  [data-header-expand],
+  [data-header-dynamic-form],
+  [data-header-success] {
+    display: none;
+  }
 }

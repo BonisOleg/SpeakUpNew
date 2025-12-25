@@ -13,34 +13,74 @@
 
 {# Хедер з логотипом та формою #}
 <div class="header-wrapper">
-  <header class="header">
-    <div class="header__logo">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-        <rect width="32" height="32" rx="8"/>
-      </svg>
-      SpeakUp
+  <nav class="header__nav header__nav--top">
+    <div class="header__menu header__menu--top" data-header-dynamic>
+      <a href="{% url 'core:index' %}" class="header__logo" aria-label="SpeakUp - головна">
+        <img src="{% static 'img/logoBase.png' %}" alt="SpeakUp" class="header__logo-image" loading="eager" decoding="async">
+      </a>
+
+      {# Wrapper для бігучої стрічки в хедері #}
+      {% if running_line_text %}
+      <div data-header-running-line class="header__dynamic-element header__dynamic-element--visible">
+        <div class="running-line__content">
+          <span class="running-line__text">{{ running_line_text }}</span>
+          <span class="running-line__text">{{ running_line_text }}</span>
+          <span class="running-line__text">{{ running_line_text }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      {# Кнопка "Детальніше" #}
+      <button type="button"
+              data-header-expand
+              class="button--primary header__dynamic-element header__dynamic-element--visible">
+        Детальніше
+      </button>
+
+      {# Форма з інпутами (прихована за замовчуванням) #}
+      <form data-header-dynamic-form
+            class="trial-form--desktop header__dynamic-element"
+            method="post"
+            novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text"
+                 name="name"
+                 class="form-group__input"
+                 placeholder="Ім'я"
+                 data-header-field="name"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="tel"
+                 name="phone"
+                 class="form-group__input"
+                 placeholder="+380"
+                 data-header-field="phone"
+                 inputmode="tel"
+                 required>
+        </div>
+        <button type="submit"
+                data-header-submit
+                class="button--primary">
+          Відправити
+        </button>
+      </form>
+
+      {# Повідомлення успіху (приховане за замовчуванням) #}
+      <div data-header-success class="header__success header__dynamic-element">
+        <span class="header__success-text">Дякуємо! Ми зв'яжемось з вами найближчим часом</span>
+      </div>
+
+      {# Кнопка для мобільних #}
+      <button class="trial-form__trigger--mobile" type="button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 2 9 12m0 0-7 7m7-7H2m7 0V5"/>
+        </svg>
+        Записатись на пробне заняття
+      </button>
     </div>
-
-    {# Форма для десктопу #}
-    <form class="trial-form trial-form--desktop" method="post">
-      {% csrf_token %}
-      <div class="form-group">
-        <input type="text" name="name" class="form-group__input" placeholder="Ім'я" required>
-      </div>
-      <div class="form-group">
-        <input type="tel" name="phone" class="form-group__input" placeholder="+380" inputmode="tel" required>
-      </div>
-        <button type="submit" class="button--primary">Записатись</button>
-    </form>
-
-    {# Кнопка для мобільних #}
-    <button class="trial-form__trigger--mobile" type="button">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 2 9 12m0 0-7 7m7-7H2m7 0V5"/>
-      </svg>
-      Записатись на пробне заняття
-    </button>
-  </header>
+  </nav>
 </div>
 
 {# Модальна форма для мобільних #}

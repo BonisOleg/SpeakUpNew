@@ -59,6 +59,38 @@
   --spacing-xl: 2rem;       /* 32px */
   --spacing-xxl: 3rem;      /* 48px */
 
+  /* Menu scale factor (1/1.5 = 0.6667) */
+  --menu-scale: 0.6667;
+
+  /* Масштабовані spacing для меню */
+  --menu-spacing-xs: calc(clamp(8px, 1vw, 12px) * var(--menu-scale));
+  --menu-spacing-sm: calc(clamp(16px, 2vw, 24px) * var(--menu-scale));
+  --menu-spacing-md: calc(clamp(24px, 4vw, 32px) * var(--menu-scale));
+  --menu-spacing-lg: calc(1.5rem * var(--menu-scale));
+
+  /* Масштабовані font-size для меню */
+  --menu-font-xs: calc(13px * var(--menu-scale));
+  --menu-font-sm: calc(14px * var(--menu-scale));
+  --menu-font-base: calc(1rem * var(--menu-scale));
+  --menu-font-lg: calc(1.25rem * var(--menu-scale));
+  --menu-font-xl: calc(1.5rem * var(--menu-scale));
+
+  /* Масштабовані розміри */
+  --menu-size-xs: calc(8px * var(--menu-scale));
+  --menu-size-sm: calc(12px * var(--menu-scale));
+  --menu-size-md: calc(16px * var(--menu-scale));
+  --menu-size-lg: calc(44px * var(--menu-scale));
+  --menu-size-xl: calc(48px * var(--menu-scale));
+
+  /* Масштабовані border */
+  --menu-border-sm: calc(1px * var(--menu-scale));
+  --menu-border-md: calc(2px * var(--menu-scale));
+
+  /* Масштабовані border-radius */
+  --menu-radius-sm: calc(0.25rem * var(--menu-scale));
+  --menu-radius-md: calc(0.5rem * var(--menu-scale));
+  --menu-radius-lg: calc(1.5rem * var(--menu-scale));
+
   /* Border radius */
   --radius-sm: 0.25rem;     /* 4px */
   --radius-md: 0.5rem;      /* 8px */
