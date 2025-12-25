@@ -4,6 +4,7 @@ import { BurgerMenu } from './modules/burger-menu.js';
 import { initRunningLine } from './modules/running-line.js';
 import { initTrialForm } from './modules/trial-form.js';
 import { ParallaxBackground } from './modules/parallax-background.js';
+import { initHeaderDynamicForm } from './modules/header-dynamic-form.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[SpeakUp] Initializing modules...');
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new BurgerMenu();
   initRunningLine();
   initTrialForm();
+  initHeaderDynamicForm();
 
   // Паралакс ефект (тільки на головній сторінці)
   if (document.querySelector('[data-parallax-layer]')) {
