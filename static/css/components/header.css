@@ -605,9 +605,9 @@
 
   /* Виправлення асиметрії: прибрати горизонтальний padding та резервоване місце під маркери */
   .mobile-nav-container .header__menu {
-    padding: var(--menu-size-xs) 0 !important;
-    padding-inline-start: 0 !important;
-    padding-inline-end: 0 !important;
+    padding: var(--menu-size-xs) 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
     margin-left: 0;
     /* Вертикальний padding залишається для відступів зверху/знизу */
   }
@@ -693,7 +693,7 @@
   max-width: 0;
   overflow: hidden;
   transform: scale(0.95);
-  display: none !important;
+  display: none;
 }
 
 /* Видимі елементи */
@@ -718,7 +718,7 @@
 
 /* Wrapper бігучої стрічки в хедері */
 [data-header-running-line] {
-  flex: 1;
+  flex: 1 0 0;
   min-width: 0;
   overflow: hidden;
   display: flex;
@@ -754,7 +754,7 @@
 
 /* Повідомлення успіху */
 .header__success {
-  flex: 1;
+  flex: 1 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -796,7 +796,7 @@
 
 /* Приховати стандартні повідомлення про помилки валідації для форми в хедері */
 [data-header-dynamic-form] .form-group .form-error {
-  display: none !important;
+  display: none;
 }
 
 [data-header-dynamic-form] .form-group input:invalid,
