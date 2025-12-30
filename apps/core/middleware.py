@@ -11,23 +11,34 @@ from .redirects import REDIRECTS
 class AllowedHostsMiddleware:
     """
     Middleware для обробки ALLOWED_HOSTS.
-    Обходить перевірку SecurityMiddleware, якщо ALLOWED_HOSTS не налаштований або містить '*'.
+    Автоматично дозволяє всі хости, якщо ALLOWED_HOSTS не налаштований або містить '*'.
     """
     def __init__(self, get_response):
         self.get_response = get_response
 
-    def __call__(self, request):
+    def process_request(self, request):
+        """
+        process_request викликається ДО SecurityMiddleware.process_request,
+        що дозволяє нам модифікувати ALLOWED_HOSTS перед перевіркою.
+        """
         allowed_hosts = getattr(settings, 'ALLOWED_HOSTS', [])
-        host = request.get_host().split(':')[0]  # Без порту
 
         # Якщо ALLOWED_HOSTS порожній або містить '*', дозволяємо всі хости
         allow_all = not allowed_hosts or '*' in allowed_hosts
 
         if allow_all:
-            # Додаємо хост до ALLOWED_HOSTS динамічно, щоб SecurityMiddleware не блокував
-            if host not in settings.ALLOWED_HOSTS:
-                settings.ALLOWED_HOSTS.append(host)
+            try:
+                host = request.get_host().split(':')[0]  # Без порту
+                # Додаємо хост до ALLOWED_HOSTS динамічно
+                if host not in settings.ALLOWED_HOSTS:
+                    settings.ALLOWED_HOSTS.append(host)
+            except Exception:
+                # Якщо не можемо отримати хост, не блокуємо запит
+                pass
 
+        return None  # None означає "продовжити обробку"
+
+    def __call__(self, request):
         response = self.get_response(request)
         return response
 
