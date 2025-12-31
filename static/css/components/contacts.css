@@ -248,6 +248,27 @@
     padding: var(--section-padding-mobile);
   }
 
+  /* Додати достатній padding для контактних елементів, щоб текст не обрізався */
+  .contacts-section__content {
+    padding-bottom: var(--spacing-sm);
+  }
+
+  .contact-item {
+    padding-bottom: var(--spacing-xs);
+    min-height: auto;
+  }
+
+  .contact-item__link {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .schedule-item {
+    padding-bottom: var(--spacing-md);
+    min-height: auto;
+  }
+
   .contacts-hero {
     margin-bottom: 0;
   }

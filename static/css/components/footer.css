@@ -70,6 +70,10 @@
 .footer__tagline {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
+  line-height: 1.5;
+  padding-top: var(--spacing-xs);
+  overflow: visible;
+  word-wrap: break-word;
 }
 
 /* Навігація */
@@ -184,6 +188,7 @@
   .footer__brand {
     align-items: flex-start;
     flex: 0 0 auto;
+    padding-top: var(--spacing-xs);
   }
 
   .footer__nav {
@@ -207,7 +212,7 @@
 @media (width <= 767px) {
   .footer {
     margin-top: var(--section-spacing-mobile);
-    padding-top: var(--section-padding-mobile);
+    padding-top: calc(var(--section-padding-mobile) + 20px);
     padding-bottom: calc(var(--nav-height, 70px) + var(--section-spacing-mobile) + env(safe-area-inset-bottom, 0px));
   }
 

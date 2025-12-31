@@ -424,6 +424,14 @@ h1, h2, h3, h4, h5, h6 {
   .main-content:has(+ .footer) {
     padding-bottom: 0;
   }
+
+  /* Додати margin-bottom для останньої секції перед footer, щоб навігація не перекривала контент */
+  .main-content:has(+ .footer) > *:last-child > section:last-child,
+  .main-content:has(+ .footer) section:last-child,
+  .main-content:has(+ .footer) .glass-section:last-child {
+    margin-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 20px);
+    scroll-margin-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 20px);
+  }
 }
 
 /* Прибрати margin-bottom у останньої секції перед footer */
@@ -433,6 +441,65 @@ h1, h2, h3, h4, h5, h6 {
 .main-content section:last-child,
 .main-content .glass-section:last-child {
   margin-bottom: 0;
+}
+
+/* Додати scroll-margin-bottom для останніх секцій на мобільних, щоб навігація не перекривала контент */
+@media (width <= 767px) {
+  .main-content > *:last-child > section:last-child,
+  .main-content section:last-child,
+  .main-content .glass-section:last-child {
+    scroll-margin-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 20px);
+  }
+
+  /* Додати scroll-margin-top для перших секцій, щоб контент не обрізався зверху */
+  .main-content > *:first-child > section:first-child,
+  .main-content section:first-child,
+  .main-content .glass-section:first-child {
+    scroll-margin-top: calc(var(--header-height, 80px) + env(safe-area-inset-top, 0px) + 20px);
+  }
+
+  /* Додати додатковий padding-top для першої секції, якщо вона може бути обрізана */
+  .main-content > *:first-child > section:first-child,
+  .main-content section:first-child {
+    padding-top: max(20px, env(safe-area-inset-top, 20px));
+  }
+}
+
+/* Стилі для сторінки "Про нас" - збільшення контрастності тексту */
+.about-page .glass-section p {
+  color: var(--color-white);
+  line-height: 1.7;
+}
+
+.about-page .glass-section p:not(.about-hero__subtitle) {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.about-page .glass-section h2 {
+  color: var(--color-white);
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.about-page .glass-section ul li {
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+}
+
+.about-page .glass-section strong {
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+@media (width <= 767px) {
+  .about-page .glass-section p {
+    color: rgba(255, 255, 255, 0.98);
+  }
+
+  .about-page .glass-section ul li {
+    color: rgba(255, 255, 255, 0.98);
+  }
 }
 
 /* Специфічно для hero-content (головна сторінка) - 4rem відстань перед footer */

@@ -8,8 +8,67 @@ import { initTabSlider } from './shared/tab-slider.js';
 import programsListModule from './modules/programs-list.js';
 import { BaseAccordion } from './modules/base-accordion.js';
 
+/**
+ * Автоматично визначає активне посилання в навігації на основі поточного URL
+ */
+function setActiveNavigationLink() {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.mobile-nav-container .header__link[data-nav-tab]');
+
+  // Видаляємо активний клас з усіх посилань
+  navLinks.forEach(link => {
+    link.classList.remove('header__link--active');
+  });
+
+  // Нормалізуємо поточний шлях (прибираємо trailing slash, крім кореня)
+  const normalizedCurrentPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
+
+  // Знаходимо посилання, яке відповідає поточному шляху
+  let activeLink = null;
+  let bestMatch = null;
+
+  navLinks.forEach(link => {
+    try {
+      const linkUrl = new URL(link.href, window.location.origin);
+      const linkPath = linkUrl.pathname;
+      const normalizedLinkPath = linkPath === '/' ? '/' : linkPath.replace(/\/$/, '');
+
+      // Точна відповідність
+      if (normalizedLinkPath === normalizedCurrentPath) {
+        activeLink = link;
+        return;
+      }
+
+      // Для головної сторінки - тільки точна відповідність
+      if (normalizedLinkPath === '/') {
+        return;
+      }
+
+      // Перевіряємо, чи поточний шлях починається з шляху посилання
+      if (normalizedCurrentPath.startsWith(normalizedLinkPath + '/')) {
+        // Вибираємо найдовший відповідний шлях
+        if (!bestMatch || normalizedLinkPath.length > bestMatch.length) {
+          bestMatch = { link, path: normalizedLinkPath };
+        }
+      }
+    } catch (e) {
+      console.warn('[Navigation] Помилка при обробці посилання:', link.href, e);
+    }
+  });
+
+  // Встановлюємо активне посилання
+  if (activeLink) {
+    activeLink.classList.add('header__link--active');
+  } else if (bestMatch) {
+    bestMatch.link.classList.add('header__link--active');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[SpeakUp] Initializing modules...');
+
+  // Спочатку встановлюємо активне посилання на основі поточного URL
+  setActiveNavigationLink();
 
   new BurgerMenu();
   initRunningLine();

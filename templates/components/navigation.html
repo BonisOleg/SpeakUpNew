@@ -4,7 +4,7 @@
       <!-- Слайдер (червоний вовчок) -->
       <div class="header__menu-slider" data-nav-slider></div>
       <ul class="header__menu">
-        <li><a href="{% url 'core:index' %}" class="header__link header__link--active" data-nav-tab><span class="header__link-text">Головна</span></a></li>
+        <li><a href="{% url 'core:index' %}" class="header__link" data-nav-tab><span class="header__link-text">Головна</span></a></li>
         <li><a href="{% url 'core:programs_list' %}" class="header__link" data-nav-tab><span class="header__link-text">Програми</span></a></li>
         <li class="header__menu-item--mobile-hidden">
           <a href="{% url 'core:program_detail' slug='corporate' %}" class="header__link" data-nav-tab><span class="header__link-text">Корпоративним клієнтам</span></a>
