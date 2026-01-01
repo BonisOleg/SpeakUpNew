@@ -198,26 +198,12 @@
 /* Мобільна версія */
 @media (width <= 767px) {
   .hero-section {
-    /* Використовуємо min-height замість max-height для забезпечення мінімального простору */
-    min-height: auto;
-
-    /* Видаляємо overflow: hidden, щоб контент не обрізався */
     overflow: visible;
-
-    /* Адаптивні відступи з урахуванням safe-area-inset */
     padding: clamp(1rem, 4vw, var(--section-padding-mobile));
-    padding-top: clamp(1rem, 4vw, var(--section-padding-mobile));
-    padding-bottom: clamp(1rem, 4vw, var(--section-padding-mobile));
     margin-bottom: var(--section-spacing-mobile);
     max-width: var(--content-width-mobile);
-
-    /* Додаємо gap між елементами для правильного spacing */
     gap: clamp(1rem, 3vw, 1.5rem);
-
-    /* Зменшуємо margin-top на мобільних */
     margin-top: clamp(1rem, 2vh, 2rem);
-
-    /* Додаємо scroll-margin-top для правильного скролу */
     scroll-margin-top: calc(var(--header-height, 80px) + env(safe-area-inset-top, 0px) + 1rem);
   }
 
@@ -234,29 +220,11 @@
     max-width: 100%;
     width: 100%;
     margin-left: 0;
-    order: 2;
   }
 
+  /* Приховуємо зображення на мобільних */
   .hero-section__image {
-    order: 1;
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0;
-    margin-bottom: clamp(0.5rem, 2vw, 1rem);
-
-    /* Обмежуємо максимальну висоту зображення */
-    max-height: clamp(120px, 25vh, 180px);
-  }
-
-  .hero-section__image img {
-    width: auto;
-    max-width: min(100%, 200px);
-    max-height: clamp(120px, 25vh, 180px);
-    height: auto;
-    object-fit: contain;
+    display: none;
   }
 
   /* Адаптивні капсули для акцентів на мобільних */
@@ -270,9 +238,7 @@
   }
 }
 
-/* Додаткові медіа-запити для різних розмірів екранів */
-
-/* Дуже малі екрани (320px - 374px) */
+/* Додаткові медіа-запити для дуже малих екранів */
 @media (width <= 374px) {
   .hero-section {
     padding: clamp(0.75rem, 3vw, 1rem);
@@ -280,48 +246,18 @@
   }
 
   .hero-section__header h1 {
-    font-size: clamp(1.5rem, 7vw, 2rem); /* 24-32px */
+    font-size: clamp(1.5rem, 7vw, 2rem);
     line-height: 1.25;
   }
 
   .hero-section__header p {
-    font-size: clamp(0.8125rem, 2.5vw, 1rem); /* 13-16px */
-  }
-
-  .hero-section__image {
-    max-height: clamp(100px, 20vh, 150px);
-  }
-
-  .hero-section__image img {
-    max-width: min(100%, 160px);
-    max-height: clamp(100px, 20vh, 150px);
-  }
-}
-
-/* Середні мобільні (375px - 414px) */
-@media (width >= 375px) and (width <= 414px) {
-  .hero-section {
-    padding: clamp(1rem, 4vw, 1.5rem);
-  }
-
-  .hero-section__header h1 {
-    font-size: clamp(1.875rem, 7.5vw, 2.25rem); /* 30-36px */
-  }
-
-  .hero-section__image {
-    max-height: clamp(140px, 28vh, 200px);
-  }
-
-  .hero-section__image img {
-    max-width: min(100%, 220px);
-    max-height: clamp(140px, 28vh, 200px);
+    font-size: clamp(0.8125rem, 2.5vw, 1rem);
   }
 }
 
 /* Landscape орієнтація на мобільних */
 @media (width <= 767px) and (orientation: landscape) {
   .hero-section {
-    /* Зменшуємо padding для landscape */
     padding: clamp(0.75rem, 2vh, 1rem);
     gap: clamp(0.5rem, 1.5vh, 0.75rem);
     margin-top: clamp(0.5rem, 1vh, 1rem);
@@ -343,26 +279,6 @@
 
   .hero-section__cta {
     gap: clamp(0.5rem, 1.5vh, 0.75rem);
-
-    /* Використовуємо grid для landscape, щоб форма та зображення були поруч */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
-
-  .hero-section__image {
-    order: 1;
-    max-height: clamp(100px, 25vh, 140px);
-    margin-bottom: 0;
-  }
-
-  .hero-section__image img {
-    max-width: min(100%, 180px);
-    max-height: clamp(100px, 25vh, 140px);
-  }
-
-  .hero-section__form {
-    order: 2;
   }
 
   .trial-form--hero .form-group {
