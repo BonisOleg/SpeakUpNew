@@ -132,3 +132,46 @@
   }
 }
 
+/* Мобільна оптимізація hero форми */
+@media (width <= 767px) {
+  .trial-form--hero {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .trial-form--hero .form-group {
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  .trial-form--hero .form-group:last-of-type {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .trial-form--hero .form-group input,
+  .trial-form--hero .form-group input[type="text"],
+  .trial-form--hero .form-group input[type="tel"],
+  .trial-form--hero .form-group input.form-group__input {
+    /* Адаптивні розміри для мобільних */
+    padding: clamp(0.75rem, 2vw, 0.875rem) clamp(0.875rem, 3vw, 1rem);
+    font-size: clamp(0.9375rem, 3vw, 1rem); /* 15-16px */
+    min-height: clamp(48px, 12vw, 52px);
+  }
+
+  .trial-form--hero .button {
+    /* Адаптивні розміри кнопки */
+    min-height: clamp(48px, 12vw, 52px);
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.5rem, 5vw, 2rem);
+    width: 100%;
+
+    /* Переконаємося, що кнопка завжди видима */
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .trial-form--hero .form-error {
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    padding-left: clamp(0.875rem, 3vw, 1rem);
+  }
+}
+
