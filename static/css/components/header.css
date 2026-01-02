@@ -787,11 +787,12 @@
   .mobile-nav-container .burger-menu {
     display: flex;
     width: var(--menu-size-xl);
-    height: 100%;
+    height: auto;
     min-width: var(--menu-size-xl);
     max-width: var(--menu-size-xl);
+    padding: var(--menu-size-xs) 0;
     position: static;
-    align-self: stretch;
+    align-self: center;
     flex-shrink: 0;
     flex-grow: 0;
     background: rgba(0, 0, 0, 0.8);
