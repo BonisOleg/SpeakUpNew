@@ -786,8 +786,13 @@
   /* Бургер з'являється: */
   .burger-menu {
     display: flex;
-    flex: 0 0 var(--menu-size-xl);
+    height: 100%;
+    min-width: var(--menu-size-xl);
+    width: var(--menu-size-xl);
     position: static;
+    align-self: stretch;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-border-light);
   }
 
   .burger-menu__dropdown {
