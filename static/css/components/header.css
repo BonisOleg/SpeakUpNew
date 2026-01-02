@@ -620,21 +620,9 @@
     display: none;
   }
 
-  /* Мобільна кнопка з'являється: */
+  /* Мобільна кнопка прихована (використовуємо динамічну форму замість неї) */
   .trial-form__trigger--mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: var(--spacing-md);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    touch-action: manipulation;
+    display: none;
   }
 
   /* Navigation стає grid: */
@@ -669,8 +657,8 @@
     position: fixed;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: stretch;
+    justify-content: center;
     gap: var(--spacing-xs);
     height: auto;
     min-height: 60px;
@@ -692,8 +680,12 @@
   }
 
   .header__menu--top {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--menu-spacing-xs);
+    background: var(--color-gray-light);
+    border-radius: var(--radius-pill);
+    padding: var(--menu-spacing-sm) var(--menu-spacing-md);
+    box-sizing: border-box;
   }
 
   .header__menu--top .header__logo {
@@ -746,10 +738,12 @@
   .header__nav--top {
     flex: 1 0 0;
     min-width: 0;
-    background: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-pill);
+    padding: var(--menu-spacing-sm) var(--menu-spacing-lg);
+    box-sizing: border-box;
+    box-shadow: none;
   }
 
   .header__menu {
@@ -833,7 +827,7 @@
   [data-header-dynamic] {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: var(--menu-spacing-xs);
     flex: 1 0 0;
     min-width: 0;
     width: 100%;
@@ -846,12 +840,11 @@
     min-width: 0;
     display: flex;
     overflow: hidden;
-    max-width: calc(100% - 200px);
   }
 
   [data-header-running-line] .running-line__text {
-    font-size: 0.75rem;
-    padding: 0 1rem;
+    font-size: var(--menu-font-sm);
+    padding: 0 1.5rem;
   }
 
   [data-header-running-line] .running-line__content {
@@ -863,10 +856,11 @@
   .header__dynamic-element--visible[data-header-expand] {
     display: flex;
     flex-shrink: 0;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 0.875rem;
+    min-height: var(--menu-size-lg);
+    padding: calc(0.875rem * var(--menu-scale)) calc(1.5rem * var(--menu-scale));
+    font-size: var(--menu-font-base);
+    border-radius: var(--menu-radius-md);
     white-space: nowrap;
-    min-height: 36px;
   }
 
   /* Форма на мобільних */
@@ -874,7 +868,7 @@
   .header__dynamic-element--visible[data-header-dynamic-form] {
     display: flex;
     flex: 1 0 0;
-    gap: var(--spacing-xs);
+    gap: var(--menu-spacing-xs);
     align-items: center;
     min-width: 0;
   }
@@ -886,34 +880,39 @@
   }
 
   [data-header-dynamic-form] .form-group__input {
-    font-size: 0.875rem;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    min-height: 36px;
+    min-height: var(--menu-size-lg);
+    padding: calc(0.875rem * var(--menu-scale)) calc(1rem * var(--menu-scale));
+    font-size: var(--menu-font-base);
+    border-radius: var(--menu-radius-md);
+    box-sizing: border-box;
   }
 
   [data-header-dynamic-form] .button--primary {
     flex-shrink: 0;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 0.875rem;
+    min-height: var(--menu-size-lg);
+    padding: calc(0.875rem * var(--menu-scale)) calc(1.5rem * var(--menu-scale));
+    font-size: var(--menu-font-base);
+    border-radius: var(--menu-radius-md);
     white-space: nowrap;
-    min-height: 36px;
   }
 
   /* Кнопка Student Zone на мобільних */
   .header-wrapper .header__student-zone {
     display: flex;
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    align-self: stretch;
+    height: 100%;
+    width: auto;
     aspect-ratio: 1 / 1;
-    border-width: 10px;
-    padding: 3px;
+    min-width: 44px;
+    border-width: calc(15px * var(--menu-scale));
+    padding: calc(5px * var(--menu-scale));
+    box-sizing: border-box;
   }
 
-  .header__student-zone-text {
-    font-size: 0.625rem;
+  .header-wrapper .header__student-zone-text {
+    font-size: calc(2vh * 0.5 * var(--menu-scale));
+    font-size: calc(2dvh * 0.5 * var(--menu-scale));
   }
 }
 
