@@ -130,7 +130,7 @@
 }
 
 .header__student-zone-text span:nth-child(2) {
-  color: var(--color-black);
+  color: var(--color-white);
 }
 
 /* Форма в хедері (десктоп): */
@@ -662,9 +662,6 @@
     gap: var(--spacing-xs);
     height: auto;
     min-height: 60px;
-    background: transparent;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
   }
 
   /* Приховати спейсери на мобільних */
@@ -904,15 +901,15 @@
     height: 100%;
     width: auto;
     aspect-ratio: 1 / 1;
-    min-width: 44px;
+    min-width: 4.7rem;
     border-width: calc(15px * var(--menu-scale));
     padding: calc(5px * var(--menu-scale));
     box-sizing: border-box;
   }
 
   .header-wrapper .header__student-zone-text {
-    font-size: calc(2vh * 0.5 * var(--menu-scale));
-    font-size: calc(2dvh * 0.5 * var(--menu-scale));
+    font-size: 0.5rem;
+
   }
 }
 
