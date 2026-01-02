@@ -5,11 +5,8 @@
     <div class="footer__content">
       <!-- Бренд/логотип -->
       <div class="footer__brand">
-        <a href="{% url 'core:index' %}" class="footer__logo">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-            <rect width="32" height="32" rx="8"/>
-          </svg>
-          SpeakUp
+        <a href="{% url 'core:index' %}" class="footer__logo" aria-label="SpeakUp - головна">
+          <img src="{% static 'img/logoMenu.png' %}" alt="SpeakUp" class="footer__logo-image" loading="lazy" decoding="async">
         </a>
         <p class="footer__tagline">Онлайн курси англійської мови</p>
       </div>

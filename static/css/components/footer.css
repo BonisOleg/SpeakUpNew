@@ -50,9 +50,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--color-primary);
   text-decoration: none;
   transition: opacity var(--transition-fast);
 }
@@ -65,6 +62,13 @@
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+.footer__logo-image {
+  height: 32px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .footer__tagline {
@@ -218,6 +222,10 @@
 
   .footer__content {
     gap: var(--spacing-md);
+  }
+
+  .footer__logo-image {
+    height: 28px;
   }
 
   .footer__nav {
