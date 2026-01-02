@@ -7,6 +7,8 @@
   flex-direction: column;
   max-height: 65vh; /* Fallback */
   max-height: 65dvh;
+  max-width: 91vw;
+  max-width: 91dvw;
   padding: var(--section-padding-desktop);
   margin-bottom: var(--section-spacing-desktop);
   contain: layout style paint; /* Ізоляція для продуктивності */
@@ -232,7 +234,7 @@
   }
 
   .hero-section__price-accent {
-    font-size: clamp(0.75em, 2.5vw, 0.9em);
+    font-size: clamp(3.5rem, 5vw, 2em);
   }
 }
 

@@ -194,7 +194,7 @@
   }
 
   .achievement-card__number {
-    font-size: clamp(2.25rem, 10vw, 3rem);
+    font-size: clamp(1.125rem, 5vw, 1.5rem);
     margin-bottom: 0.75rem;
     text-shadow:
       0 2px 4px rgba(0, 0, 0, 0.5),

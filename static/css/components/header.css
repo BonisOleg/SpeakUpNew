@@ -331,7 +331,6 @@
   position: absolute;
   top: var(--menu-spacing-sm);
   left: var(--menu-spacing-sm);
-  height: calc(100% - calc(var(--menu-spacing-sm) * 2));
   width: 0;
   background: var(--color-primary);
   border-radius: var(--radius-pill);

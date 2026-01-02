@@ -25,9 +25,8 @@
 
 .testimonial-card {
   position: relative;
-  min-width: 300px;
-  width: 100%;
-  max-width: 380px;
+  width: 80%;
+  max-width: 240px;
   padding: var(--spacing-lg);
   margin: 0 var(--spacing-md);
   display: flex;
