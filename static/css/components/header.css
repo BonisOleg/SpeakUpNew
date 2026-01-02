@@ -784,7 +784,7 @@
   }
 
   /* Бургер з'являється: */
-  .burger-menu {
+  .mobile-nav-container .burger-menu {
     display: flex;
     width: var(--menu-size-xl);
     height: 100%;
@@ -792,8 +792,11 @@
     max-width: var(--menu-size-xl);
     position: static;
     align-self: stretch;
+    flex-shrink: 0;
+    flex-grow: 0;
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid var(--color-border-light);
+    box-sizing: border-box;
   }
 
   .burger-menu__dropdown {
