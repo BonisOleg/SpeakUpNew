@@ -93,6 +93,13 @@
 
 }
 
+@media (width >= 1024px) {
+  .news-list-page {
+    max-width: min(var(--content-width-desktop), var(--content-max-width));
+    padding: var(--section-padding-desktop);
+  }
+}
+
 /* Hero секція */
 .news-hero {
   text-align: center;

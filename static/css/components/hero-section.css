@@ -196,6 +196,12 @@
   }
 }
 
+@media (width >= 1024px) {
+  .hero-section {
+    max-width: min(var(--content-width-desktop), var(--content-max-width));
+  }
+}
+
 /* Мобільна версія */
 @media (width <= 767px) {
   .hero-section {
