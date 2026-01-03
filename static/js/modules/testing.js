@@ -352,6 +352,7 @@ function renderQuestion() {
   answered = false;
 
   const currentQEl = document.getElementById('currentQ');
+  const totalQEl = document.getElementById('totalQ');
   const stageProgressEl = document.getElementById('stageProgress');
   const feedbackEl = document.getElementById('feedback');
   const skipAreaEl = document.getElementById('skipArea');
@@ -360,6 +361,9 @@ function renderQuestion() {
 
   if (currentQEl) {
     currentQEl.textContent = currentQuestion + 1;
+  }
+  if (totalQEl) {
+    totalQEl.textContent = tensesQuestions.length;
   }
   if (stageProgressEl) {
     stageProgressEl.style.width = `${(currentQuestion / tensesQuestions.length) * 100}%`;
