@@ -48,22 +48,7 @@
   perspective: 800px;
   cursor: pointer;
   border-radius: 16px;
-
-  /* Lazy load optimization */
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
-
-/* Коли картка завантажена */
-.advantage-card[data-loaded] {
-  opacity: 1;
-}
-
-  transition: transform 0.3s ease;
-
-  /* Фіксована висота - не змінюється при flip */
-  min-height: 420px;
-  max-height: 420px;
 
 @media (hover: hover) and (pointer: fine) {
   .advantage-card:hover {
