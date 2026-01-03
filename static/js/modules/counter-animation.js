@@ -15,7 +15,7 @@ const animationQueue = [];
 const requestIdleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
 /**
- * Форматує число з пробілами для тисяч
+ * Форматує число з пробілами для тысяч (без передніх нулів)
  */
 function formatNumber(num) {
   // Для 200000: "200 000"
@@ -35,6 +35,7 @@ function formatNumber(num) {
     if (remainder === 0) {
       return `${thousands} 000`;
     }
+    // Використовуємо padStart тільки якщо remainder < 100, інакше просто число
     return `${thousands} ${String(remainder).padStart(3, '0')}`;
   } else if (num >= 1000) {
     // Для чисел >= 1000: 5 000
@@ -43,8 +44,10 @@ function formatNumber(num) {
     if (remainder === 0) {
       return `${thousands} 000`;
     }
+    // Використовуємо padStart тільки якщо remainder < 100, інакше просто число
     return `${thousands} ${String(remainder).padStart(3, '0')}`;
   }
+  // Для чисел < 1000 просто повертаємо число без передніх нулів
   return String(num);
 }
 

@@ -3,43 +3,16 @@
    Оптимізація: замість JavaScript reflows, використовуємо CSS @property
    ========================================================================== */
 
-/* CSS Counter Property для сучасних браузерів */
+/* CSS Counter Property вимкнено - використовується JavaScript анімація */
+/* JavaScript тепер повністю керує форматуванням чисел та суфіксів */
 @supports (counter-reset: name var(--value)) {
-  @property --achievement-counter {
-    syntax: '<integer>';
-    initial-value: 0;
-    inherits: false;
-  }
-
-  .achievement-card__number {
-    counter-reset: achievement-counter var(--achievement-counter);
-  }
-
+  /* Вимикаємо CSS counter та псевдоелементи, щоб уникнути конфліктів з JS */
   .achievement-card__number::before {
-    content: counter(achievement-counter);
+    content: none;
   }
 
-  /* Suffix додається через ::after для більшої гнучкості */
-  .achievement-card__number[data-achievement-suffix]::after {
-    content: attr(data-achievement-suffix);
-  }
-
-  /* Анімація лічильника - CSS Native */
-  .achievement-card.animating .achievement-card__number {
-    animation: count-up 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-
-    /* Оптимізація: will-change тільки під час анімації */
-    will-change: --achievement-counter;
-  }
-
-  @keyframes count-up {
-    from {
-      --achievement-counter: 0;
-    }
-
-    to {
-      --achievement-counter: var(--achievement-target);
-    }
+  .achievement-card__number::after {
+    content: none;
   }
 }
 
