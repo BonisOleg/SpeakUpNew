@@ -93,8 +93,15 @@
   <link rel="stylesheet" href="{% static 'css/components/trial-form.css' %}">
   <link rel="stylesheet" href="{% static 'css/components/message.css' %}">
   <link rel="stylesheet" href="{% static 'css/components/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/running-line.css' %}">
 
-  <!-- Не критичні CSS завантажуються через дочірні шаблони (extra_css block) або пізніше -->
+  <!-- Utilities (використовуються на всіх сторінках) -->
+  <link rel="stylesheet" href="{% static 'css/utilities/carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/utilities/glassmorphism.css' %}">
+  <link rel="stylesheet" href="{% static 'css/utilities/counter-animation.css' %}">
+
+  <!-- Не критичні CSS завантажуються через дочірні шаблони (extra_css block) -->
+  <!-- programs-list.css, news.css - специфічні для окремих сторінок -->
 
   {% block extra_css %}{% endblock %}
 
