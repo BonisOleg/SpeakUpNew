@@ -239,6 +239,9 @@
   .header-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+
+    /* Кнопка Student Zone на десктопі - висота 1в1 з навігацією */
+    align-items: stretch;
   }
 
   .header {
@@ -246,11 +249,6 @@
     margin: 0 auto;
     padding: var(--spacing-md) var(--spacing-lg);
     box-shadow: none;
-  }
-
-  /* Кнопка Student Zone на десктопі - висота 1в1 з навігацією */
-  .header-wrapper {
-    align-items: stretch;
   }
 
   .header__student-zone {

@@ -92,6 +92,7 @@
   0%, 100% {
     text-shadow: 0 0 0 rgba(255, 215, 0, 0);
   }
+
   50% {
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
   }
@@ -102,6 +103,7 @@
     opacity: 0;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.05);

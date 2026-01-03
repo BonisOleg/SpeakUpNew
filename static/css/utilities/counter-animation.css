@@ -27,20 +27,19 @@
   /* Анімація лічильника - CSS Native */
   .achievement-card.animating .achievement-card__number {
     animation: count-up 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+
+    /* Оптимізація: will-change тільки під час анімації */
+    will-change: --achievement-counter;
   }
 
   @keyframes count-up {
     from {
       --achievement-counter: 0;
     }
+
     to {
       --achievement-counter: var(--achievement-target);
     }
-  }
-
-  /* Оптимізація: will-change тільки під час анімації */
-  .achievement-card.animating .achievement-card__number {
-    will-change: --achievement-counter;
   }
 }
 
@@ -71,6 +70,7 @@
   @supports (counter-reset: name var(--value)) {
     .achievement-card.animating .achievement-card__number {
       animation: none;
+
       --achievement-counter: var(--achievement-target);
     }
   }

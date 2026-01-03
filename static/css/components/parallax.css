@@ -26,6 +26,7 @@
 
 .parallax-layer__background {
   z-index: 0;
+
   /* WebP з fallback на PNG */
   background-image: url('../../img/mainBackground.webp');
   background-size: cover;

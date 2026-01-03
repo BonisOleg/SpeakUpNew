@@ -28,6 +28,7 @@
   animation: scroll-line 20s linear infinite;
   transform: translateZ(0); /* GPU акселерація */
   -webkit-transform: translateZ(0);
+
   /* will-change видалено - додавалось динамічно через JS */
 }
 
