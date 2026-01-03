@@ -39,7 +39,8 @@ def seo_context(request):
             })
 
     # Генерувати абсолютний URL для OG image
-    default_og_image = request.build_absolute_uri(settings.DEFAULT_OG_IMAGE)
+    default_og_image_path = getattr(settings, 'DEFAULT_OG_IMAGE', '/static/img/logoBase.png')
+    default_og_image = request.build_absolute_uri(default_og_image_path)
 
     result = {
         'canonical_url': canonical_url,

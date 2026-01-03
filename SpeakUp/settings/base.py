@@ -137,7 +137,7 @@ GOOGLE_SITE_VERIFICATION = os.getenv('GOOGLE_SITE_VERIFICATION', '')
 FACEBOOK_DOMAIN_VERIFICATION = os.getenv('FACEBOOK_DOMAIN_VERIFICATION', '')
 
 # Default OG image (відносний шлях від STATIC_URL)
-DEFAULT_OG_IMAGE = os.getenv('DEFAULT_OG_IMAGE', '/static/images/og-default.png')
+DEFAULT_OG_IMAGE = os.getenv('DEFAULT_OG_IMAGE', '/static/img/logoBase.png')
 
 # Email (для dev - console):
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
