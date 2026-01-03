@@ -308,17 +308,18 @@
 
 /* Контент картки */
 .program-card__content {
+  padding: 0 var(--spacing-md);
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--transition-normal);
+  transition: max-height var(--transition-normal), padding var(--transition-normal);
 }
 
 .program-card.accordion-item--open .program-card__content {
-  max-height: 2000px;
+  padding: 0 var(--spacing-md) var(--spacing-md);
 }
 
 .program-card__body {
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  padding-top: var(--spacing-xs);
 }
 
 /* Ціна */
