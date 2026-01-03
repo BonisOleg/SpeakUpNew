@@ -105,6 +105,37 @@ function processQueue() {
   }
 }
 
+function startAnimation(card, numberElement, targetNumber, suffix) {
+  if (card.dataset.animated) return;
+
+  card.dataset.animated = 'true';
+
+  if (supportsCSSCounter) {
+    // CSS Native анімація (для сучасних браузерів)
+    // Встановити CSS змінні для анімації
+    numberElement.style.setProperty('--achievement-target', targetNumber);
+
+    // Додати клас для запуску CSS анімації
+    card.classList.add('animating');
+
+    // Видалити клас після закінчення анімації (2s)
+    setTimeout(() => {
+      card.classList.remove('animating');
+    }, 2000);
+  } else {
+    // JS Fallback для старих браузерів
+    numberElement.textContent = formatNumber(0) + suffix;
+
+    if (activeAnimations >= MAX_CONCURRENT_ANIMATIONS) {
+      animationQueue.push({ element: numberElement, target: targetNumber, suffix });
+    } else {
+      requestIdleCallback(() => {
+        animateCounter(numberElement, targetNumber, suffix);
+      });
+    }
+  }
+}
+
 function initAchievements() {
   const achievementCards = document.querySelectorAll('.achievement-card');
 
@@ -115,41 +146,31 @@ function initAchievements() {
     const targetNumber = parseInt(card.dataset.achievementNumber, 10);
     const suffix = numberElement.dataset.achievementSuffix || '';
 
-    // Спостереження через global-observer
-    observe(card, (entry) => {
-      if (entry.isIntersecting && !card.dataset.animated) {
-        card.dataset.animated = 'true';
+    // Перевірка чи елемент вже в viewport (fallback)
+    const rect = card.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
 
-        if (supportsCSSCounter) {
-          // CSS Native анімація (для сучасних браузерів)
-          // Встановити CSS змінні для анімації
-          numberElement.style.setProperty('--achievement-target', targetNumber);
-
-          // Додати клас для запуску CSS анімації
-          card.classList.add('animating');
-
-          // Видалити клас після закінчення анімації (2s)
-          setTimeout(() => {
-            card.classList.remove('animating');
-          }, 2000);
-        } else {
-          // JS Fallback для старих браузерів
-          numberElement.textContent = formatNumber(0) + suffix;
-
-          if (activeAnimations >= MAX_CONCURRENT_ANIMATIONS) {
-            animationQueue.push({ element: numberElement, target: targetNumber, suffix });
-          } else {
-            requestIdleCallback(() => {
-              animateCounter(numberElement, targetNumber, suffix);
-            });
-          }
+    if (isInViewport && !card.dataset.animated) {
+      // Якщо елемент вже видимий, запустити анімацію одразу
+      startAnimation(card, numberElement, targetNumber, suffix);
+    } else {
+      // Спостереження через global-observer для елементів поза viewport
+      observe(card, (entry) => {
+        if (entry.isIntersecting && !card.dataset.animated) {
+          startAnimation(card, numberElement, targetNumber, suffix);
         }
-      }
-    });
+      });
+    }
   });
 }
 
-document.addEventListener('DOMContentLoaded', initAchievements);
+// Ініціалізація для модулів з defer
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAchievements);
+} else {
+  // DOM вже готовий (для модулів з defer)
+  initAchievements();
+}
 
 export default { initAchievements };
 

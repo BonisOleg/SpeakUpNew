@@ -341,6 +341,17 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-white);
 }
 
+/* HTMX Indicator - прихований за замовчуванням */
+.htmx-indicator {
+  display: none;
+}
+
+/* Показується коли є HTMX запит */
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+  display: block;
+}
+
 /* Загальний стиль для заголовків секцій (як h1 в hero) */
 .section-title {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
