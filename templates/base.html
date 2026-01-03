@@ -73,75 +73,28 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{% static 'img/logoBase.png' %}">
 
-  <!-- STEP 1: PRELOAD найважливіших некритичних CSS -->
-  <link rel="preload" as="style" href="{% static 'css/components/ios-safe.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/normalize.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/base.css' %}"
-        data-css-preload>
+  <!-- Критичні CSS - синхронне завантаження для усунення FOUC -->
+  <!-- Базові CSS (першими) -->
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/ios-safe.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-  <!-- STEP 2: Розбитий header.css на 5 модулів -->
-  <link rel="preload" as="style" href="{% static 'css/components/header-base.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/navigation.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/burger-menu.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/header-dynamic-form.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/tab-slider.css' %}"
-        data-css-preload>
+  <!-- Header компоненти -->
+  <link rel="stylesheet" href="{% static 'css/components/header-base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/burger-menu.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/header-dynamic-form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/tab-slider.css' %}">
 
-  <!-- NOSCRIPT FALLBACK для браузерів без JS -->
-  <noscript>
-    <link rel="stylesheet" href="{% static 'css/components/ios-safe.css' %}">
-    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/header-base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/navigation.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/burger-menu.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/header-dynamic-form.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/tab-slider.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/button.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/form.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/message.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/modal.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/running-line.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/trial-form.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/footer.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/programs-list.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/news.css' %}">
-    <link rel="stylesheet" href="{% static 'css/utilities/carousel.css' %}">
-    <link rel="stylesheet" href="{% static 'css/utilities/glassmorphism.css' %}">
-    <link rel="stylesheet" href="{% static 'css/utilities/counter-animation.css' %}">
-  </noscript>
+  <!-- Компоненти (використовуються в header.html та base.html) -->
+  <link rel="stylesheet" href="{% static 'css/components/button.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/modal.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/trial-form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/message.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/footer.css' %}">
 
-  <!-- Решта CSS асинхронно після page load -->
-  <link rel="preload" as="style" href="{% static 'css/components/button.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/form.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/message.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/modal.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/running-line.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/trial-form.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/footer.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/programs-list.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/components/news.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/utilities/carousel.css' %}"
-        data-css-preload>
-  <link rel="preload" as="style" href="{% static 'css/utilities/glassmorphism.css' %}"
-        data-css-preload>
-  <!-- Counter animation CSS завантажується одразу для швидшого відображення досягнень -->
-  <link rel="stylesheet" href="{% static 'css/utilities/counter-animation.css' %}">
+  <!-- Не критичні CSS завантажуються через дочірні шаблони (extra_css block) або пізніше -->
 
   {% block extra_css %}{% endblock %}
 
