@@ -6,22 +6,27 @@
 
 {% block structured_data %}
 {{ block.super }}
-{% for promotion in promotions %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Offer",
-  "name": "{{ promotion.title_uk if current_language == 'uk' else promotion.title_ru }}",
-  "description": "{{ promotion.description_uk if current_language == 'uk' else promotion.description_ru }}",
-  "priceCurrency": "UAH",
-  "availability": "https://schema.org/InStock",
-  "seller": {
-    "@type": "EducationalOrganization",
-    "name": "SPEAK UP"
-  }
+  "@type": "ItemList",
+  "itemListElement": [
+    {% for promotion in promotions %}
+    {
+      "@type": "Offer",
+      "name": "{{ promotion.title_uk if current_language == 'uk' else promotion.title_ru }}",
+      "description": "{{ promotion.description_uk if current_language == 'uk' else promotion.description_ru }}",
+      "priceCurrency": "UAH",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "EducationalOrganization",
+        "name": "SPEAK UP"
+      }
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
 }
 </script>
-{% endfor %}
 {% endblock %}
 
 {% block content %}
