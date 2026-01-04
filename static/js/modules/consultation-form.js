@@ -1,5 +1,7 @@
 'use strict';
 
+import { initPhoneMask } from '../utils/form-helpers.js';
+
 /**
  * Consultation Form - форма консультації з месенджерами
  * Кнопки месенджерів з'являються під чекбоксом при виборі "консультація в переписці"
@@ -8,6 +10,12 @@ function initConsultationForm() {
   const formContainer = document.querySelector('.consultation-form');
   const form = formContainer?.querySelector('.consultation-form__form') || formContainer;
   if (!form) return;
+
+  // Ініціалізувати маску телефону
+  const phoneInput = form.querySelector('input[type="tel"]');
+  if (phoneInput) {
+    initPhoneMask(phoneInput);
+  }
 
   const checkbox = form.querySelector('input[name="prefers_messenger"]');
   const messengerButtons = form.querySelector('.consultation-form__messenger-buttons');

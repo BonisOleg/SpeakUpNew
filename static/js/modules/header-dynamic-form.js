@@ -196,6 +196,12 @@ class HeaderDynamicForm {
     try {
       const formData = new FormData(this.elements.form);
 
+      // Нормалізувати телефон: видалити пробіли та залишити тільки +380XXXXXXXXX
+      if (this.elements.phoneField) {
+        const phoneValue = this.elements.phoneField.value.replace(/\s/g, ''); // Видалити всі пробіли
+        formData.set('phone', phoneValue);
+      }
+
       // UTM параметри
       const urlParams = new URLSearchParams(window.location.search);
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'].forEach(param => {
@@ -240,7 +246,9 @@ class HeaderDynamicForm {
       isValid = false;
     }
 
-    if (!phone || phone.replace(/\D/g, '').length < 12) {
+    // Перевірка телефону: після видалення нецифрових символів має бути 12 цифр (+380XXXXXXXXX = 13 символів, але 12 цифр)
+    const phoneDigits = phone ? phone.replace(/\D/g, '') : '';
+    if (!phone || phoneDigits.length < 12) {
       this.showFieldError('phone', 'Введіть номер телефону');
       isValid = false;
     }

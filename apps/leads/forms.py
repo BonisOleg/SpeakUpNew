@@ -22,6 +22,21 @@ class TrialLessonForm(forms.ModelForm):
             }),
         }
 
+    def clean_name(self):
+        """Валідація імені: мінімум 2 символи"""
+        name = self.cleaned_data.get('name', '').strip()
+        if name and len(name) < 2:
+            raise forms.ValidationError("Ім'я має містити мінімум 2 символи")
+        return name
+
+    def clean_phone(self):
+        """Нормалізувати телефон: видалити пробіли"""
+        phone = self.cleaned_data.get('phone', '')
+        if phone:
+            # Видалити всі пробіли
+            phone = phone.replace(' ', '')
+        return phone
+
 
 
 

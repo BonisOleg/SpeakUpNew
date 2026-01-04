@@ -46,6 +46,13 @@ function handleSubmit(e) {
   const submitBtn = form.querySelector('[type="submit"]');
   const formData = new FormData(form);
 
+  // Нормалізувати телефон: видалити пробіли та залишити тільки +380XXXXXXXXX
+  const phoneInput = form.querySelector('input[name="phone"]');
+  if (phoneInput) {
+    const phoneValue = phoneInput.value.replace(/\s/g, ''); // Видалити всі пробіли
+    formData.set('phone', phoneValue);
+  }
+
   // Додати UTM параметри:
   const urlParams = new URLSearchParams(window.location.search);
   formData.append('utm_source', urlParams.get('utm_source') || '');

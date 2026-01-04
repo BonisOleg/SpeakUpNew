@@ -95,3 +95,11 @@ class ConsultationForm(forms.ModelForm):
         self.fields['messenger_choice'].widget.attrs['style'] = 'display: none;'
         self.fields['messenger_choice'].required = False
 
+    def clean_phone(self):
+        """Нормалізувати телефон: видалити пробіли"""
+        phone = self.cleaned_data.get('phone', '')
+        if phone:
+            # Видалити всі пробіли
+            phone = phone.replace(' ', '')
+        return phone
+
