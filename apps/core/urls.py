@@ -6,7 +6,7 @@ app_name = 'core'
 urlpatterns = [
     # Головні сторінки
     path('', views.index, name='index'),
-    path('about', views.about, name='about'),
+    path('about/', views.about, name='about'),
     path('contacts', views.contacts, name='contacts'),
     path('faq', views.faq, name='faq'),
     path('testing', views.testing, name='testing'),
