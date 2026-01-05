@@ -70,8 +70,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_BROTLI_ENABLED = True
 
 # WhiteNoise cache settings
+# ТИМЧАСОВО відключено для розробки стилів
 # MAX_AGE: максимальний час кешування статичних файлів (1 рік)
-WHITENOISE_MAX_AGE = 31536000  # 1 рік в секундах
+WHITENOISE_MAX_AGE = 0  # Тимчасово: 0 (було 31536000 - 1 рік в секундах)
 
 # Додати Content-Type для файлів до стиснення
 WHITENOISE_MIMETYPES = {
