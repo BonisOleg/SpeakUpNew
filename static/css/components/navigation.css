@@ -119,6 +119,7 @@
   box-sizing: border-box;
   box-shadow: none;
   width: 100%;
+
   /* max-width буде перевизначено в media query для >= 768px */
 }
 
