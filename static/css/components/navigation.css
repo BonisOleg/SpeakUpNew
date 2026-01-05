@@ -14,7 +14,16 @@
 
   .header__nav--top {
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .header__menu--top {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -110,7 +119,7 @@
   box-sizing: border-box;
   box-shadow: none;
   width: 100%;
-  max-width: var(--content-max-width);
+  /* max-width буде перевизначено в media query для >= 768px */
 }
 
 .header__menu {

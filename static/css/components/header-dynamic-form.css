@@ -50,6 +50,7 @@
 [data-header-running-line] {
   flex: 1 0 0;
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -60,6 +61,7 @@
   pointer-events: auto;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 /* Дочірні елементи бігучеї стрічки не повинні блокувати кліки */
@@ -108,6 +110,7 @@
 [data-header-success] {
   flex: 1 0 0;
   min-width: 0;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,6 +119,7 @@
   font-weight: 500;
   color: var(--color-success);
   animation: success-pulse 0.5s ease-out forwards;
+  box-sizing: border-box;
 }
 
 @keyframes success-pulse {
@@ -153,9 +157,11 @@
 [data-header-dynamic-form] {
   flex: 1 0 0;
   min-width: 0;
+  max-width: 100%;
   display: flex;
   gap: var(--menu-spacing-xs);
   align-items: center;
+  box-sizing: border-box;
 }
 
 [data-header-dynamic-form] .form-group {
