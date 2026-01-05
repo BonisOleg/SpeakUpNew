@@ -120,6 +120,56 @@
   }
 }
 
+/* Договори */
+.footer__contracts {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.footer__contract-link {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+  background: rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  display: inline-block;
+  text-align: center;
+  min-width: 140px;
+}
+
+.footer__contract-link:hover,
+.footer__contract-link:focus-visible {
+  background: var(--color-primary);
+  border-color: var(--color-white);
+  color: var(--color-white);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__contract-link:hover {
+    background: var(--color-primary);
+    border-color: var(--color-white);
+    transform: translateY(-2px);
+  }
+}
+
+.footer__contract-link--left {
+  margin-right: auto;
+}
+
+.footer__contract-link--right {
+  margin-left: auto;
+}
+
 /* Соціальні мережі */
 .footer__social {
   display: flex;
@@ -209,6 +259,16 @@
     flex: 0 0 auto;
   }
 
+  .footer__contracts {
+    flex-basis: 100%;
+    justify-content: space-between;
+    margin-top: var(--spacing-sm);
+  }
+
+  .footer__contract-link {
+    flex: 0 1 auto;
+  }
+
   .footer__copyright {
     flex-basis: 100%;
     text-align: center;
@@ -241,6 +301,23 @@
   .footer__nav-link {
     display: block;
     padding: var(--spacing-sm);
+  }
+
+  .footer__contracts {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    width: 100%;
+  }
+
+  .footer__contract-link {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .footer__contract-link--left,
+  .footer__contract-link--right {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .footer__copyright {

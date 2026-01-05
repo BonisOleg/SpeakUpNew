@@ -18,9 +18,7 @@ class Command(BaseCommand):
         promotions = [
             {
                 'title_uk': 'Акція 1+1 = 4',
-                'title_ru': 'Акция 1+1 = 4',
                 'description_uk': 'Купуй 2 рівні англійської і ще 2 отримай в подарунок',
-                'description_ru': 'Покупай 2 уровня английского и еще 2 получи в подарок',
             },
         ]
 
@@ -32,15 +30,7 @@ class Command(BaseCommand):
             text_uk = f"🎉 {promotion['title_uk']}: {promotion['description_uk']} | Деталі на сторінці акцій"
             running_line_texts.append({
                 'text': text_uk,
-                'order': idx * 2 - 1,
-                'is_active': True
-            })
-
-            # Російська версія (якщо потрібно)
-            text_ru = f"🎉 {promotion['title_ru']}: {promotion['description_ru']} | Детали на странице акций"
-            running_line_texts.append({
-                'text': text_ru,
-                'order': idx * 2,
+                'order': idx,
                 'is_active': True
             })
 

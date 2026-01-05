@@ -15,7 +15,7 @@ class TrialLesson(models.Model):
     name = models.CharField(max_length=100, verbose_name="Ім'я")
     phone_validator = RegexValidator(
         regex=r'^\+380\d{9}$',
-        message="Номер має бути в форматі +380XXXXXXXXX"
+        message="Введіть коректний український номер телефону"
     )
     phone = models.CharField(
         max_length=13,

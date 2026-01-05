@@ -7,6 +7,7 @@ import { initHeaderDynamicForm } from './modules/header-dynamic-form.js';
 import { initTabSlider } from './shared/tab-slider.js';
 import programsListModule from './modules/programs-list.js';
 import { BaseAccordion } from './modules/base-accordion.js';
+import { initPhoneMask } from './utils/form-helpers.js';
 
 /**
  * Автоматично визначає активне посилання в навігації на основі поточного URL
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     programsListModule.initProgramsList();
   }
 
-  // Корпоративна сторінка - акордеони
+  // Корпоративна сторінка - акордеони та форма
   if (document.querySelector('.corporate-program-page')) {
     // Ініціалізація акордеонів для корпоративної сторінки через BaseAccordion
     const corporateGrids = document.querySelectorAll('.corporate-program-page .programs-grid');
@@ -104,6 +105,24 @@ document.addEventListener('DOMContentLoaded', () => {
         animationDuration: 300
       });
     });
+
+    // Ініціалізація маски телефону для corporate form
+    const corporateForm = document.querySelector('.corporate-consultation__form form');
+    if (corporateForm) {
+      const phoneInput = corporateForm.querySelector('input[name="phone"]');
+      if (phoneInput) {
+        initPhoneMask(phoneInput);
+      }
+
+      // Нормалізувати телефон перед відправкою
+      corporateForm.addEventListener('submit', function() {
+        if (phoneInput) {
+          // Видалити пробіли, дужки, дефіси
+          const phoneValue = phoneInput.value.replace(/\s/g, '').replace(/\(|\)|-/g, '');
+          phoneInput.value = phoneValue;
+        }
+      });
+    }
   }
 
   // FAQ сторінка - ініціалізація акордеонів
