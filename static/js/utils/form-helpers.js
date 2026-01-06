@@ -10,6 +10,7 @@
  * Приймає вхідне число та форматує його як український номер
  * Формат: +380 XX XXX XX XX
  * Обмежує введення до 9 цифр після префіксу +380
+ * Зберігає позицію курсора при форматуванні
  *
  * @param {HTMLInputElement} input - input елемент з type="tel"
  */
@@ -20,52 +21,220 @@ export function initPhoneMask(input) {
   if (input.dataset.phoneMaskInitialized === 'true') return;
   input.dataset.phoneMaskInitialized = 'true';
 
-  input.addEventListener('input', (e) => {
-    const inputValue = e.target.value;
+  /**
+   * Витягти тільки цифри з номера та нормалізувати префікс
+   * @param {string} value - вхідне значення
+   * @returns {string} - тільки цифри номера (без префіксу 380/80/0)
+   */
+  function extractDigits(value) {
+    // Видалити всі нецифрові символи
+    let digits = value.replace(/\D/g, '');
 
-    // Перевірити, чи значення вже починається з "+380 "
-    // Якщо так - витягувати тільки цифри після "+380 " (не включаючи 380)
-    let value;
-    if (inputValue.startsWith('+380 ')) {
-      // Вже є префікс +380, витягуємо тільки цифри після нього
-      value = inputValue.substring(5).replace(/\D/g, '');
-    } else {
-      // Немає префіксу, обробляємо все значення
-      // Отримати тільки цифри з введеного значення
-      value = inputValue.replace(/\D/g, '');
+    // Видалити префікс країни, якщо користувач ввів його
+    // Перевіряємо в порядку від найдовшого до найкоротшого префіксу
+    if (digits.length >= 3 && digits.startsWith('380')) {
+      digits = digits.substring(3);
+    } else if (digits.length >= 2 && digits.startsWith('80')) {
+      digits = digits.substring(2);
+    } else if (digits.length >= 1 && digits.startsWith('0')) {
+      digits = digits.substring(1);
+    }
 
-      // Видаліти префікс країни, якщо користувач ввів його
-      // Перевіряємо в порядку від найдовшого до найкоротшого префіксу
-      // Важливо: перевіряємо спочатку найдовший префікс (380), потім коротші (80, 0)
-      if (value.length >= 3 && value.startsWith('380')) {
-        // Якщо починається з 380, видаляємо префікс (залишається номер без 380)
-        value = value.substring(3);
-      } else if (value.length >= 2 && value.startsWith('80')) {
-        // Якщо починається з 80 (але не 380), видаляємо префікс
-        value = value.substring(2);
-      } else if (value.length >= 1 && value.startsWith('0')) {
-        // Якщо починається з 0 (але не 80 або 380), видаляємо префікс
-        value = value.substring(1);
+    // Обмежити до 9 цифр
+    if (digits.length > 9) {
+      digits = digits.substring(0, 9);
+    }
+
+    return digits;
+  }
+
+  /**
+   * Відформатувати номер у формат +380 XX XXX XX XX
+   * @param {string} digits - тільки цифри (до 9 символів)
+   * @returns {string} - відформатований номер
+   */
+  function formatPhone(digits) {
+    if (!digits || digits.length === 0) {
+      return '+380 ';
+    }
+
+    const parts = [];
+    if (digits.length > 0) parts.push(digits.substring(0, 2));
+    if (digits.length > 2) parts.push(digits.substring(2, 5));
+    if (digits.length > 5) parts.push(digits.substring(5, 7));
+    if (digits.length > 7) parts.push(digits.substring(7, 9));
+
+    return `+380 ${parts.join(' ')}`;
+  }
+
+  /**
+   * Обчислити нову позицію курсора після форматування
+   * @param {number} oldCursorPos - стара позиція курсора
+   * @param {string} oldValue - старе значення
+   * @param {string} newValue - нове значення
+   * @returns {number} - нова позиція курсора
+   */
+  function calculateNewCursorPosition(oldCursorPos, oldValue, newValue) {
+    // Якщо поле порожнє або містить тільки префікс, курсор в кінці
+    if (!oldValue || oldValue.trim() === '+380' || oldValue === '+380 ') {
+      return newValue.length;
+    }
+
+    // Підрахувати кількість цифр до позиції курсора в старому значенні
+    const digitsBeforeCursor = oldValue.substring(0, oldCursorPos).replace(/\D/g, '').length;
+
+    // Якщо немає цифр до курсора, курсор після префіксу
+    if (digitsBeforeCursor === 0) {
+      return 5; // Після "+380 "
+    }
+
+    // Знайти позицію в новому значенні, де закінчуються ці цифри
+    let newPos = 5; // Початок після "+380 "
+    let digitCount = 0;
+
+    for (let i = 5; i < newValue.length; i++) {
+      if (/\d/.test(newValue[i])) {
+        digitCount++;
+        if (digitCount === digitsBeforeCursor) {
+          // Знайдено позицію після останньої цифри до курсора
+          newPos = i + 1;
+          break;
+        }
       }
     }
 
-    // Обмежити до 9 цифр (український номер після +380)
-    // Це гарантує, що користувач не зможе ввести більше 9 цифр після префіксу
-    if (value.length > 9) {
-      value = value.substring(0, 9);
+    // Якщо всі цифри введені або курсор був в кінці, курсор в кінці
+    if (digitCount >= 9 || oldCursorPos >= oldValue.length) {
+      return newValue.length;
     }
 
-    // Побудувати маску: +380 XX XXX XX XX
-    const parts = [];
-    if (value.length > 0) parts.push(value.substring(0, 2));
-    if (value.length > 2) parts.push(value.substring(2, 5));
-    if (value.length > 5) parts.push(value.substring(5, 7));
-    if (value.length > 7) parts.push(value.substring(7, 9));
+    return newPos;
+  }
 
-    // Встановити значення з форматуванням
-    // Завжди додаємо +380 на початку
-    e.target.value = `+380 ${parts.join(' ')}`;
-  });
+  /**
+   * Обробити введення та відформатувати номер
+   * @param {Event} e - подія input
+   */
+  function handleInput(e) {
+    const input = e.target;
+    const oldValue = input.value;
+    const oldCursorPos = input.selectionStart || 0;
+
+    // Витягти цифри
+    const digits = extractDigits(oldValue);
+
+    // Відформатувати
+    const newValue = formatPhone(digits);
+
+    // Оновити значення тільки якщо воно змінилося
+    if (oldValue !== newValue) {
+      input.value = newValue;
+
+      // Відновити позицію курсора
+      const newCursorPos = calculateNewCursorPosition(oldCursorPos, oldValue, newValue);
+
+      // Використати requestAnimationFrame для надійного встановлення курсора
+      requestAnimationFrame(() => {
+        input.setSelectionRange(newCursorPos, newCursorPos);
+      });
+    }
+  }
+
+  /**
+   * Обробити натискання клавіші (для Backspace/Delete)
+   * @param {KeyboardEvent} e - подія keydown
+   */
+  function handleKeyDown(e) {
+    const input = e.target;
+    const cursorPos = input.selectionStart || 0;
+    const value = input.value;
+
+    // Дозволити стандартну обробку для спеціальних клавіш
+    const allowedKeys = [
+      'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+      'Home', 'End', 'Tab', 'Escape'
+    ];
+
+    if (allowedKeys.includes(e.key)) {
+      // Для Backspace/Delete на позиції після пробілу - перемістити курсор
+      if ((e.key === 'Backspace' || e.key === 'Delete') && cursorPos > 0) {
+        // Якщо курсор на пробілі або після пробілу, перемістити його
+        if (value[cursorPos - 1] === ' ' && e.key === 'Backspace') {
+          e.preventDefault();
+          const newPos = cursorPos - 1;
+          input.setSelectionRange(newPos, newPos);
+          // Запустити обробку input для форматування
+          setTimeout(() => {
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          }, 0);
+        } else if (value[cursorPos] === ' ' && e.key === 'Delete') {
+          e.preventDefault();
+          const newPos = cursorPos + 1;
+          input.setSelectionRange(newPos, newPos);
+          // Запустити обробку input для форматування
+          setTimeout(() => {
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          }, 0);
+        }
+      }
+      return;
+    }
+
+    // Блокувати введення нецифрових символів (крім Ctrl/Cmd комбінацій)
+    if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+      const isDigit = /^\d$/.test(e.key);
+      const isAllowedSpecial = ['+', '(', ')', '-', ' '].includes(e.key);
+
+      if (!isDigit && !isAllowedSpecial) {
+        e.preventDefault();
+      }
+    }
+  }
+
+  /**
+   * Обробити вставку з буфера обміну
+   * @param {ClipboardEvent} e - подія paste
+   */
+  function handlePaste(e) {
+    e.preventDefault();
+
+    const input = e.target;
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const cursorPos = input.selectionStart || 0;
+    const value = input.value;
+
+    // Вставити текст на позицію курсора
+    const newValue = value.substring(0, cursorPos) + pastedText + value.substring(input.selectionEnd || cursorPos);
+
+    // Витягти цифри та відформатувати
+    const digits = extractDigits(newValue);
+    const formatted = formatPhone(digits);
+
+    input.value = formatted;
+
+    // Встановити курсор в кінці
+    requestAnimationFrame(() => {
+      const newPos = formatted.length;
+      input.setSelectionRange(newPos, newPos);
+    });
+  }
+
+  // Додати обробники подій
+  input.addEventListener('input', handleInput);
+  input.addEventListener('keydown', handleKeyDown);
+  input.addEventListener('paste', handlePaste);
+
+  // Ініціалізувати значення якщо поле вже має значення
+  if (input.value) {
+    const digits = extractDigits(input.value);
+    const formatted = formatPhone(digits);
+    if (input.value !== formatted) {
+      input.value = formatted;
+    }
+  } else {
+    // Встановити початкове значення "+380 " для порожнього поля
+    input.value = '+380 ';
+  }
 }
 
 /**
