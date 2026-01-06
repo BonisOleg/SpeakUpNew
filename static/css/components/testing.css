@@ -383,7 +383,7 @@
   text-align: center;
   font-weight: 700;
   font-size: var(--font-size-lg);
-  color: var(--color-text);
+  color: #1f2937;
   margin-bottom: var(--spacing-xs);
 }
 
@@ -502,7 +502,7 @@
 
 .result-card__details-value {
   font-weight: 700;
-  color: var(--color-text);
+  color: #1f2937;
 }
 
 .result-card__description {

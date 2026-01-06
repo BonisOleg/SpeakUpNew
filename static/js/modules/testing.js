@@ -399,9 +399,24 @@ function renderQuestion() {
     // Анімація появи карток
     const cards = answersGridEl.querySelectorAll('.card-option');
     cards.forEach((card, i) => {
+      // Ensure text colors are set before animation
+      const textEl = card.querySelector('.card-option__text');
+      const tenseEl = card.querySelector('.card-option__tense');
+      const descEl = card.querySelector('.card-option__desc');
+      if (textEl && !textEl.style.color) textEl.style.color = '#1f2937';
+      if (tenseEl && !tenseEl.style.color) tenseEl.style.color = '';
+      if (descEl && !descEl.style.color) descEl.style.color = '';
+
       card.style.opacity = '0';
       card.style.animationDelay = `${i * 0.1}s`;
       card.classList.add('slide-in');
+
+      // Fallback: ensure text is visible after animation completes
+      setTimeout(() => {
+        if (card.style.opacity === '0' || getComputedStyle(card).opacity === '0') {
+          card.style.opacity = '1';
+        }
+      }, 600 + (i * 100));
     });
   }
 }
@@ -439,37 +454,64 @@ function handleTenseAnswer(index) {
       cards[index].classList.add('card-correct');
       cards[index].style.borderColor = '#22c55e';
       cards[index].style.background = 'linear-gradient(135deg, #dcfce7, #bbf7d0)';
-      // Ensure text remains visible
+      // Ensure text remains visible - set colors immediately and with high priority
       const textEl = cards[index].querySelector('.card-option__text');
       const tenseEl = cards[index].querySelector('.card-option__tense');
       const descEl = cards[index].querySelector('.card-option__desc');
-      if (textEl) textEl.style.color = '#1f2937';
-      if (tenseEl) tenseEl.style.color = '#16a34a';
-      if (descEl) descEl.style.color = '#374151';
+      if (textEl) {
+        textEl.style.setProperty('color', '#1f2937', 'important');
+        textEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (tenseEl) {
+        tenseEl.style.setProperty('color', '#16a34a', 'important');
+        tenseEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (descEl) {
+        descEl.style.setProperty('color', '#374151', 'important');
+        descEl.style.setProperty('opacity', '1', 'important');
+      }
     }
   } else {
     if (cards[index]) {
       cards[index].classList.add('card-wrong');
       cards[index].style.borderColor = '#ef4444';
       cards[index].style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
-      // Ensure text remains visible
+      // Ensure text remains visible - set colors immediately and with high priority
       const textEl = cards[index].querySelector('.card-option__text');
       const tenseEl = cards[index].querySelector('.card-option__tense');
       const descEl = cards[index].querySelector('.card-option__desc');
-      if (textEl) textEl.style.color = '#1f2937';
-      if (tenseEl) tenseEl.style.color = '#dc2626';
-      if (descEl) descEl.style.color = '#374151';
+      if (textEl) {
+        textEl.style.setProperty('color', '#1f2937', 'important');
+        textEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (tenseEl) {
+        tenseEl.style.setProperty('color', '#dc2626', 'important');
+        tenseEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (descEl) {
+        descEl.style.setProperty('color', '#374151', 'important');
+        descEl.style.setProperty('opacity', '1', 'important');
+      }
     }
     if (cards[q.correct]) {
       cards[q.correct].style.borderColor = '#22c55e';
       cards[q.correct].style.background = 'linear-gradient(135deg, #dcfce7, #bbf7d0)';
-      // Ensure text remains visible
+      // Ensure text remains visible - set colors immediately and with high priority
       const textEl = cards[q.correct].querySelector('.card-option__text');
       const tenseEl = cards[q.correct].querySelector('.card-option__tense');
       const descEl = cards[q.correct].querySelector('.card-option__desc');
-      if (textEl) textEl.style.color = '#1f2937';
-      if (tenseEl) tenseEl.style.color = '#16a34a';
-      if (descEl) descEl.style.color = '#374151';
+      if (textEl) {
+        textEl.style.setProperty('color', '#1f2937', 'important');
+        textEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (tenseEl) {
+        tenseEl.style.setProperty('color', '#16a34a', 'important');
+        tenseEl.style.setProperty('opacity', '1', 'important');
+      }
+      if (descEl) {
+        descEl.style.setProperty('color', '#374151', 'important');
+        descEl.style.setProperty('opacity', '1', 'important');
+      }
     }
   }
 
@@ -493,13 +535,22 @@ function skipQuestion() {
   if (cards[q.correct]) {
     cards[q.correct].style.borderColor = '#22c55e';
     cards[q.correct].style.background = 'linear-gradient(135deg, #dcfce7, #bbf7d0)';
-    // Ensure text remains visible
+    // Ensure text remains visible - set colors immediately and with high priority
     const textEl = cards[q.correct].querySelector('.card-option__text');
     const tenseEl = cards[q.correct].querySelector('.card-option__tense');
     const descEl = cards[q.correct].querySelector('.card-option__desc');
-    if (textEl) textEl.style.color = '#1f2937';
-    if (tenseEl) tenseEl.style.color = '#16a34a';
-    if (descEl) descEl.style.color = '#374151';
+    if (textEl) {
+      textEl.style.setProperty('color', '#1f2937', 'important');
+      textEl.style.setProperty('opacity', '1', 'important');
+    }
+    if (tenseEl) {
+      tenseEl.style.setProperty('color', '#16a34a', 'important');
+      tenseEl.style.setProperty('opacity', '1', 'important');
+    }
+    if (descEl) {
+      descEl.style.setProperty('color', '#374151', 'important');
+      descEl.style.setProperty('opacity', '1', 'important');
+    }
   }
   showFeedback(false, q.explanation);
 }
