@@ -29,6 +29,7 @@
 @media (width >= 768px) {
   .testing-page {
     padding: var(--spacing-lg);
+    padding-top: 6rem;
   }
 }
 
