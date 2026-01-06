@@ -1,6 +1,6 @@
 'use strict';
 
-import { initPhoneMask, showFieldError, clearFieldError, normalizePhone } from '../utils/form-helpers.js';
+import { showFieldError, clearFieldError } from '../utils/form-helpers.js';
 
 export function initTrialForm() {
   const triggerMobile = document.querySelector('.trial-form__trigger--mobile');
@@ -34,10 +34,6 @@ export function initTrialForm() {
     form?.addEventListener('submit', handleSubmit);
   });
 
-  // Маска телефону (використовуємо shared функцію):
-  document.querySelectorAll('input[type="tel"]').forEach(input => {
-    initPhoneMask(input);
-  });
 }
 
 function handleSubmit(e) {
@@ -97,11 +93,6 @@ function handleSubmit(e) {
     return;
   }
 
-  // Нормалізувати телефон в input ПЕРЕД створенням FormData
-  if (phoneInput) {
-    const normalizedPhone = normalizePhone(phoneInput.value);
-    phoneInput.value = normalizedPhone;
-  }
 
   const formData = new FormData(form);
 

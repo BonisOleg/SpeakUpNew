@@ -1,6 +1,5 @@
 'use strict';
 
-import { initPhoneMask, normalizePhone } from '../utils/form-helpers.js';
 
 /**
  * Consultation Form - форма консультації з месенджерами
@@ -11,11 +10,6 @@ function initConsultationForm() {
   const form = formContainer?.querySelector('.consultation-form__form') || formContainer;
   if (!form) return;
 
-  // Ініціалізувати маску телефону
-  const phoneInput = form.querySelector('input[type="tel"]');
-  if (phoneInput) {
-    initPhoneMask(phoneInput);
-  }
 
   const checkbox = form.querySelector('input[name="prefers_messenger"]');
   const messengerButtons = form.querySelector('.consultation-form__messenger-buttons');
@@ -85,14 +79,6 @@ function initConsultationForm() {
     });
   });
 
-  // Обробка відправки форми - нормалізувати телефон перед відправкою
-  form.addEventListener('submit', function() {
-    const phoneInput = form.querySelector('input[name="phone"]');
-    if (phoneInput) {
-      const normalizedPhone = normalizePhone(phoneInput.value);
-      phoneInput.value = normalizedPhone;
-    }
-  });
 }
 
 document.addEventListener('DOMContentLoaded', initConsultationForm);

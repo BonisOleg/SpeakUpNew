@@ -1,6 +1,5 @@
 'use strict';
 
-import { initPhoneMask, normalizePhone } from '../utils/form-helpers.js';
 
 /**
  * Динамічна форма в хедері
@@ -55,10 +54,6 @@ class HeaderDynamicForm {
       this.elements.phoneField.dataset.originalPlaceholder = this.elements.phoneField.placeholder || '+380';
     }
 
-    // Ініціалізувати маску телефону для полів форми
-    if (this.elements.phoneField) {
-      initPhoneMask(this.elements.phoneField);
-    }
 
     this.bindEvents();
     this.setState(STATE.INITIAL);
@@ -186,11 +181,6 @@ class HeaderDynamicForm {
     this.elements.submitBtn.textContent = 'Відправляємо...';
 
     try {
-      // Нормалізувати телефон в input ПЕРЕД створенням FormData
-      if (this.elements.phoneField) {
-        const normalizedPhone = normalizePhone(this.elements.phoneField.value);
-        this.elements.phoneField.value = normalizedPhone;
-      }
 
       const formData = new FormData(this.elements.form);
 
@@ -243,12 +233,11 @@ class HeaderDynamicForm {
       isValid = false;
     }
 
-    // Нормалізувати телефон використовуючи централізовану функцію
-    const normalizedPhone = phone ? normalizePhone(phone) : '';
-    const phoneDigits = normalizedPhone.replace(/\D/g, '');
+    // Витягти тільки цифри з телефону
+    const phoneDigits = phone ? phone.replace(/\D/g, '') : '';
 
     // Дозволити різні формати: +380XXXXXXXXX (12 цифр), 380XXXXXXXXX (12 цифр), 0XXXXXXXXX (10 цифр)
-    if (!normalizedPhone) {
+    if (!phone || !phoneDigits) {
       this.showFieldError('phone', 'Введіть номер телефону');
       isValid = false;
     } else if (phoneDigits.length === 10) {
