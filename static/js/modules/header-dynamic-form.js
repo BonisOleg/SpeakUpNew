@@ -1,5 +1,7 @@
 'use strict';
 
+import { initPhoneMask, normalizePhone } from '../utils/form-helpers.js';
+
 /**
  * Динамічна форма в хедері
  * Стани: initial (бігуча стрічка + кнопка на десктопі / тільки бігуча стрічка на мобільних) → expanded (форма) → success → initial
@@ -51,6 +53,11 @@ class HeaderDynamicForm {
     }
     if (this.elements.phoneField && !this.elements.phoneField.dataset.originalPlaceholder) {
       this.elements.phoneField.dataset.originalPlaceholder = this.elements.phoneField.placeholder || '+380';
+    }
+
+    // Ініціалізувати маску телефону для полів форми
+    if (this.elements.phoneField) {
+      initPhoneMask(this.elements.phoneField);
     }
 
     this.bindEvents();
@@ -136,12 +143,6 @@ class HeaderDynamicForm {
       case STATE.EXPANDED:
         this.showElements([this.elements.form]);
         this.startInactivityTimer();
-        // Додаткова перевірка для мобільних - переконатися, що форма видима
-        if (this.elements.form) {
-          this.elements.form.style.display = 'flex';
-          this.elements.form.style.visibility = 'visible';
-          this.elements.form.style.opacity = '1';
-        }
         // Фокус на перше поле
         setTimeout(() => this.elements.nameField?.focus(), 100);
         break;
@@ -166,15 +167,6 @@ class HeaderDynamicForm {
     elements.forEach(el => {
       if (el && el.classList.contains('header__dynamic-element')) {
         el.classList.add('header__dynamic-element--visible');
-        // Відновити display для flex елементів
-        if (el.tagName === 'FORM' || el.classList.contains('header__success')) {
-          el.style.display = 'flex';
-          // Додатково для мобільних - переконатися, що форма видима
-          el.style.visibility = 'visible';
-          el.style.opacity = '1';
-        } else {
-          el.style.display = '';
-        }
       }
     });
   }
@@ -194,13 +186,13 @@ class HeaderDynamicForm {
     this.elements.submitBtn.textContent = 'Відправляємо...';
 
     try {
-      const formData = new FormData(this.elements.form);
-
-      // Нормалізувати телефон: видалити пробіли та залишити тільки +380XXXXXXXXX
+      // Нормалізувати телефон в input ПЕРЕД створенням FormData
       if (this.elements.phoneField) {
-        const phoneValue = this.elements.phoneField.value.replace(/\s/g, ''); // Видалити всі пробіли
-        formData.set('phone', phoneValue);
+        const normalizedPhone = normalizePhone(this.elements.phoneField.value);
+        this.elements.phoneField.value = normalizedPhone;
       }
+
+      const formData = new FormData(this.elements.form);
 
       // UTM параметри
       const urlParams = new URLSearchParams(window.location.search);
@@ -251,8 +243,8 @@ class HeaderDynamicForm {
       isValid = false;
     }
 
-    // Нормалізувати телефон ТАК САМО як у handleSubmit (видалити пробіли)
-    const normalizedPhone = phone ? phone.replace(/\s/g, '') : '';
+    // Нормалізувати телефон використовуючи централізовану функцію
+    const normalizedPhone = phone ? normalizePhone(phone) : '';
     const phoneDigits = normalizedPhone.replace(/\D/g, '');
 
     // Дозволити різні формати: +380XXXXXXXXX (12 цифр), 380XXXXXXXXX (12 цифр), 0XXXXXXXXX (10 цифр)

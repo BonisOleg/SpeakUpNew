@@ -7,7 +7,7 @@ import { initHeaderDynamicForm } from './modules/header-dynamic-form.js';
 import { initTabSlider } from './shared/tab-slider.js';
 import programsListModule from './modules/programs-list.js';
 import { BaseAccordion } from './modules/base-accordion.js';
-import { initPhoneMask } from './utils/form-helpers.js';
+import { initPhoneMask, normalizePhone } from './utils/form-helpers.js';
 
 /**
  * Автоматично визначає активне посилання в навігації на основі поточного URL
@@ -117,9 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Нормалізувати телефон перед відправкою
       corporateForm.addEventListener('submit', function() {
         if (phoneInput) {
-          // Видалити пробіли, дужки, дефіси
-          const phoneValue = phoneInput.value.replace(/\s/g, '').replace(/\(|\)|-/g, '');
-          phoneInput.value = phoneValue;
+          const normalizedPhone = normalizePhone(phoneInput.value);
+          phoneInput.value = normalizedPhone;
         }
       });
     }

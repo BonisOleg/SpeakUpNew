@@ -1,6 +1,6 @@
 'use strict';
 
-import { initPhoneMask, showFieldError, clearFieldError } from '../utils/form-helpers.js';
+import { initPhoneMask, showFieldError, clearFieldError, normalizePhone } from '../utils/form-helpers.js';
 
 export function initTrialForm() {
   const triggerMobile = document.querySelector('.trial-form__trigger--mobile');
@@ -97,13 +97,13 @@ function handleSubmit(e) {
     return;
   }
 
-  const formData = new FormData(form);
-
-  // Нормалізувати телефон: видалити пробіли та залишити тільки +380XXXXXXXXX
+  // Нормалізувати телефон в input ПЕРЕД створенням FormData
   if (phoneInput) {
-    const phoneValue = phoneInput.value.replace(/\s/g, ''); // Видалити всі пробіли
-    formData.set('phone', phoneValue);
+    const normalizedPhone = normalizePhone(phoneInput.value);
+    phoneInput.value = normalizedPhone;
   }
+
+  const formData = new FormData(form);
 
   // Додати UTM параметри:
   const urlParams = new URLSearchParams(window.location.search);

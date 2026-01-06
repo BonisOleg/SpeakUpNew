@@ -1,6 +1,6 @@
 'use strict';
 
-import { initPhoneMask } from '../utils/form-helpers.js';
+import { initPhoneMask, normalizePhone } from '../utils/form-helpers.js';
 
 /**
  * Consultation Form - форма консультації з месенджерами
@@ -89,9 +89,8 @@ function initConsultationForm() {
   form.addEventListener('submit', function() {
     const phoneInput = form.querySelector('input[name="phone"]');
     if (phoneInput) {
-      // Видалити всі пробіли з телефону перед відправкою
-      const phoneValue = phoneInput.value.replace(/\s/g, '');
-      phoneInput.value = phoneValue;
+      const normalizedPhone = normalizePhone(phoneInput.value);
+      phoneInput.value = normalizedPhone;
     }
   });
 }

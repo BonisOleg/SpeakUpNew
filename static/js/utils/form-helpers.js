@@ -16,7 +16,11 @@
 export function initPhoneMask(input) {
   if (!input || input.type !== 'tel') return;
 
-  input.addEventListener('input', function(e) {
+  // Перевірити, чи маска вже ініціалізована (щоб уникнути подвійної ініціалізації)
+  if (input.dataset.phoneMaskInitialized === 'true') return;
+  input.dataset.phoneMaskInitialized = 'true';
+
+  input.addEventListener('input', (e) => {
     // Отримати тільки цифри з введеного значення
     let value = e.target.value.replace(/\D/g, '');
 
@@ -49,7 +53,7 @@ export function initPhoneMask(input) {
 
     // Встановити значення з форматуванням
     // Завжди додаємо +380 на початку
-    e.target.value = '+380 ' + parts.join(' ');
+    e.target.value = `+380 ${  parts.join(' ')}`;
   });
 }
 
@@ -224,5 +228,29 @@ export function resetFormWithErrors(form) {
 
   // Ввімкнути кнопку
   toggleFormState(form, false);
+}
+
+/**
+ * Нормалізувати номер телефону до формату +380XXXXXXXXX
+ * Видаляє всі пробіли, дужки, дефіси та інші символи
+ *
+ * @param {string} phoneValue - номер телефону для нормалізації
+ * @returns {string} нормалізований номер телефону
+ */
+export function normalizePhone(phoneValue) {
+  if (!phoneValue) return '';
+
+  // Видалити всі пробіли, дужки, дефіси та інші нецифрові символи (крім +)
+  let normalized = phoneValue.replace(/\s/g, '').replace(/[()-]/g, '');
+
+  // Якщо є + на початку, залишити його
+  const hasPlus = normalized.startsWith('+');
+  if (hasPlus) {
+    normalized = `+${normalized.substring(1).replace(/\D/g, '')}`;
+  } else {
+    normalized = normalized.replace(/\D/g, '');
+  }
+
+  return normalized;
 }
 
