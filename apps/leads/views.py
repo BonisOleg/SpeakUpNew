@@ -1,5 +1,6 @@
 import logging
 from django.http import JsonResponse
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_protect
 from .forms import TrialLessonForm
@@ -58,9 +59,11 @@ def submit_trial_form(request):
             # TODO: Telegram notification (заглушка)
 
             logger.info('[TrialForm] Request processed successfully')
+            # Використовуємо Django URL reverse для правильного URL
+            redirect_url = reverse('core:testing')
             return JsonResponse({
                 'success': True,
-                'redirect_url': '/testing/',
+                'redirect_url': redirect_url,
                 'message': 'Дякуємо! Перенаправляємо вас на тест.'
             })
         except Exception as e:
