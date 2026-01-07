@@ -1,16 +1,22 @@
 from django import forms
 from .models import TrialLesson
 from .utils import normalize_phone_number
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class TrialLessonForm(forms.ModelForm):
-    # Honeypot поле (приховане CSS)
-    website = forms.CharField(
+    # Honeypot поле - НЕЗВИЧНА назва щоб браузер НЕ автозаповнював
+    # "contact_me_by_fax_only" - назва яку браузери не розпізнають
+    contact_me_by_fax_only = forms.CharField(
         required=False,
+        label='',  # Без label щоб не привертати увагу
         widget=forms.TextInput(attrs={
             'tabindex': '-1',
-            'autocomplete': 'off',
-            'class': 'form-group__input--honeypot'
+            'autocomplete': 'new-password',  # Обманюємо Chrome
+            'class': 'form-group__input--honeypot',
+            'aria-hidden': 'true'
         })
     )
 
@@ -44,13 +50,13 @@ class TrialLessonForm(forms.ModelForm):
         phone = self.cleaned_data.get('phone', '')
         return normalize_phone_number(phone)
 
-    def clean_website(self):
-        """Якщо honeypot заповнено - це бот"""
-        website = self.cleaned_data.get('website', '')
-        if website:
-            # Не показуємо помилку боту, просто валідація не пройде
-            raise forms.ValidationError("Bot detected")
-        return website
+    def clean_contact_me_by_fax_only(self):
+        """Honeypot перевірка (НЕ викидаємо ValidationError, обробимо в view)"""
+        value = self.cleaned_data.get('contact_me_by_fax_only', '')
+        if value:
+            # Просто логуємо (помилку покажемо в view)
+            logger.warning('[Honeypot] Field filled in form: %s', value[:50])
+        return value
 
 
 

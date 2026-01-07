@@ -14,9 +14,15 @@
       novalidate>
   {% csrf_token %}
 
-  {# Honeypot поле (приховане CSS) #}
+  {# Honeypot поле (приховане CSS) - незвична назва #}
   <div class="form-group form-group--honeypot" aria-hidden="true">
-    <input type="text" name="website" tabindex="-1" autocomplete="off" class="form-group__input--honeypot">
+    <input type="text"
+           name="contact_me_by_fax_only"
+           tabindex="-1"
+           autocomplete="new-password"
+           class="form-group__input--honeypot"
+           value=""
+           aria-hidden="true">
   </div>
 
   <div class="form-group">

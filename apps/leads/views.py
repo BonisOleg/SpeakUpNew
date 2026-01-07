@@ -20,6 +20,24 @@ def submit_trial_form(request):
     logger.debug('[TrialForm] CSRF token in headers: %s', request.headers.get('X-CSRFToken', 'not found'))
     logger.debug('[TrialForm] CSRF token in POST: %s', request.POST.get('csrfmiddlewaretoken', 'not found'))
 
+    # ===== HONEYPOT CHECK - перевіряємо ДО створення форми =====
+    honeypot_value = request.POST.get('contact_me_by_fax_only', '').strip()
+    if honeypot_value:
+        logger.warning(
+            '[TrialForm] Honeypot triggered - bot detected. IP: %s, Value: %s, User-Agent: %s',
+            get_client_ip(request),
+            honeypot_value[:50],
+            request.META.get('HTTP_USER_AGENT', 'unknown')[:100]
+        )
+        # Повертаємо SUCCESS щоб бот не знав що його виявили (silent reject)
+        # Редірект на testing як для звичайного користувача
+        return JsonResponse({
+            'success': True,
+            'redirect_url': reverse('core:testing'),
+            'message': 'Дякуємо! Перенаправляємо вас на тест.'
+        })
+    # ===== END HONEYPOT CHECK =====
+
     # Перевірка CSRF (якщо декоратор не спрацював, це вже буде 403)
     # Але ми можемо додати додаткову перевірку для кращого логування
     try:

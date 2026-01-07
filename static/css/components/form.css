@@ -87,23 +87,27 @@
   resize: vertical;
 }
 
-/* Honeypot поле - приховане від користувачів */
+/* Honeypot поле - приховане від користувачів
+   Назва "contact_me_by_fax_only" - незвична щоб браузер НЕ автозаповнював
+   Multiple layers of hiding для різних браузерів */
 .form-group--honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-  overflow: hidden;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
 }
 
 .form-group__input--honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
 
