@@ -1,9 +1,5 @@
 {% load static %}
-{#
-  Параметри:
-  - variant: 'hero' (default) | 'header-desktop' | 'header-mobile'
-  - form: TrialLessonForm instance
-#}
+{# Параметри: variant: 'hero' (default) | 'header-desktop' | 'header-mobile', form: TrialLessonForm instance #}
 {% with variant=variant|default:"hero" %}
 
 <form class="trial-form trial-form--{{ variant }}"

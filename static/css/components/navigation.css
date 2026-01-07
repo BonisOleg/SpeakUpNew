@@ -217,6 +217,7 @@
   .header__nav--top {
     flex: 1 0 0;
     min-width: 0;
+    max-height: 4.5rem;
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-pill);

@@ -228,6 +228,7 @@
     gap: var(--menu-spacing-xs);
     flex: 1 0 0;
     min-width: 0;
+    max-height: 2.5rem;
     width: 100%;
   }
 
