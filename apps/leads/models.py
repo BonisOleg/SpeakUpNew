@@ -56,8 +56,9 @@ class TrialLesson(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Лід"
-        verbose_name_plural = "Ліди"
+        verbose_name = "Заявка на пробний урок"
+        verbose_name_plural = "Заявки на пробні уроки"
+        app_label = 'leads'
 
     def __str__(self):
         return f"{self.name} - {self.phone} ({self.created_at.strftime('%d.%m.%Y')})"
@@ -68,8 +69,9 @@ class ConsultationRequest(CoreConsultationRequest):
 
     class Meta:
         proxy = True
-        verbose_name = "Лід"
-        verbose_name_plural = "Ліди"
+        verbose_name = "Заявка на консультацію"
+        verbose_name_plural = "Заявки на консультацію"
+        app_label = 'leads'
 
 
 
