@@ -1,4 +1,4 @@
-from .models import RunningLineText
+from apps.core.models import RunningLineText
 
 
 def running_line_context(request):

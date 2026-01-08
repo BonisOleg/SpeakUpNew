@@ -260,20 +260,20 @@ class ConsultationRequest(BaseModel):
         verbose_name="Месенджер"
     )
     # UTM tracking (як у TrialLesson)
-    utm_source = models.CharField(max_length=100, blank=True, verbose_name="UTM Source")
-    utm_medium = models.CharField(max_length=100, blank=True, verbose_name="UTM Medium")
-    utm_campaign = models.CharField(max_length=100, blank=True, verbose_name="UTM Campaign")
-    utm_content = models.CharField(max_length=100, blank=True, verbose_name="UTM Content")
-    utm_term = models.CharField(max_length=100, blank=True, verbose_name="UTM Term")
+    utm_source = models.CharField(max_length=100, blank=True, verbose_name="UTM Source", help_text="Джерело трафіку (google, facebook, instagram)")
+    utm_medium = models.CharField(max_length=100, blank=True, verbose_name="UTM Medium", help_text="Канал (cpc, organic, social)")
+    utm_campaign = models.CharField(max_length=100, blank=True, verbose_name="UTM Campaign", help_text="Назва кампанії")
+    utm_content = models.CharField(max_length=100, blank=True, verbose_name="UTM Content", help_text="Контент оголошення")
+    utm_term = models.CharField(max_length=100, blank=True, verbose_name="UTM Term", help_text="Ключове слово")
     fbclid = models.CharField(max_length=200, blank=True, verbose_name="Facebook Click ID")
     gclid = models.CharField(max_length=200, blank=True, verbose_name="Google Click ID")
-    referrer = models.URLField(max_length=500, blank=True, verbose_name="Referrer")
+    referrer = models.URLField(max_length=500, blank=True, verbose_name="Referrer", help_text="Сторінка, з якої прийшов користувач")
     ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IP адреса")
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Заявка на консультацію"
-        verbose_name_plural = "Заявки на консультацію"
+        verbose_name = "Лід"
+        verbose_name_plural = "Ліди"
 
     def __str__(self):
         return f"{self.phone} - {self.created_at.strftime('%d.%m.%Y')}"
@@ -340,4 +340,20 @@ class ContactInfo(BaseModel):
         if self.is_active:
             ContactInfo.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)
+
+
+class RunningLineText(models.Model):
+    """Текст бігучої стрічки над хедером"""
+    text = models.CharField(max_length=200, verbose_name="Текст")
+    is_active = models.BooleanField(default=True, verbose_name="Активний")
+    order = models.PositiveIntegerField(default=0, verbose_name="Порядок")
+
+    class Meta:
+        ordering = ['order', '-id']
+        verbose_name = "Текст бігучої стрічки"
+        verbose_name_plural = "Тексти бігучої стрічки"
+        db_table = 'leads_runninglinetext'  # Використовуємо існуючу таблицю
+
+    def __str__(self):
+        return self.text[:50]
 

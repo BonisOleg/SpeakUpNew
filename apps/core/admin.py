@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib import messages
 from .models import (
     NewsArticle, Achievement, CourseCategory, Course,
-    Testimonial, FAQ, ConsultationRequest, ContactInfo
+    Testimonial, FAQ, ContactInfo, RunningLineText
 )
 
 
@@ -51,15 +51,6 @@ class AchievementAdmin(admin.ModelAdmin):
     list_filter = ['is_active']
     search_fields = ['label_uk', 'label_ru']
     list_editable = ['order', 'is_active']
-
-
-# Переваги додаються через код, не через адмін панель
-# @admin.register(Advantage)
-# class AdvantageAdmin(admin.ModelAdmin):
-#     list_display = ['title_uk', 'order', 'is_active']
-#     list_filter = ['is_active']
-#     search_fields = ['title_uk', 'title_ru']
-#     list_editable = ['order', 'is_active']
 
 
 @admin.register(CourseCategory)
@@ -149,33 +140,6 @@ class FAQAdmin(admin.ModelAdmin):
     list_editable = ['order', 'is_active']
 
 
-@admin.register(ConsultationRequest)
-class ConsultationRequestAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'prefers_messenger', 'messenger_choice', 'created_at']
-    list_filter = ['prefers_messenger', 'messenger_choice', 'created_at']
-    search_fields = ['phone']
-    readonly_fields = ['created_at', 'updated_at']
-    date_hierarchy = 'created_at'
-
-    fieldsets = (
-        ('Контактна інформація', {
-            'fields': ('phone', 'prefers_messenger', 'messenger_choice')
-        }),
-        ('UTM Tracking', {
-            'fields': ('utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'),
-            'classes': ('collapse',)
-        }),
-        ('Додаткова інформація', {
-            'fields': ('fbclid', 'gclid', 'referrer', 'ip_address'),
-            'classes': ('collapse',)
-        }),
-        ('Системна інформація', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
-
-
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
     """Admin для управління контактною інформацією (синглтон)"""
@@ -211,3 +175,17 @@ class ContactInfoAdmin(admin.ModelAdmin):
         """Дозволити видалення"""
         return True
 
+
+@admin.register(RunningLineText)
+class RunningLineTextAdmin(admin.ModelAdmin):
+    """Admin для текстів бігучої стрічки"""
+    list_display = ['text', 'is_active', 'order']
+    list_filter = ['is_active']
+    search_fields = ['text']
+    list_editable = ['is_active', 'order']
+
+    fieldsets = (
+        ('Текст', {
+            'fields': ('text', 'order', 'is_active')
+        }),
+    )

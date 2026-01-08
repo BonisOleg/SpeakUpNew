@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from apps.core.models import ConsultationRequest as CoreConsultationRequest
 
 
 class TrialLesson(models.Model):
@@ -24,56 +25,51 @@ class TrialLesson(models.Model):
     )
 
     # UTM параметри (для реклами):
-    utm_source = models.CharField(max_length=100, blank=True)
-    utm_medium = models.CharField(max_length=100, blank=True)
-    utm_campaign = models.CharField(max_length=100, blank=True)
-    utm_content = models.CharField(max_length=100, blank=True)
-    utm_term = models.CharField(max_length=100, blank=True)
+    utm_source = models.CharField(max_length=100, blank=True, verbose_name="UTM Source", help_text="Джерело трафіку (google, facebook, instagram)")
+    utm_medium = models.CharField(max_length=100, blank=True, verbose_name="UTM Medium", help_text="Канал (cpc, organic, social)")
+    utm_campaign = models.CharField(max_length=100, blank=True, verbose_name="UTM Campaign", help_text="Назва кампанії")
+    utm_content = models.CharField(max_length=100, blank=True, verbose_name="UTM Content", help_text="Контент оголошення")
+    utm_term = models.CharField(max_length=100, blank=True, verbose_name="UTM Term", help_text="Ключове слово")
 
     # Реклама:
     fbclid = models.CharField(max_length=200, blank=True, verbose_name="Facebook Click ID")
     gclid = models.CharField(max_length=200, blank=True, verbose_name="Google Click ID")
-    referrer = models.URLField(max_length=500, blank=True)
+    referrer = models.URLField(max_length=500, blank=True, verbose_name="Referrer", help_text="Сторінка, з якої прийшов користувач")
 
     # Тест:
     test_status = models.CharField(
         max_length=20,
         choices=TEST_STATUS_CHOICES,
-        default='not_started'
+        default='not_started',
+        verbose_name="Статус тесту"
     )
-    test_results = models.JSONField(null=True, blank=True)
+    test_results = models.JSONField(null=True, blank=True, verbose_name="Результати тесту")
 
     # Системні:
-    created_at = models.DateTimeField(auto_now_add=True)
-    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
+    ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IP адреса")
 
     # Нотифікації:
-    email_sent = models.BooleanField(default=False)
-    telegram_sent = models.BooleanField(default=False)
-    notified_at = models.DateTimeField(null=True, blank=True)
+    email_sent = models.BooleanField(default=False, verbose_name="Email відправлено")
+    telegram_sent = models.BooleanField(default=False, verbose_name="Telegram відправлено")
+    notified_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата нотифікації")
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Заявка на пробний урок"
-        verbose_name_plural = "Заявки на пробні уроки"
+        verbose_name = "Лід"
+        verbose_name_plural = "Ліди"
 
     def __str__(self):
         return f"{self.name} - {self.phone} ({self.created_at.strftime('%d.%m.%Y')})"
 
 
-class RunningLineText(models.Model):
-    """Текст бігучої стрічки над хедером"""
-    text = models.CharField(max_length=200, verbose_name="Текст")
-    is_active = models.BooleanField(default=True, verbose_name="Активний")
-    order = models.PositiveIntegerField(default=0, verbose_name="Порядок")
+class ConsultationRequest(CoreConsultationRequest):
+    """Proxy модель для відображення ConsultationRequest в розділі "Ліди" """
 
     class Meta:
-        ordering = ['order', '-id']
-        verbose_name = "Текст бігучої стрічки"
-        verbose_name_plural = "Тексти бігучої стрічки"
-
-    def __str__(self):
-        return self.text[:50]
+        proxy = True
+        verbose_name = "Лід"
+        verbose_name_plural = "Ліди"
 
 
 
