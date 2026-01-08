@@ -17,15 +17,22 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: var(--spacing-sm);
-  border: 1.5px solid var(--color-white);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-base);
+  padding: var(--input-padding);
+  border: var(--input-border-width) solid var(--input-border);
+  border-radius: var(--input-border-radius);
+  font-size: var(--input-font-size);
   font-family: var(--font-family-base);
   min-height: 44px;
-  background-color: var(--color-white);
+  background-color: var(--input-bg);
   color: var(--color-black);
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: var(--input-transition);
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1;
 }
 
 .form-group input:focus,

@@ -170,6 +170,15 @@
   /* Form contrast */
   --input-bg: var(--color-white);
   --input-border: var(--color-white);
+
+  /* Input styling variables */
+  --input-border-width: 1.5px;
+  --input-border-radius: var(--radius-sm);
+  --input-padding: var(--spacing-sm);
+  --input-font-size: var(--font-size-base);
+  --input-transition: border-color var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
+  --input-focus-shadow: 0 0 0 2px var(--color-primary-light);
+  --input-placeholder-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Dark mode support */

@@ -1,5 +1,7 @@
 'use strict';
 
+import { initPhoneInputs } from './modules/phone-input-handler.js';
+
 // ==========================================================================
 // Main JavaScript - HTMX Integration + Cross-Platform Handlers
 // ==========================================================================
@@ -95,6 +97,11 @@ if (typeof htmx !== 'undefined') {
   // Rule 87: Обробка після заміни контенту - afterSwap
   document.body.addEventListener('htmx:afterSwap', function (event) {
     const target = event.detail.target;
+
+    // Реініціалізувати phone inputs після HTMX swap
+    if (target.querySelector('input[type="tel"]')) {
+      initPhoneInputs(target);
+    }
 
     // Закриття модальних вікон
     if (target.classList.contains('modal')) {
@@ -200,6 +207,9 @@ function trapFocus(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('[SpeakUp] Application initialized');
+
+  // Ініціалізувати phone inputs
+  initPhoneInputs();
 
   // Закриття повідомлень
   document.querySelectorAll('.message__close').forEach(btn => {

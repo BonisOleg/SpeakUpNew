@@ -30,11 +30,12 @@ class TrialLessonForm(forms.ModelForm):
                 'required': True,
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '+380',
+                'placeholder': '+38 (0XX) XXX XX XX',
                 'class': 'form-group__input',
                 'type': 'tel',
                 'inputmode': 'tel',
                 'required': True,
+                'autocomplete': 'tel',
             }),
         }
 

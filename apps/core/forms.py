@@ -48,11 +48,12 @@ class ConsultationForm(forms.ModelForm):
         fields = ['phone', 'prefers_messenger', 'messenger_choice']
         widgets = {
             'phone': forms.TextInput(attrs={
-                'placeholder': '+380',
+                'placeholder': '+38 (0XX) XXX XX XX',
                 'class': 'form-group__input',
                 'type': 'tel',
                 'inputmode': 'tel',
                 'required': True,
+                'autocomplete': 'tel',
             }),
             'messenger_choice': forms.RadioSelect(attrs={
                 'class': 'messenger-choice',

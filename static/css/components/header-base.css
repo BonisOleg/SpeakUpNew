@@ -204,7 +204,7 @@
 }
 
 .header__menu--top .trial-form--desktop .form-group__input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--input-placeholder-color);
   opacity: 1;
 }
 

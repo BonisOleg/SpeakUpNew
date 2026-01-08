@@ -26,6 +26,12 @@ export class TrialFormHandler {
       }, { once: true });
     });
 
+    // Слухати custom event від phone handler
+    this.form.addEventListener('phone:error-cleared', (e) => {
+      console.log('[TrialFormHandler] Phone error cleared by PhoneInputHandler');
+      // Нічого не робити — PhoneInputHandler вже все зробив
+    });
+
     // Submit handler
     this.form.addEventListener('submit', (e) => this.handleSubmit(e));
   }
