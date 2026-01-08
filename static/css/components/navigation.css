@@ -301,7 +301,7 @@
 
   .header__menu--top {
     flex-wrap: nowrap;
-    gap: var(--menu-spacing-xs);
+    gap: 0;
     background: var(--color-gray-light);
     border-radius: var(--radius-pill);
     padding: var(--menu-spacing-sm) 0;
