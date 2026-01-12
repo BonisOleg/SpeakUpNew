@@ -38,10 +38,6 @@
   display: flex;
 }
 
-.header__dynamic-element--visible[data-header-expand] {
-  display: flex;
-}
-
 .header__dynamic-element--visible[data-header-dynamic-form] {
   display: flex;
 }
@@ -138,20 +134,7 @@
   }
 }
 
-/* Expand button */
-[data-header-expand] {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: var(--menu-spacing-xs);
-}
-
-[data-header-expand] .button {
-  min-height: var(--menu-size-lg);
-  padding: calc(0.875rem * var(--menu-scale)) calc(1.5rem * var(--menu-scale));
-  font-size: var(--menu-font-base);
-  border-radius: var(--menu-radius-md);
-}
+/* Expand button - больше не используется, кнопка теперь использует data-trial-modal-trigger */
 
 /* Динамічна форма в хедері */
 [data-header-dynamic-form] {
