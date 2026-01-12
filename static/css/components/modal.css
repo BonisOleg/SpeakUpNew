@@ -62,7 +62,10 @@
 
 @media (width <= 767px) {
   .modal {
-    padding: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    padding-left: max(var(--spacing-md), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--spacing-md), env(safe-area-inset-right, 0px));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,7 +73,7 @@
 
   .modal__content {
     width: 100%;
-    max-width: calc(100vw - 4 * var(--spacing-md));
+    max-width: calc(100vw - 2 * max(var(--spacing-md), env(safe-area-inset-left, 0px)) - 2 * max(var(--spacing-md), env(safe-area-inset-right, 0px)));
     max-height: fit-content;
     overflow: hidden;
     margin: 0 auto;
@@ -159,10 +162,13 @@
 /* iOS Safari фікси */
 @supports (-webkit-touch-callout: none) {
   .modal {
-    padding: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    padding-left: max(var(--spacing-md), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--spacing-md), env(safe-area-inset-right, 0px));
   }
 
   .modal__content {
-    max-width: calc(100vw - 4 * var(--spacing-md));
+    max-width: calc(100vw - 2 * max(var(--spacing-md), env(safe-area-inset-left, 0px)) - 2 * max(var(--spacing-md), env(safe-area-inset-right, 0px)));
   }
 }
