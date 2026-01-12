@@ -94,7 +94,7 @@
 }
 
 [data-header-running-line] .running-line__text {
-  padding: 0 2rem;
+  padding: 0 1rem;
   white-space: nowrap;
   font-size: calc(var(--menu-font-base) * 1.2);
   font-weight: 600;
@@ -226,7 +226,7 @@
 
   [data-header-running-line] .running-line__text {
     font-size: calc(var(--menu-font-sm) * 1.15);
-    padding: 0 1.5rem;
+    padding: 0 0.75rem;
     line-height: 1.4;
     font-weight: 600;
   }
