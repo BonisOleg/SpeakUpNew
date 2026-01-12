@@ -6,9 +6,11 @@
  */
 export function initTrialModal() {
   const trigger = document.querySelector('[data-trial-modal-trigger]');
+  const mobileTrigger = document.querySelector('.trial-form__trigger--mobile');
   const modal = document.querySelector('.trial-form__modal');
 
-  if (!trigger || !modal) return;
+  if (!modal) return;
+  if (!trigger && !mobileTrigger) return;
 
   const closeBtn = modal.querySelector('.modal__close');
   const backdrop = modal.querySelector('.modal__backdrop');
@@ -67,11 +69,21 @@ export function initTrialModal() {
     }
   };
 
-  // Обробники подій
-  trigger.addEventListener('click', () => {
-    openModal();
-    document.addEventListener('keydown', handleEscapeKey);
-  });
+  // Обробники подій для десктопної кнопки
+  if (trigger) {
+    trigger.addEventListener('click', () => {
+      openModal();
+      document.addEventListener('keydown', handleEscapeKey);
+    });
+  }
+
+  // Обробники подій для мобільної кнопки
+  if (mobileTrigger) {
+    mobileTrigger.addEventListener('click', () => {
+      openModal();
+      document.addEventListener('keydown', handleEscapeKey);
+    });
+  }
 
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {

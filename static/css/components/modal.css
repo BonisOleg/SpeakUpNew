@@ -48,14 +48,12 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: max(var(--spacing-lg), env(safe-area-inset-top, 0px))
-           max(var(--spacing-lg), env(safe-area-inset-right, 0px))
-           max(var(--spacing-lg), env(safe-area-inset-bottom, 0px))
-           max(var(--spacing-lg), env(safe-area-inset-left, 0px));
+  padding: var(--spacing-lg);
   transform: scale(0.95);
   transition: transform var(--transition-base);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .modal--active .modal__content {
@@ -64,8 +62,7 @@
 
 @media (width <= 767px) {
   .modal {
-    padding-left: var(--spacing-md);
-    padding-right: var(--spacing-md);
+    padding: var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,10 +70,11 @@
 
   .modal__content {
     width: 100%;
-    max-width: calc(100vw - 2 * var(--spacing-md));
+    max-width: calc(100vw - 4 * var(--spacing-md));
     max-height: fit-content;
     overflow: hidden;
     margin: 0 auto;
+    padding: var(--spacing-lg);
   }
 
   .modal__header {
@@ -161,11 +159,10 @@
 /* iOS Safari фікси */
 @supports (-webkit-touch-callout: none) {
   .modal {
-    padding-left: max(var(--spacing-md), env(safe-area-inset-left, 0px));
-    padding-right: max(var(--spacing-md), env(safe-area-inset-right, 0px));
+    padding: var(--spacing-md);
   }
 
   .modal__content {
-    max-width: calc(100vw - 2 * max(var(--spacing-md), env(safe-area-inset-left, 0px)));
+    max-width: calc(100vw - 4 * var(--spacing-md));
   }
 }
