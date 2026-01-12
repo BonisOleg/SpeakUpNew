@@ -224,8 +224,10 @@
 .header__expand-btn,
 .header__phone-btn {
   flex-shrink: 0;
-  width: var(--menu-size-lg);
-  height: var(--menu-size-lg);
+  width: 7vh;
+  width: 7dvh;
+  height: 7vh;
+  height: 7dvh;
   aspect-ratio: 1 / 1;
   padding: 0;
   border-radius: 50%;
@@ -285,16 +287,17 @@
     display: flex;
     order: -1;
     flex-shrink: 0;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     aspect-ratio: 1 / 1;
+    padding: 0;
     border-radius: 50%;
   }
 
   .header__expand-btn svg,
   .header__phone-btn svg {
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 16px;
+    max-height: 16px;
   }
 
   /* Мобільна кнопка прихована */
