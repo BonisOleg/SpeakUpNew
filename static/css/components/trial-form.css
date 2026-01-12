@@ -5,10 +5,10 @@
 }
 
 .trial-form__modal .modal__content {
-  background: var(--color-gray-light);
+  background: rgba(255, 255, 255, 0.15);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-border-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .trial-form__modal .modal__title {
@@ -242,15 +242,26 @@
   }
 }
 
-/* Final override для модального вікна */
-.modal.trial-form__modal .modal__content {
-  background: var(--color-gray-light);
+/* Final override для модального вікна - найвища специфічність */
+.modal.trial-form__modal.modal--active .modal__content {
+  background: rgba(255, 255, 255, 0.15);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-border-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal.trial-form__modal .modal__content {
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .modal.trial-form__modal .modal__title {
+  color: var(--color-white);
+}
+
+.modal.trial-form__modal .modal__close {
   color: var(--color-white);
 }
 
