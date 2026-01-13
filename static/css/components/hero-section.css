@@ -48,8 +48,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Спільні стилі для золотистих акцентів "180 грн" та "БЕЗКОШТОВНО" */
-.hero-section__price-accent,
+/* Золотий акцент для "БЕЗКОШТОВНО" */
 .hero-section__free-accent {
   display: inline-block;
   font-weight: 900;
@@ -204,9 +203,6 @@
     font-size: clamp(0.75em, 2.5vw, 0.9em);
   }
 
-  .hero-section__price-accent {
-    font-size: clamp(3.5rem, 5vw, 2em);
-  }
 
   /* На мобільних дозволяємо перенос заголовка форми */
   .hero-section__form-title {
