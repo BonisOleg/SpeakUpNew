@@ -126,15 +126,15 @@
   }
 }
 
-/* Зелений акцент для "БЕЗКОШТОВНО" */
+/* Золотий акцент для "БЕЗКОШТОВНО" */
 .hero-section__free-accent {
   display: inline-block;
-  color: var(--color-success);
-  font-weight: 700;
-  background-color: var(--color-white);
-  padding: 0.25em 0.5em;
-  border-radius: var(--radius-md);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
 }
 
 .hero-section__header p {
@@ -278,7 +278,7 @@
   /* Адаптивні капсули для акцентів на мобільних */
   .hero-section__free-accent {
     padding: 0.2em 0.4em;
-    font-size: clamp(0.75em, 2.5vw, 0.9em);
+    font-size: clamp(1em, 3vw, 1.2em);
   }
 
   .hero-section__price-accent {
