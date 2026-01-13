@@ -142,6 +142,7 @@
 
   .achievements .section-title {
     margin-bottom: 2rem;
+    margin-top: 0px;
   }
 
   .achievements__grid {
