@@ -314,10 +314,7 @@
     gap: 0;
     background: var(--color-gray-light);
     border-radius: var(--radius-pill);
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding: var(--menu-spacing-xs);
     box-sizing: border-box;
   }
 
