@@ -5,8 +5,8 @@
 .hero-section {
   display: flex;
   flex-direction: column;
-  max-height: 65vh; /* Fallback */
-  max-height: 65dvh;
+  max-height: 65vh; /* Fallback для старих браузерів */
+  max-height: 65svh; /* На мобільних - гарантує поміщення контенту */
   max-width: 91vw;
   max-width: 91dvw;
   padding: var(--section-padding-desktop);
@@ -16,8 +16,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 9vh;
-  margin-top: 9dvh;
+  margin-top: 9vh; /* Стабільний, не реагує на UI браузера */
 }
 
 .hero-section__header {
@@ -253,6 +252,9 @@
     gap: clamp(0.5rem, 2vw, 0.75rem);
     margin-top: clamp(1rem, 2vh, 2rem);
     scroll-margin-top: calc(var(--header-height, 80px) + env(safe-area-inset-top, 0px) + 1rem);
+    /* Облік fixed навігації знизу та safe-area для iOS */
+    padding-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 1rem);
+    scroll-margin-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 1rem);
   }
 
   .hero-section__cta {
@@ -268,6 +270,8 @@
     max-width: 100%;
     width: 100%;
     margin-left: 0;
+    /* Облік fixed навігації для прокрутки форми */
+    scroll-margin-bottom: calc(var(--nav-height, 70px) + env(safe-area-inset-bottom, 0px) + 0.5rem);
   }
 
   /* Приховуємо зображення на мобільних */

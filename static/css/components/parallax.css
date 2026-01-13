@@ -7,13 +7,20 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 100vh; /* Fallback */
+  height: 100svh; /* На мобільних - стабільна висота при видимому UI браузера */
   z-index: var(--z-parallax-container, -1);
   overflow: hidden;
   pointer-events: none;
 
   /* Видалено contain для уникнення проблем з відображенням інших елементів */
+}
+
+/* На мобільних використовуємо svh замість dvh для стабільності */
+@media (width <= 767px) {
+  .parallax-container {
+    height: 100svh; /* Стабільна висота коли UI браузера видиме */
+  }
 }
 
 .parallax-layer {
