@@ -366,53 +366,10 @@
     height: auto;
     width: auto;
     aspect-ratio: 1 / 1;
-    min-width: 4.5rem;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: var(--radius-pill);
-    padding: var(--menu-spacing-xs);
+    min-width: 3.5rem;
+    border-width: calc(10px * var(--menu-scale));
+    padding: calc(3px * var(--menu-scale));
     box-sizing: border-box;
-    border: 1px solid var(--color-border-light);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: var(--color-white);
-    text-decoration: none;
-    position: relative;
-  }
-
-  /* Внутрішній обгортка для сірого фону та червоного круга */
-  .header-wrapper .header__student-zone::before {
-    content: '';
-    position: absolute;
-    top: var(--menu-spacing-xs);
-    left: var(--menu-spacing-xs);
-    right: var(--menu-spacing-xs);
-    bottom: var(--menu-spacing-xs);
-    background: var(--color-gray-light);
-    border-radius: var(--radius-pill);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Переміщення контенту (текст та червоний круг) на передний план */
-  .header-wrapper .header__student-zone {
-    align-items: center;
-    justify-content: center;
-  }
-
-  .header-wrapper .header__student-zone .header__student-zone-text {
-    position: relative;
-    z-index: 2;
-    background: var(--color-primary);
-    border-radius: 50%;
-    width: 2.8rem;
-    height: 2.8rem;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 0 1px var(--color-white);
-    font-size: calc(0.5rem * var(--menu-scale));
-    padding: 3px;
   }
 
   .header-wrapper .header__student-zone-text {
