@@ -292,6 +292,7 @@
     aspect-ratio: 1 / 1;
     padding: 0;
     border-radius: 50%;
+    margin-left: calc(-1 * var(--menu-spacing-xs));
   }
 
   .header__expand-btn svg,
@@ -365,7 +366,7 @@
     height: auto;
     width: auto;
     aspect-ratio: 1 / 1;
-    min-width: 4.7rem;
+    min-width: 3.5rem;
     border-width: calc(15px * var(--menu-scale));
     padding: calc(5px * var(--menu-scale));
     box-sizing: border-box;

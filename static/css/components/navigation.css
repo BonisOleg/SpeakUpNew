@@ -228,8 +228,8 @@
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-pill);
-    padding-top: var(--menu-spacing-xs);
-    padding-bottom: var(--menu-spacing-xs);
+    padding-top: var(--menu-spacing-sm);
+    padding-bottom: var(--menu-spacing-sm);
     padding-left: var(--menu-spacing-sm);
     padding-right: var(--menu-spacing-sm);
     box-sizing: border-box;
