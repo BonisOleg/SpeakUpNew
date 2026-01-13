@@ -87,7 +87,13 @@
   }
 
   .modal__header {
+    position: relative;
     margin-bottom: var(--spacing-sm);
+  }
+
+  .modal__header-content {
+    text-align: center;
+    width: calc(100% - 44px);
   }
 
   .modal__title {
@@ -102,12 +108,16 @@
 }
 
 .modal__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
   margin-bottom: var(--spacing-md);
   padding-bottom: 0;
   border-bottom: none;
+}
+
+.modal__header-content {
+  text-align: center;
+  width: 100%;
+  padding-right: var(--spacing-lg);
 }
 
 .modal__title {
@@ -128,6 +138,9 @@
 }
 
 .modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   padding: var(--spacing-xs);
