@@ -139,8 +139,8 @@
 
 .modal__close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
   background: none;
   border: none;
   padding: var(--spacing-xs);
@@ -152,6 +152,7 @@
   line-height: 1;
   transition: color var(--transition-base);
   touch-action: manipulation;
+  z-index: calc(var(--z-modal) + 1);
 }
 
 .modal__close:focus-visible {

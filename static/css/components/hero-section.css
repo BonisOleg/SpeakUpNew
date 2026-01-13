@@ -199,14 +199,11 @@
 
 .hero-section__form-title {
   margin: 0 0 1.5rem 0;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   font-weight: 600;
   color: var(--color-white);
   text-align: center;
   line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .hero-section__image {
