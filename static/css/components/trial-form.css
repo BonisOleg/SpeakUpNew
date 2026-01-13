@@ -91,7 +91,7 @@
 .trial-form--hero .form-group input[type="text"],
 .trial-form--hero .form-group input[type="tel"],
 .trial-form--hero .form-group input.form-group__input {
-  background-color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid var(--color-white);
   border-radius: 0.5rem;
   padding: 0.875rem 1rem;
@@ -106,7 +106,7 @@
 
 .trial-form--hero .form-group input:hover {
   border-color: var(--color-white);
-  background-color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .trial-form--hero .form-group input:focus,
@@ -114,7 +114,7 @@
 .trial-form--hero .form-group input[type="tel"]:focus,
 .trial-form--hero .form-group input.form-group__input:focus {
   border-color: var(--color-white);
-  background-color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
   outline: none;
 }
