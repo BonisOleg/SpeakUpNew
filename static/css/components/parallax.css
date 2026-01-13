@@ -32,34 +32,49 @@
 }
 
 .parallax-layer__background {
+  position: relative;
   z-index: 0;
+}
 
-  /* WebP з fallback на PNG */
+/* Псевдоелемент для фону з position: fixed (для коректної роботи на iOS Safari) */
+.parallax-layer__background::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110vh; /* Запас 10vh для покриття Dynamic Island та панелі Safari */
+  z-index: -1;
+
+  /* Перенесені background властивості */
   background-image: url('../../img/mainBackground.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+
+  /* Оптимізація для iOS - апаратне прискорення */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Fallback для браузерів без WebP */
 @supports not (background-image: url('data:image/webp;base64,')) {
-  .parallax-layer__background {
+  .parallax-layer__background::before {
     background-image: url('../../img/mainBackground.png');
   }
 }
 
 /* Мобільна версія фону */
 @media (width <= 767px) {
-  .parallax-layer__background {
-    /* WebP для мобільних */
+  .parallax-layer__background::before {
     background-image: url('../../img/mainBackground_mob.webp');
-    background-attachment: scroll;
   }
 
-  /* Fallback для браузерів без WebP */
+  /* Fallback для браузерів без WebP на мобільних */
   @supports not (background-image: url('data:image/webp;base64,')) {
-    .parallax-layer__background {
+    .parallax-layer__background::before {
       background-image: url('../../img/mainBackground_mob.png');
     }
   }
