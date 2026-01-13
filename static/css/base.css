@@ -24,6 +24,7 @@
   --color-bg: #FFFFFF;
   --color-bg-dark: #000000;
   --color-bg-secondary: #F5F5F5;
+  --color-bg-parallax: #2d2724; /* Темно-коричневий фон для паралаксу (запобігання білим смугам на iOS) */
 
   /* Glassmorphism: */
   --glass-white: rgba(255, 255, 255, 0.1);
@@ -216,6 +217,9 @@ html {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-y: auto;
+
+  /* Темний фон для запобігання білим смугам на overscroll */
+  background-color: var(--color-bg-parallax);
 }
 
 body {
@@ -225,7 +229,7 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.5;
   color: var(--color-white);
-  background-color: var(--color-bg);
+  background-color: var(--color-bg-parallax); /* Темний фон замість білого для паралаксу */
 
   /* Rule 32: overscroll-behavior */
   overscroll-behavior: none;
