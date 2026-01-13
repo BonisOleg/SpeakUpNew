@@ -12,10 +12,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-md);
+  box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+/* Десктоп - симетричний padding */
+@media (width > 767px) {
+  .modal {
+    padding: var(--spacing-md);
+  }
 }
 
 .modal--active {
@@ -73,9 +80,9 @@
 
   .modal__content {
     width: 100%;
+    max-width: none;
     max-height: fit-content;
     overflow: hidden;
-    margin: 0 auto;
     padding: var(--spacing-lg);
   }
 
@@ -155,15 +162,5 @@
   .modal,
   .modal__content {
     transition: none;
-  }
-}
-
-/* iOS Safari фікси */
-@supports (-webkit-touch-callout: none) {
-  .modal {
-    padding-top: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
-    padding-left: max(var(--spacing-md), env(safe-area-inset-left, 0px));
-    padding-right: max(var(--spacing-md), env(safe-area-inset-right, 0px));
   }
 }
