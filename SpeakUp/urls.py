@@ -31,6 +31,10 @@ urlpatterns = [
         content_type='text/plain',
         extra_context={'debug': settings.DEBUG}
     ), name='robots_txt'),
+    path('googleeb817bc37494f0e8.html', TemplateView.as_view(
+        template_name='googleeb817bc37494f0e8.html',
+        content_type='text/html'
+    ), name='google_verification'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ]
 
