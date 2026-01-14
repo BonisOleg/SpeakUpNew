@@ -165,6 +165,79 @@ REDIRECTS = {
     '/ua/school/chernovola/': '/school/chernovola',
     '/ua/school/ekaterininskaya': '/school/ekaterininskaya',
     '/ua/school/ekaterininskaya/': '/school/ekaterininskaya',
+
+    # ===== WORDPRESS КАТЕГОРІЇ → /news/ =====
+    # Типові категорії блогу редирекціються на список новин
+    '/category/': '/news/',
+    '/category': '/news/',
+    '/bez-kategoriї/': '/news/',
+    '/bez-kategoriї': '/news/',
+    '/bez-kategorii/': '/news/',
+    '/bez-kategorii': '/news/',
+    '/bez-kategorii-news/': '/news/',
+    '/bez-kategorii-news': '/news/',
+
+    # ===== WORDPRESS ТЕГИ → /news/ =====
+    # Всі теги редирекціються на список новин (теги не реалізовані на новому сайті)
+    '/tag/': '/news/',
+    '/tag': '/news/',
+    '/polezno/': '/news/',
+    '/polezno': '/news/',
+    '/english/': '/news/',
+    '/english': '/news/',
+
+    # ===== WORDPRESS АРХІВИ (ДАТОВАНІ) → /news/ =====
+    # Архіви за місяцями/роками редирекціються на список всіх новин
+    '/2024/': '/news/',
+    '/2024': '/news/',
+    '/2023/': '/news/',
+    '/2023': '/news/',
+    '/2022/': '/news/',
+    '/2022': '/news/',
+    '/2021/': '/news/',
+    '/2021': '/news/',
+    '/2020/': '/news/',
+    '/2020': '/news/',
+    '/2019/': '/news/',
+    '/2019': '/news/',
+
+    # ===== WORDPRESS ПАГІНАЦІЯ НОВИН → /news/ =====
+    # Сторінки пагінації редирекціються на першу сторінку
+    '/blog/page/': '/news/',
+    '/blog/page': '/news/',
+    '/news/page/': '/news/',
+    '/news/page': '/news/',
+    '/page/': '/',
+    '/page': '/',
+
+    # ===== WORDPRESS АВТОРИ → /news/ =====
+    # Архіви авторів редирекціються на список новин
+    '/author/': '/news/',
+    '/author': '/news/',
+
+    # ===== WORDPRESS ПЛАГІНИ РЕДИРЕКТІВ =====
+    # Типові URL бібліотек/плагінів WordPress
+    '/redirect/': '/',
+    '/redirect': '/',
+    '/sitemap.html': '/sitemap.xml',
+    '/sitemap.html/': '/sitemap.xml',
+
+    # ===== РОСІЙСЬКІ ВЕРСІЇ КАТЕГОРІЙ/ТЕГІВ =====
+    '/ru/category/': '/ru/news/',
+    '/ru/category': '/ru/news/',
+    '/ru/tag/': '/ru/news/',
+    '/ru/tag': '/ru/news/',
+    '/ru/blog/page/': '/ru/news/',
+    '/ru/blog/page': '/ru/news/',
+    '/ru/author/': '/ru/news/',
+    '/ru/author': '/ru/news/',
+
+    # ===== ТИПОВІ 404 URL ДЛЯ БЛОГА =====
+    # Коли користувач намагається знайти конкретну новину через пошук
+    '/bez-kategoriї/page/': '/news/',
+    '/bez-kategoriї/page': '/news/',
+    '/category/uncategorized/': '/news/',
+    '/category/uncategorized': '/news/',
 }
 
 
