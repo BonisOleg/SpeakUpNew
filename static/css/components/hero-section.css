@@ -16,7 +16,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 9vh; /* Стабільний, не реагує на UI браузера */
+  margin-top: calc(var(--header-height, 80px) + 2rem);
 }
 
 .hero-section__header {
@@ -239,9 +239,23 @@
   }
 }
 
+/* Планшет: 768px - 1023px */
+@media (width >= 768px) and (width < 1024px) {
+  .hero-section {
+    max-width: min(85vw, var(--content-max-width));
+    margin-top: calc(var(--header-height, 80px) + 1.5rem);
+  }
+
+  .hero-section__cta {
+    margin-left: 10dvw;
+  }
+}
+
+/* Десктоп: 1024px+ */
 @media (width >= 1024px) {
   .hero-section {
     max-width: min(var(--content-width-desktop), var(--content-max-width));
+    margin-top: calc(var(--header-height, 80px) + 2rem);
   }
 }
 
