@@ -376,7 +376,7 @@
     flex-shrink: 0;
     align-self: center;
     width: clamp(3rem, 8vw, 4rem);
-    border-width: calc(12px * var(--menu-scale));
+    border-width: calc(8px * var(--menu-scale));
     padding: calc(3px * var(--menu-scale));
     box-sizing: border-box;
   }
