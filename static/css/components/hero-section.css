@@ -5,18 +5,17 @@
 .hero-section {
   display: flex;
   flex-direction: column;
-  max-height: 65vh; /* Fallback для старих браузерів */
-  max-height: 65svh; /* На мобільних - гарантує поміщення контенту */
+  max-height: clamp(auto, 65svh, 90vh);
   max-width: 91vw;
   max-width: 91dvw;
   padding: var(--section-padding-desktop);
   margin-bottom: var(--section-spacing-desktop);
   contain: layout style paint; /* Ізоляція для продуктивності */
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: calc(var(--header-height, 80px) + 2rem);
+  margin-top: 9vh; /* Стабільний, не реагує на UI браузера */
 }
 
 .hero-section__header {
@@ -179,13 +178,14 @@
   width: 100%;
   margin-left: 15vw; /* Fallback */
   margin-left: 15dvw; /* iOS Dynamic Viewport */
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-section__form {
   padding: 0;
   width: 100%;
   max-width: 400px;
+  min-height: clamp(200px, 50vh, 400px);
   justify-self: end;
   margin-left: auto;
 }
@@ -239,23 +239,43 @@
   }
 }
 
-/* Планшет: 768px - 1023px */
-@media (width >= 768px) and (width < 1024px) {
-  .hero-section {
-    max-width: min(85vw, var(--content-max-width));
-    margin-top: calc(var(--header-height, 80px) + 1.5rem);
-  }
-
-  .hero-section__cta {
-    margin-left: 10dvw;
-  }
-}
-
-/* Десктоп: 1024px+ */
 @media (width >= 1024px) {
   .hero-section {
     max-width: min(var(--content-width-desktop), var(--content-max-width));
-    margin-top: calc(var(--header-height, 80px) + 2rem);
+  }
+}
+
+/* Проміжні розміри: планшет та зменшений десктоп (768px - 1023px) */
+@media (width >= 768px) and (width < 1024px) {
+  .hero-section {
+    max-height: auto;
+    padding: clamp(2rem, 4vw, 3rem);
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .hero-section__cta {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 3vw, 1.5rem);
+    margin-left: 0;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .hero-section__form {
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+    min-height: auto;
+  }
+
+  .hero-section__form-title {
+    white-space: normal;
+  }
+
+  /* Приховуємо зображення на проміжних розмірах */
+  .hero-section__image {
+    display: none;
   }
 }
 

@@ -91,23 +91,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4rem;
-  height: 4rem;
+  width: clamp(3.5rem, 5vw, 6.5rem);
+  height: clamp(3.5rem, 5vw, 6.5rem);
   aspect-ratio: 1 / 1;
-  min-width: 3.5rem;
-  max-width: 5rem;
   border-radius: 50%;
   background: var(--color-primary);
-  border: 2px solid #1b1714;
+  border: clamp(8px, 2vw, 15px) solid #1b1714;
   box-shadow: inset 0 0 0 1px var(--color-white);
-  padding: 0;
+  padding: clamp(3px, 0.8vw, 5px);
   cursor: pointer;
   transition: all var(--transition-fast);
   box-sizing: border-box;
   color: var(--color-white);
   font-family: var(--font-family-base);
   text-decoration: none;
-  will-change: transform;
 }
 
 @media (hover: hover) {
@@ -128,14 +125,19 @@
   align-items: center;
   justify-content: center;
   line-height: 1;
-  font-size: clamp(0.5rem, 2.5vw, 0.65rem);
+  font-size: clamp(0.5rem, 1.2vw, 0.875rem);
   font-weight: 800;
   text-align: center;
+  white-space: nowrap;
 }
 
 .header__student-zone-text span {
   display: block;
-  line-height: 1.05;
+  line-height: 1;
+}
+
+.header__student-zone-text span:nth-child(2) {
+  color: var(--color-white);
 }
 
 /* Форма в хедері (десктоп) */
@@ -244,11 +246,13 @@
   display: none;
 }
 
-/* Планшет: 768px - 1023px */
-@media (width >= 768px) and (width < 1024px) {
+/* Десктоп: обмежити ширину header-wrapper */
+@media (width >= 768px) {
   .header-wrapper {
     max-width: var(--content-max-width);
     margin: 0 auto;
+
+    /* Кнопка Student Zone на десктопі - висота 1в1 з навігацією */
     align-items: center;
   }
 
@@ -260,47 +264,14 @@
   }
 
   .header__student-zone {
-    flex-shrink: 0;
-    width: 4rem;
-    height: 4rem;
-    min-width: 4rem;
-    max-width: 4rem;
-    border-width: 2px;
-    padding: 0;
+    align-self: center;
+    height: clamp(3.5rem, 7vw, 7rem);
+    width: clamp(3.5rem, 7vw, 7rem);
+    aspect-ratio: 1 / 1;
   }
 
   .header__student-zone-text {
-    font-size: 0.55rem;
-  }
-}
-
-/* Десктоп: 1024px+ */
-@media (width >= 1024px) {
-  .header-wrapper {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    align-items: center;
-  }
-
-  .header {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: var(--spacing-md) var(--spacing-lg);
-    box-shadow: none;
-  }
-
-  .header__student-zone {
-    flex-shrink: 0;
-    width: 4.5rem;
-    height: 4.5rem;
-    min-width: 4.5rem;
-    max-width: 4.5rem;
-    border-width: 2px;
-    padding: 0;
-  }
-
-  .header__student-zone-text {
-    font-size: 0.65rem;
+    font-size: clamp(0.5rem, 1.3vw, 1rem);
   }
 }
 
@@ -393,17 +364,17 @@
     display: flex;
     flex-shrink: 0;
     align-self: center;
-    width: 3rem;
-    height: 3rem;
-    min-width: 3rem;
-    max-width: 3rem;
-    border-width: 2px;
-    padding: 0;
+    height: clamp(3rem, 10vw, 4.5rem);
+    width: auto;
+    aspect-ratio: 1 / 1;
+    min-width: clamp(3rem, 10vw, 4.5rem);
+    border-width: clamp(8px, 2vw, 12px);
+    padding: clamp(2px, 0.8vw, 4px);
     box-sizing: border-box;
   }
 
   .header-wrapper .header__student-zone-text {
-    font-size: 0.45rem;
+    font-size: clamp(0.4rem, 1.5vw, 0.6rem);
   }
 }
 
