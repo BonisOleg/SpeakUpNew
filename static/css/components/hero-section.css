@@ -5,7 +5,7 @@
 .hero-section {
   display: flex;
   flex-direction: column;
-  max-height: clamp(auto, 65svh, 90vh);
+  max-height: clamp(500px, 65vh, 800px);
   max-width: 91vw;
   max-width: 91dvw;
   padding: var(--section-padding-desktop);
@@ -185,7 +185,6 @@
   padding: 0;
   width: 100%;
   max-width: 400px;
-  min-height: clamp(200px, 50vh, 400px);
   justify-self: end;
   margin-left: auto;
 }
@@ -245,37 +244,14 @@
   }
 }
 
-/* Проміжні розміри: планшет та зменшений десктоп (768px - 1023px) */
+/* Проміжні розміри для планшетів */
 @media (width >= 768px) and (width < 1024px) {
   .hero-section {
-    max-height: auto;
-    padding: clamp(2rem, 4vw, 3rem);
-    gap: clamp(1rem, 3vw, 1.5rem);
+    max-height: clamp(600px, 70vh, 900px);
   }
 
   .hero-section__cta {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1rem, 3vw, 1.5rem);
-    margin-left: 0;
-    width: 100%;
     overflow: visible;
-  }
-
-  .hero-section__form {
-    max-width: 100%;
-    width: 100%;
-    margin-left: 0;
-    min-height: auto;
-  }
-
-  .hero-section__form-title {
-    white-space: normal;
-  }
-
-  /* Приховуємо зображення на проміжних розмірах */
-  .hero-section__image {
-    display: none;
   }
 }
 

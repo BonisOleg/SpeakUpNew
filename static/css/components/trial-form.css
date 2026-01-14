@@ -134,6 +134,8 @@
   padding: 0.875rem 2rem;
   box-shadow: 0 4px 12px rgba(231, 30, 20, 0.3);
   transition: all 0.2s ease;
+  display: block;
+  box-sizing: border-box;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -181,45 +183,6 @@
 
   .trial-form--hero .form-group.has-error input::placeholder {
     opacity: 0;
-  }
-}
-
-/* Проміжні розміри: планшет та зменшений десктоп (768px - 1023px) */
-@media (width >= 768px) and (width < 1024px) {
-  .trial-form--hero {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .trial-form--hero .form-group {
-    margin-bottom: clamp(0.875rem, 2.5vw, 1rem);
-  }
-
-  .trial-form--hero .form-group:last-of-type {
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
-  }
-
-  .trial-form--hero .form-group input,
-  .trial-form--hero .form-group input[type="text"],
-  .trial-form--hero .form-group input[type="tel"],
-  .trial-form--hero .form-group input.form-group__input {
-    padding: clamp(0.875rem, 1.5vw, 1rem) clamp(0.875rem, 2vw, 1rem);
-    font-size: clamp(0.9375rem, 2vw, 1rem);
-    min-height: clamp(50px, 10vw, 52px);
-  }
-
-  .trial-form--hero .button {
-    min-height: clamp(50px, 10vw, 52px);
-    font-size: clamp(0.875rem, 2vw, 1rem);
-    padding: clamp(0.875rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 2rem);
-    width: 100%;
-    display: block;
-    box-sizing: border-box;
-  }
-
-  .trial-form--hero .form-error {
-    font-size: clamp(0.875rem, 2vw, 1rem);
-    padding-left: clamp(0.875rem, 2vw, 1rem);
   }
 }
 
