@@ -386,13 +386,13 @@
     align-self: center;
     width: 60px;
     height: 60px;
-    border-width: calc(8px * var(--menu-scale));
+    border-width: calc(10px * var(--menu-scale));
     padding: calc(3px * var(--menu-scale));
     box-sizing: border-box;
   }
 
   .header-wrapper .header__student-zone-text {
-    font-size: clamp(0.4rem, 1vw, 0.6rem);
+    font-size: clamp(0.5rem, 1vw, 0.6rem);
   }
 
   /* Fallback для старих браузерів */
