@@ -131,30 +131,50 @@ export class BaseCarousel {
   handleScroll() {
     if (this.isScrolling) return;
 
-    // Оновлюємо currentIndex на основі scroll позиції
+    // Оновлюємо currentIndex на основі scroll позиції з більш точною логікою
     const scrollLeft = this.container.scrollLeft;
     const itemWidth = this.items[0]?.offsetWidth || 0;
     const gap = this.options.gap;
-    const newIndex = Math.round(scrollLeft / (itemWidth + gap));
+    const tolerance = 2; // Tolerance для subpixel рендерингу (±2px)
 
-    if (newIndex !== this.currentIndex && newIndex >= 0 && newIndex < this.items.length) {
+    // Розраховуємо новий індекс з більшою точністю
+    const itemStride = itemWidth + gap;
+    let newIndex = Math.round(scrollLeft / itemStride);
+
+    // Переконуємось що новий індекс в межах
+    newIndex = Math.max(0, Math.min(newIndex, this.items.length - 1));
+
+    if (newIndex !== this.currentIndex) {
       this.currentIndex = newIndex;
       this.updateButtons();
     }
   }
 
   prev() {
-    if (this.isScrolling || this.currentIndex <= 0) return;
+    if (this.isScrolling || !this.canScrollLeft()) return;
 
     this.currentIndex--;
     this.scrollToIndex(this.currentIndex);
   }
 
   next() {
-    if (this.isScrolling || this.currentIndex >= this.items.length - this.options.itemsPerView) return;
+    if (this.isScrolling || !this.canScrollRight()) return;
 
     this.currentIndex++;
     this.scrollToIndex(this.currentIndex);
+  }
+
+  canScrollLeft() {
+    // Перевіряємо чи можна прокрутити вліво на основі реальної позиції scroll
+    const tolerance = 2; // Tolerance для subpixel рендерингу
+    return this.container.scrollLeft > tolerance;
+  }
+
+  canScrollRight() {
+    // Перевіряємо чи можна прокрутити вправо на основі реальної позиції scroll
+    const tolerance = 2; // Tolerance для subpixel рендерингу
+    const maxScroll = this.container.scrollWidth - this.container.clientWidth;
+    return this.container.scrollLeft < (maxScroll - tolerance);
   }
 
   scrollToIndex(index) {
@@ -178,14 +198,15 @@ export class BaseCarousel {
   }
 
   updateButtons() {
-    // Оновлюємо стан кнопок prev/next
+    // Оновлюємо стан кнопок prev/next на основі реальної можливості прокрутки
     if (this.options.prevButton) {
       const prevBtn = typeof this.options.prevButton === 'string'
         ? document.querySelector(this.options.prevButton)
         : this.options.prevButton;
       if (prevBtn) {
-        prevBtn.disabled = this.currentIndex <= 0;
-        prevBtn.setAttribute('aria-disabled', this.currentIndex <= 0);
+        const canScroll = this.canScrollLeft();
+        prevBtn.disabled = !canScroll;
+        prevBtn.setAttribute('aria-disabled', !canScroll);
       }
     }
 
@@ -194,9 +215,9 @@ export class BaseCarousel {
         ? document.querySelector(this.options.nextButton)
         : this.options.nextButton;
       if (nextBtn) {
-        const maxIndex = this.items.length - this.options.itemsPerView;
-        nextBtn.disabled = this.currentIndex >= maxIndex;
-        nextBtn.setAttribute('aria-disabled', this.currentIndex >= maxIndex);
+        const canScroll = this.canScrollRight();
+        nextBtn.disabled = !canScroll;
+        nextBtn.setAttribute('aria-disabled', !canScroll);
       }
     }
   }
