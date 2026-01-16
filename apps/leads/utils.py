@@ -7,9 +7,10 @@ def normalize_phone_number(phone):
     Нормалізувати український номер телефону до формату +380XXXXXXXXX.
 
     Підтримує формати:
-    - +380XXXXXXXXX
-    - 380XXXXXXXXX
-    - 0XXXXXXXXX (10 цифр - НАЙПОШИРЕНІШИЙ ФОРМАТ)
+    - +380XXXXXXXXX (13 символів: +380 + 9 цифр)
+    - 380XXXXXXXXX (12 цифр)
+    - 38XXXXXXXXX (11 цифр)
+    - 0XXXXXXXXX (10 цифр)
     - XXXXXXXXX (9 цифр)
 
     Raises:
@@ -22,8 +23,11 @@ def normalize_phone_number(phone):
     if not phone:
         return phone
 
-    # Видалити всі пробіли, дужки, дефіси та інші символи
+    # Видалити всі пробіли, дужки, дефіси та інші символи (крім +)
     phone_clean = phone.replace(' ', '').replace('(', '').replace(')', '').replace('-', '')
+
+    # Перевірити чи є + на початку
+    has_plus = phone_clean.startswith('+')
 
     # Витягти тільки цифри
     digits = ''.join(filter(str.isdigit, phone_clean))
@@ -32,25 +36,32 @@ def normalize_phone_number(phone):
     if not digits:
         raise forms.ValidationError("Введіть коректний український номер телефону")
 
-    # Нормалізація до формату +380XXXXXXXXX
-    # ПРІОРИТЕТ: формат 0XXXXXXXXX (10 цифр) - найпоширеніший
-    if len(digits) == 10 and digits.startswith('0'):
+    # Нормалізація до формату +380XXXXXXXXX (13 символів: +380 + 9 цифр)
+    if has_plus and phone_clean.startswith('+380'):
+        # +380XXXXXXXXX - вже має правильний префікс, потрібно витягти 9 цифр після 380
+        if len(digits) >= 3:
+            # Витягнути цифри після 380 (останні 9 цифр)
+            phone_digits = digits[3:] if len(digits) > 3 else digits
+            if len(phone_digits) == 9:
+                phone = '+380' + phone_digits
+            else:
+                raise forms.ValidationError("Введіть коректний український номер телефону (9 цифр після +380)")
+        else:
+            raise forms.ValidationError("Введіть коректний український номер телефону")
+    elif len(digits) == 12 and digits.startswith('380'):
+        # 380XXXXXXXXX -> +380XXXXXXXXX (видаляємо 380, додаємо +380)
+        phone = '+380' + digits[3:]
+    elif len(digits) == 11 and digits.startswith('38'):
+        # 38XXXXXXXXX -> +380XXXXXXXXX (видаляємо 38, додаємо +380)
+        phone = '+380' + digits[2:]
+    elif len(digits) == 10 and digits.startswith('0'):
         # 0XXXXXXXXX -> +380XXXXXXXXX (видаляємо 0, додаємо +380)
         phone = '+380' + digits[1:]
-    elif len(digits) == 12 and digits.startswith('380'):
-        # 380XXXXXXXXX -> +380XXXXXXXXX
-        phone = '+' + digits
-    elif len(digits) == 13 and phone_clean.startswith('+380'):
-        # +380XXXXXXXXX -> залишити як є
-        phone = '+' + digits
     elif len(digits) == 9:
         # XXXXXXXXX (9 цифр без префіксу) -> +380XXXXXXXXX
         phone = '+380' + digits
-    elif len(digits) == 11 and digits.startswith('38'):
-        # 38XXXXXXXXX (11 цифр) -> +380XXXXXXXXX
-        phone = '+380' + digits[2:]
     else:
-        raise forms.ValidationError("Введіть коректний український номер телефону (10 цифр починаючи з 0)")
+        raise forms.ValidationError("Введіть коректний український номер телефону")
 
     # Фінальна перевірка формату (модель очікує ^\+380\d{9}$)
     if not phone.startswith('+380') or len(phone) != 13:
