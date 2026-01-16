@@ -59,6 +59,25 @@ export class TrialFormHandler {
     GTMEvents.formSubmit('trial', this.location);
 
     try {
+      // Нормалізувати номер телефону перед submit
+      const phoneInput = this.form.querySelector('input[type="tel"]');
+      if (phoneInput) {
+        // Використати data-rawValue якщо є, інакше нормалізувати
+        const rawValue = phoneInput.dataset.rawValue;
+        if (rawValue) {
+          phoneInput.value = rawValue;
+        } else {
+          // Нормалізувати вручну
+          const value = phoneInput.value;
+          const digits = value.replace(/\D/g, '').substring(2); // Видалити +38
+          if (digits.length === 10 && digits[0] === '0') {
+            phoneInput.value = '+380' + digits.substring(1);
+          } else {
+            phoneInput.value = '+38';
+          }
+        }
+      }
+
       const formData = new FormData(this.form);
       const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
 
