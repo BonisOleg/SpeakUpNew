@@ -79,3 +79,23 @@ WHITENOISE_MIMETYPES = {
     '.json': 'application/json; charset=utf-8',
     '.svg': 'image/svg+xml; charset=utf-8',
 }
+
+# Logging configuration for production (console instead of file)
+# На Render немає директорії logs, тому використовуємо console handler
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'encoding': 'utf-8',
+        },
+    },
+    'loggers': {
+        'apps.core.utils.redirect_logger': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+        },
+    },
+}

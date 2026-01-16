@@ -148,6 +148,10 @@ GTM_MEASUREMENT_ID = os.getenv('GTM_MEASUREMENT_ID', '')
 GTM_API_SECRET = os.getenv('GTM_API_SECRET', '')
 
 # Logging configuration
+# Створити директорію logs якщо вона не існує (для локальної розробки)
+logs_dir = BASE_DIR / 'logs'
+logs_dir.mkdir(exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -155,7 +159,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
+            'filename': logs_dir / 'django.log',
             'encoding': 'utf-8',
         },
     },
