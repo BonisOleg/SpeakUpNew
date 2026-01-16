@@ -20,8 +20,8 @@ class PhoneInputHandler {
   }
 
   init() {
-    // Встановити початкове значення
-    if (!this.input.value || this.input.value === '+380') {
+    // ЗАВЖДИ встановлювати +38 при ініціалізації
+    if (!this.input.value || this.input.value.length < 3) {
       this.input.value = this.prefix;
     }
 
@@ -32,14 +32,15 @@ class PhoneInputHandler {
     this.input.addEventListener('input', this.handleInput.bind(this));
     this.input.addEventListener('paste', this.handlePaste.bind(this));
     this.input.addEventListener('change', this.handleChange.bind(this)); // для autofill
+    this.input.addEventListener('blur', this.handleBlur.bind(this)); // Додано blur
   }
 
   handleFocus(e) {
     // 1. Очистити помилки (головна фіча!)
     this.clearErrors();
 
-    // 2. Встановити значення якщо порожнє
-    if (!this.input.value) {
+    // 2. ЗАВЖДИ переконатися що +38 на місці
+    if (!this.input.value || this.input.value.length < 3 || !this.input.value.startsWith('+38')) {
       this.input.value = this.prefix;
     } else {
       // Форматувати значення якщо воно не форматоване
@@ -52,6 +53,13 @@ class PhoneInputHandler {
 
     // 3. Перемістити курсор після префіксу
     this.setCursorPosition();
+  }
+
+  handleBlur(e) {
+    // При втраті фокусу переконатися що +38 на місці
+    if (!this.input.value || this.input.value.length < 3 || !this.input.value.startsWith('+38')) {
+      this.input.value = this.prefix;
+    }
   }
 
   clearErrors() {
@@ -109,12 +117,28 @@ class PhoneInputHandler {
     // Видалити все крім цифр та +
     let cleaned = value.replace(/[^\d+]/g, '');
 
-    // Переконатися що починається з +38
+    // ЗАВЖДИ переконатися що починається з +38
     if (!cleaned.startsWith('+38')) {
-      cleaned = this.prefix + cleaned.replace(/^\+?\d*/, '');
+      // Якщо користувач спробував видалити +38, повертаємо його
+      const digitsOnly = cleaned.replace(/\+/g, '');
+      cleaned = this.prefix + digitsOnly;
     }
 
-    // Обмежити довжину
+    // Якщо довжина менше 3 символів (+38), встановити мінімум +38
+    if (cleaned.length < 3) {
+      cleaned = this.prefix;
+    }
+
+    // Витягти цифри після +38
+    const digitsAfterPrefix = cleaned.substring(3);
+
+    // ВАЖЛИВА ПЕРЕВІРКА: перша цифра після +38 має бути 0
+    if (digitsAfterPrefix.length > 0 && digitsAfterPrefix[0] !== '0') {
+      // Якщо перша цифра не 0, видаляємо її або замінюємо
+      cleaned = this.prefix;
+    }
+
+    // Обмежити довжину до 13 символів (+38 + 10 цифр)
     if (cleaned.length > this.maxLength) {
       cleaned = cleaned.substring(0, this.maxLength);
     }
@@ -134,32 +158,39 @@ class PhoneInputHandler {
   formatPhoneForDisplay(phone) {
     // phone має бути у форматі +380XXXXXXXXX (13 символів)
     // Відображення: +38(0XX)XXX-XX-XX
+    // ЗАВЖДИ повертаємо мінімум +38
     if (!phone || !phone.startsWith('+38')) {
-      return phone;
+      return this.prefix;
     }
 
     // Витягти цифри після +38
     const digits = phone.substring(3); // 0XXXXXXXXX (10 цифр)
 
+    // Якщо немає цифр - повернути тільки +38
     if (digits.length === 0) {
       return this.prefix;
     }
 
-    if (digits.length === 1) {
-      return `${this.prefix}(0${digits}`;
+    // ВАЖЛИВА ПЕРЕВІРКА: перша цифра має бути 0
+    if (digits[0] !== '0') {
+      return this.prefix;
     }
 
-    if (digits.length <= 4) {
-      // +38(0XX)
+    if (digits.length === 1) {
       return `${this.prefix}(${digits}`;
     }
 
-    if (digits.length <= 7) {
+    if (digits.length <= 3) {
+      // +38(0XX
+      return `${this.prefix}(${digits}`;
+    }
+
+    if (digits.length <= 6) {
       // +38(0XX)XXX
       return `${this.prefix}(${digits.substring(0, 3)})${digits.substring(3)}`;
     }
 
-    if (digits.length <= 9) {
+    if (digits.length <= 8) {
       // +38(0XX)XXX-XX
       return `${this.prefix}(${digits.substring(0, 3)})${digits.substring(3, 6)}-${digits.substring(6)}`;
     }

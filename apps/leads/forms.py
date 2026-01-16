@@ -29,7 +29,7 @@ class TrialLessonForm(forms.ModelForm):
                 'class': 'form-group__input',
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '+38 (0XX) XXX XX XX',
+                'placeholder': 'Введіть номер телефону',
                 'class': 'form-group__input',
                 'type': 'tel',
                 'inputmode': 'tel',

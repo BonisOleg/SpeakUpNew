@@ -48,6 +48,10 @@ def normalize_phone_number(phone):
     if not phone.startswith('+380') or len(phone) != 13:
         raise forms.ValidationError("Номер має містити 9 цифр після коду +380")
 
+    # ВАЖЛИВА ПЕРЕВІРКА: перша цифра після +380 має бути 0
+    if len(phone) >= 5 and phone[4] != '0':
+        raise forms.ValidationError("Український номер телефону має починатися з 0 після +380")
+
     return phone
 
 

@@ -53,7 +53,7 @@ class ConsultationForm(forms.ModelForm):
                 'required': False,
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '+38 (0XX) XXX XX XX',
+                'placeholder': 'Введіть номер телефону',
                 'class': 'form-group__input',
                 'type': 'tel',
                 'inputmode': 'tel',
@@ -112,7 +112,7 @@ class CorporateConsultationForm(forms.ModelForm):
                 'autocomplete': 'email',
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '+38 (0XX) XXX XX XX',
+                'placeholder': 'Введіть номер телефону',
                 'class': 'form-group__input',
                 'type': 'tel',
                 'inputmode': 'tel',
