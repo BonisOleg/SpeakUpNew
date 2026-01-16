@@ -47,7 +47,7 @@ class TrialLessonForm(forms.ModelForm):
         return name
 
     def clean_phone(self):
-        """Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
+        r"""Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
         phone = self.cleaned_data.get('phone', '')
         return normalize_phone_number(phone)
 

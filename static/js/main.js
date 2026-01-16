@@ -98,6 +98,19 @@ if (typeof htmx !== 'undefined') {
   document.body.addEventListener('htmx:afterSwap', function (event) {
     const target = event.detail.target;
 
+    // Додати автоматичне очищення помилок при focus на всіх полях
+    target.querySelectorAll('.form-group__input').forEach(input => {
+      input.addEventListener('focus', function() {
+        this.classList.remove('field-error', 'error');
+        this.removeAttribute('aria-invalid');
+        const formGroup = this.closest('.form-group');
+        if (formGroup) {
+          const errorSpan = formGroup.querySelector('.form-error');
+          if (errorSpan) errorSpan.remove();
+        }
+      });
+    });
+
     // Реініціалізувати phone inputs після HTMX swap
     if (target.querySelector('input[type="tel"]')) {
       initPhoneInputs(target);

@@ -61,6 +61,14 @@
   background-color: var(--color-white);
 }
 
+/* Unified error class for all form fields */
+.form-group input.field-error,
+.form-group select.field-error,
+.form-group textarea.field-error {
+  border-color: var(--color-error);
+  background-color: var(--color-white);
+}
+
 .form-group input:disabled,
 .form-group select:disabled,
 .form-group textarea:disabled {
@@ -103,6 +111,11 @@
 .form-group textarea {
   min-height: 120px;
   resize: vertical;
+}
+
+/* Hidden input fields */
+.form-group__input--hidden {
+  display: none;
 }
 
 /* Honeypot поле - приховане від користувачів

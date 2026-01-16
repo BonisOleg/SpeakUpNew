@@ -179,10 +179,12 @@ export class TrialFormHandler {
         const input = this.form.querySelector(`[name="${fieldName}"]`);
         if (input) {
           input.classList.add('field-error');
+          input.setAttribute('aria-invalid', 'true');
           const formGroup = input.closest('.form-group');
           if (formGroup) {
             const errorSpan = document.createElement('span');
             errorSpan.className = 'form-error';
+            errorSpan.setAttribute('role', 'alert');
             errorSpan.textContent = errorMessages[0];
             formGroup.appendChild(errorSpan);
           }

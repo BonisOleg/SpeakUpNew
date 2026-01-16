@@ -68,14 +68,14 @@ class ConsultationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Приховати messenger_choice за замовчуванням
-        self.fields['messenger_choice'].widget.attrs['style'] = 'display: none;'
+        # Приховати messenger_choice за замовчуванням (CSS клас)
+        self.fields['messenger_choice'].widget.attrs['class'] = 'form-group__input--hidden'
         self.fields['messenger_choice'].required = False
         # Зробити name необов'язковим
         self.fields['name'].required = False
 
     def clean_phone(self):
-        """Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
+        r"""Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
         phone = self.cleaned_data.get('phone', '')
         return normalize_phone_number(phone)
 
@@ -128,15 +128,15 @@ class CorporateConsultationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Приховати messenger_choice за замовчуванням
-        self.fields['messenger_choice'].widget.attrs['style'] = 'display: none;'
+        # Приховати messenger_choice за замовчуванням (CSS клас)
+        self.fields['messenger_choice'].widget.attrs['class'] = 'form-group__input--hidden'
         self.fields['messenger_choice'].required = False
         # Зробити name та email необов'язковими
         self.fields['name'].required = False
         self.fields['email'].required = False
 
     def clean_phone(self):
-        """Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
+        r"""Нормалізувати телефон до +380XXXXXXXXX (формат моделі: ^\+380\d{9}$)"""
         phone = self.cleaned_data.get('phone', '')
         return normalize_phone_number(phone)
 
