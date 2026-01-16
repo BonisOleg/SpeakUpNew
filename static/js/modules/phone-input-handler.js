@@ -54,6 +54,7 @@ class PhoneInputHandler {
   clearErrors() {
     // Очистити клас помилки з input
     this.input.classList.remove('field-error', 'error');
+    this.input.removeAttribute('aria-invalid');
 
     // Видалити error span
     const formGroup = this.input.closest('.form-group');
@@ -150,6 +151,9 @@ class PhoneInputHandler {
   }
 
   handleInput(e) {
+    // Очистити помилки при введенні
+    this.clearErrors();
+
     let value = this.input.value;
 
     // Якщо поле порожнє, дозволити введення
@@ -203,6 +207,9 @@ class PhoneInputHandler {
   handlePaste(e) {
     e.preventDefault();
 
+    // Очистити помилки при paste
+    this.clearErrors();
+
     const pastedText = e.clipboardData.getData('text');
     // Видалити все крім цифр
     const digits = pastedText.replace(/\D/g, '');
@@ -210,15 +217,16 @@ class PhoneInputHandler {
     let normalized = this.prefix;
 
     // Нормалізувати вставлений текст
-    if (digits.startsWith('380') && digits.length >= 12) {
+    // ПРІОРИТЕТ: формат 0XXXXXXXXX (10 цифр)
+    if (digits.startsWith('0') && digits.length >= 10) {
+      // 0XXXXXXXXX -> +380XXXXXXXXX (видаляємо 0, додаємо +380)
+      normalized = '+380' + digits.substring(1, 10);
+    } else if (digits.startsWith('380') && digits.length >= 12) {
       // 380XXXXXXXXX -> +380XXXXXXXXX
-      normalized = '+38' + digits.substring(2, 12);
+      normalized = '+380' + digits.substring(3, 12);
     } else if (digits.startsWith('38') && digits.length >= 11) {
-      // 38XXXXXXXXX -> +38XXXXXXXXX
-      normalized = '+38' + digits.substring(2, 12);
-    } else if (digits.startsWith('0') && digits.length >= 10) {
-      // 0XXXXXXXXX -> +380XXXXXXXXX
-      normalized = this.prefix + digits.substring(0, 10);
+      // 38XXXXXXXXX -> +380XXXXXXXXX
+      normalized = '+380' + digits.substring(2, 11);
     } else if (digits.length > 0) {
       // Часткове введення
       const cleanDigits = digits.substring(digits.startsWith('38') ? 2 : 0);

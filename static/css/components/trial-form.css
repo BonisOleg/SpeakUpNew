@@ -101,6 +101,8 @@
 .trial-form--hero .form-group {
   position: relative;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .trial-form--hero .form-group:last-of-type {
@@ -185,45 +187,15 @@
   }
 }
 
-/* Помилки валідації для hero форми - позиціонування всередині інпута */
+/* Помилки валідації для hero форми - показувати знизу поля */
 .trial-form--hero .form-error {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  padding-left: 1rem;
+  display: block;
+  margin-top: var(--spacing-xs);
   color: var(--color-error);
-  font-size: 1rem;
-  pointer-events: none;
-  z-index: 2;
-  background: transparent;
-  margin: 0;
-}
-
-.trial-form--hero .form-group:has(.form-error) input {
-  color: transparent;
-}
-
-.trial-form--hero .form-group:has(.form-error) input::placeholder {
-  opacity: 0;
-}
-
-/* Fallback для браузерів без підтримки :has() */
-@supports not selector(:has(*)) {
-  .trial-form--hero .form-group.has-error .form-error {
-    display: flex;
-  }
-
-  .trial-form--hero .form-group.has-error input {
-    color: transparent;
-  }
-
-  .trial-form--hero .form-group.has-error input::placeholder {
-    opacity: 0;
-  }
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
 /* Мобільна оптимізація hero форми */
