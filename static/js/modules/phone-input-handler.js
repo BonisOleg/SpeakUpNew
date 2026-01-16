@@ -16,11 +16,7 @@ class PhoneInputHandler {
   }
 
   init() {
-    // ЗАВЖДИ встановлювати +38
-    if (!this.input.value || !this.input.value.startsWith('+38')) {
-      this.input.value = this.prefix;
-    }
-
+    // НЕ встановлювати +38 автоматично - тільки при введенні
     // Events
     this.input.addEventListener('focus', this.handleFocus.bind(this));
     this.input.addEventListener('click', this.handleClick.bind(this));
@@ -35,7 +31,7 @@ class PhoneInputHandler {
     // Очистити помилки
     this.clearErrors();
 
-    // ЗАВЖДИ переконатися що +38 на місці
+    // Якщо поле порожнє або не починається з +38, встановити +38
     if (!this.input.value || !this.input.value.startsWith('+38')) {
       this.input.value = this.prefix;
     }
@@ -45,9 +41,13 @@ class PhoneInputHandler {
   }
 
   handleBlur(e) {
-    // При втраті фокусу переконатися що +38 на місці
-    if (!this.input.value || !this.input.value.startsWith('+38')) {
-      this.input.value = this.prefix;
+    // При втраті фокусу якщо є значення, переконатися що +38 на місці
+    if (this.input.value && this.input.value.length > 0 && !this.input.value.startsWith('+38')) {
+      // Якщо є цифри, додати +38
+      const digits = this.input.value.replace(/\D/g, '');
+      if (digits.length > 0) {
+        this.input.value = this.prefix + digits.substring(digits.startsWith('38') ? 2 : 0, this.maxDigits + 1);
+      }
     }
   }
 
@@ -80,75 +80,95 @@ class PhoneInputHandler {
     // Перехопити події перед введенням
     const pos = this.input.selectionStart;
     const endPos = this.input.selectionEnd;
+    const value = this.input.value;
 
-    // Заборонити видалення +38
-    if (e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward') {
-      if (pos <= 3 || (pos < 3 && endPos > 3)) {
-        e.preventDefault();
-        return;
-      }
+    // Якщо поле порожнє, дозволити введення
+    if (!value || value.length === 0) {
+      return;
     }
 
-    // Заборонити вставку/введення на позиції перед +38
-    if (pos < 3) {
-      e.preventDefault();
-      this.setCursorPosition();
-      return;
+    // Заборонити видалення +38 (якщо воно є)
+    if (value.startsWith('+38')) {
+      if (e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward') {
+        if (pos <= 3 || (pos < 3 && endPos > 3)) {
+          e.preventDefault();
+          return;
+        }
+      }
+
+      // Заборонити вставку/введення на позиції перед +38
+      if (pos < 3) {
+        e.preventDefault();
+        this.setCursorPosition();
+        return;
+      }
     }
   }
 
   handleKeydown(e) {
     const pos = this.input.selectionStart;
     const endPos = this.input.selectionEnd;
+    const value = this.input.value;
 
-    // Заборонити видалення +38
-    if (e.key === 'Backspace') {
-      if (pos <= 3 || (pos <= 3 && endPos > 3)) {
+    // Якщо поле порожнє, дозволити все
+    if (!value || value.length === 0) {
+      return;
+    }
+
+    // Заборонити видалення +38 (якщо воно є)
+    if (value.startsWith('+38')) {
+      if (e.key === 'Backspace') {
+        if (pos <= 3 || (pos <= 3 && endPos > 3)) {
+          e.preventDefault();
+          this.setCursorPosition();
+          return;
+        }
+      }
+
+      if (e.key === 'Delete') {
+        if (pos < 3 || (pos < 3 && endPos > 3)) {
+          e.preventDefault();
+          this.setCursorPosition();
+          return;
+        }
+      }
+
+      // Arrow Left — не дозволити вийти за межи префіксу
+      if (e.key === 'ArrowLeft' && pos <= 3) {
         e.preventDefault();
         this.setCursorPosition();
         return;
       }
-    }
 
-    if (e.key === 'Delete') {
-      if (pos < 3 || (pos < 3 && endPos > 3)) {
+      // Home — переміщує на початок після +38
+      if (e.key === 'Home') {
         e.preventDefault();
         this.setCursorPosition();
         return;
       }
-    }
-
-    // Arrow Left — не дозволити вийти за межи префіксу
-    if (e.key === 'ArrowLeft' && pos <= 3) {
-      e.preventDefault();
-      this.setCursorPosition();
-      return;
-    }
-
-    // Home — переміщує на початок після +38
-    if (e.key === 'Home') {
-      e.preventDefault();
-      this.setCursorPosition();
-      return;
     }
   }
 
   handleInput(e) {
     let value = this.input.value;
 
-    // ЗАВЖДИ переконатися що +38 на місці
-    if (!value || !value.startsWith('+38')) {
-      this.input.value = this.prefix;
-      this.setCursorPosition();
+    // Якщо поле порожнє, дозволити введення
+    if (!value || value.length === 0) {
       return;
     }
 
     // Видалити все крім цифр та +
     let cleaned = value.replace(/[^\d+]/g, '');
 
-    // ЗАВЖДИ +38 на початку
+    // Якщо користувач почав вводити цифри без +38, додати +38
     if (!cleaned.startsWith('+38')) {
-      cleaned = this.prefix;
+      // Якщо є тільки цифри, додати +38
+      if (cleaned.length > 0 && /^\d+$/.test(cleaned)) {
+        cleaned = this.prefix + cleaned;
+      } else {
+        // Якщо є щось інше, встановити +38
+        cleaned = this.prefix;
+      }
     }
 
     // Якщо довжина менше 3 символів (+38), встановити мінімум +38
@@ -217,9 +237,11 @@ class PhoneInputHandler {
   }
 
   setCursorPosition() {
-    // Курсор після префіксу
-    const pos = Math.max(this.prefix.length, this.input.selectionStart || this.prefix.length);
-    this.input.setSelectionRange(pos, pos);
+    // Курсор після префіксу (якщо +38 є)
+    if (this.input.value && this.input.value.startsWith('+38')) {
+      const pos = Math.max(this.prefix.length, this.input.selectionStart || this.prefix.length);
+      this.input.setSelectionRange(pos, pos);
+    }
   }
 }
 
