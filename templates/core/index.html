@@ -26,6 +26,11 @@
 <link rel="preload" as="image" href="{% static 'img/2card.webp' %}" type="image/webp">
 <link rel="preload" as="image" href="{% static 'img/2card.png' %}">
 
+<!-- STEP 8: Preload зображення для секції Програми навчання -->
+<link rel="preload" as="image" href="{% static 'img/speak_man.png' %}">
+<link rel="preload" as="image" href="{% static 'img/speak_kid.png' %}">
+<link rel="preload" as="image" href="{% static 'img/speak_premium.png' %}">>
+
 <!-- STEP 8: Preload паралакс зображення (desktop + mobile) з WebP -->
 <link rel="preload" as="image" href="{% static 'img/mainBackground.webp' %}" type="image/webp" media="(min-width: 768px)">
 <link rel="preload" as="image" href="{% static 'img/mainBackground.png' %}" media="(min-width: 768px)">
@@ -322,7 +327,6 @@
 <script type="module" src="{% static 'js/modules/counter-animation.js' %}" defer></script>
 <script type="module" src="{% static 'js/modules/advantages-carousel.js' %}" defer></script>
 {% if show_pricing_instead_of_courses %}
-<script type="module" src="{% static 'js/modules/pricing-accordion.js' %}" defer></script>
 <script type="module" src="{% static 'js/modules/pricing-analytics.js' %}" defer></script>
 {% else %}
 <script type="module" src="{% static 'js/modules/courses-accordion.js' %}" defer></script>

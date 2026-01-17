@@ -1,359 +1,78 @@
-<!-- 4. Вартість навчання (Прайс-лист) -->
-<section class="pricing-section glass-section" id="courses">
-  <h2 class="section-title">Вартість навчання</h2>
+{% load static %}
+<!-- 4. Програми навчання -->
+<section class="programs-section glass-section" id="courses">
+  <h2 class="section-title">Програми навчання</h2>
 
-  <div class="pricing-grid">
-    <!-- Стовпчик 1: Діти -->
-    <div class="pricing-column">
-      <h3 class="pricing-column__title">Діти</h3>
-      <div class="pricing-accordion" data-accordion-container>
-
-        <!-- Kids/Teens -->
-        <div class="pricing-accordion__item" data-accordion-item data-pricing-item data-pricing-title="Kids 7-11 / TEENS 11+">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">Kids 7-11 / TEENS 11+</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Дитяча програма з англійської що включає 1 повний рівень</p>
-
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">У програмі:</h4>
-                <ul class="pricing-content__list">
-                  <li>30 занять по 50/90 хв з локальним викладачем у групах</li>
-                  <li>8 занять по 50/90 хв з носієм мови у групах</li>
-                  <li>2 мотиваційні заняття (тестування)</li>
-                  <li>Групи від 3 слухачів</li>
-                  <li>Формат: онлайн, графік фіксований</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 4 місяці
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price">
-                  <span class="pricing-price__label">Базова вартість:</span>
-                  <span class="pricing-price__value">24 200 грн</span>
-                </div>
-                <div class="pricing-price pricing-price--discount">
-                  <span class="pricing-price__label">Передзамовлення:</span>
-                  <span class="pricing-price__value">19 900 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
+  <div class="programs-grid">
+    <!-- Картка 1: Навчання для дорослих -->
+    <div class="program-card glass-card">
+      <div class="program-card__image-wrapper">
+        <img src="{% static 'img/speak_man.png' %}" alt="Навчання для дорослих" class="program-card__image" loading="lazy" decoding="async">
+      </div>
+      <div class="program-card__content">
+        <div class="program-card__badge">
+          <span class="program-card__badge-icon">✓</span>
+          <span class="program-card__badge-text">Гарантія результату</span>
         </div>
+        <h3 class="program-card__title">Навчання для дорослих</h3>
+        <p class="program-card__description">Обирайте свій темп: від базових рівнів до повного безліміту на рік. Програми розроблені для швидкого подолання мовного бар'єру з акцентом на розмовну практику.</p>
 
-        <!-- НМТ/ЄВІ -->
-        <div class="pricing-accordion__item" data-accordion-item data-pricing-item data-pricing-title="Підготовка до НМТ/ЄВІ">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">Підготовка до НМТ/ЄВІ</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Підготовка до національного мультипредметного тестування</p>
+        <ul class="program-card__features">
+          <li>Персональний конструктор: обирайте тип англійської (загальна або спеціалізована) та тривалість занять (50 або 90 хв)</li>
+          <li>Повне занурення: можливість отримати річний безліміт та пройти від 5 рівнів за шкалою CEFR</li>
+          <li>Долання бар'єрів: 8 розмовних клубів на кожному рівні та заняття з носіями мови</li>
+          <li>Зручний формат: доступ до особистого кабінету та інтерактивного підручника 24/7</li>
+          <li>Гарантова розмовна практика на кожному занятті</li>
+        </ul>
 
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">У програмі:</h4>
-                <ul class="pricing-content__list">
-                  <li>35 занять по 90 хв з локальним викладачем у групах</li>
-                  <li>Групи від 3 слухачів</li>
-                  <li>Формат: онлайн, графік фіксований</li>
-                  <li>Рівень: від Pre-Intermediate B1 і вище</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 4,5 місяці
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price">
-                  <span class="pricing-price__label">Базова вартість:</span>
-                  <span class="pricing-price__value">19 625 грн</span>
-                </div>
-                <div class="pricing-price pricing-price--discount">
-                  <span class="pricing-price__label">Передзамовлення:</span>
-                  <span class="pricing-price__value">16 625 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
-        </div>
-
+        <a href="#" class="button button--primary button--full">Перейти до програм</a>
       </div>
     </div>
 
-    <!-- Стовпчик 2: Дорослі (групові) -->
-    <div class="pricing-column">
-      <h3 class="pricing-column__title">Дорослі (групові)</h3>
-      <div class="pricing-accordion" data-accordion-container>
-
-        <!-- Програма на 1 рівень -->
-        <div class="pricing-accordion__item" data-accordion-item data-pricing-item data-pricing-title="Програма на 1 рівень">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">Програма на 1 рівень</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Структуризація наявних знань, покращення розмовних навичок</p>
-
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">У програмі:</h4>
-                <ul class="pricing-content__list">
-                  <li>40 базових занять</li>
-                  <li>3 індивідуальні консультації (15 хв)</li>
-                  <li>8 розмовних клубів</li>
-                  <li>Групові заняття з носіями мови (до 50% з рівня Intermediate)</li>
-                  <li>Особистий інтернет акаунт</li>
-                  <li>Інтерактивний підручник у PDF</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 3 місяці
-              </div>
-
-              <div class="pricing-content__guarantee">
-                <strong>✅ ГАРАНТІЯ результату!</strong> (Level test = 65%)
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price">
-                  <span class="pricing-price__label">Вартість:</span>
-                  <span class="pricing-price__value">15 900 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
+    <!-- Картка 2: Навчання для дітей -->
+    <div class="program-card glass-card">
+      <div class="program-card__image-wrapper">
+        <img src="{% static 'img/speak_kid.png' %}" alt="Навчання для дітей" class="program-card__image" loading="lazy" decoding="async">
+      </div>
+      <div class="program-card__content">
+        <div class="program-card__badge">
+          <span class="program-card__badge-icon">✓</span>
+          <span class="program-card__badge-text">Гарантія результату</span>
         </div>
+        <h3 class="program-card__title">Навчання для дітей</h3>
+        <p class="program-card__description">Програми для дітей та підлітків (від 6 до 17 років), що поєднують ігрову форму, роботу з носіями мови та ґрунтовну підготовку до іспитів.</p>
 
-        <!-- РІЧНИЙ БЕЗЛІМІТ -->
-        <div class="pricing-accordion__item pricing-accordion__item--featured" data-accordion-item data-pricing-item data-pricing-title="РІЧНИЙ БЕЗЛІМІТ">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">РІЧНИЙ БЕЗЛІМІТ</span>
-            <span class="pricing-accordion__badge">ПОПУЛЯРНО</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Перейти мінімум на 5 рівнів вище за шкалою CEFR</p>
+        <ul class="program-card__features">
+          <li>Вікові категорії: окремі програми для Kids (6-10 років) та Teens (11-17 років) з урахуванням психології дитини</li>
+          <li>Малі групи: навчання в групах від 3 до 8 осіб, де кожна дитина отримує максимум уваги</li>
+          <li>Підготовка до іспитів: спеціалізовані курси для успішного складання НМТ та ЄВІ (від рівня B1+)</li>
+          <li>Інтенсивна практика: розмовні заняття з носіями мови навіть на базових рівнях</li>
+        </ul>
 
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">Кожен рівень включає:</h4>
-                <ul class="pricing-content__list">
-                  <li>40 базових занять</li>
-                  <li>3 індивідуальні консультації (15 хв)</li>
-                  <li>8 розмовних клубів</li>
-                  <li>Групові заняття з носіями мови (до 50% з рівня Intermediate)</li>
-                  <li>Особистий інтернет акаунт</li>
-                  <li>Інтерактивний підручник у PDF</li>
-                </ul>
-                <p class="pricing-content__note"><strong>Кількість рівнів за рік - НЕОБМЕЖЕНА</strong></p>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 1 рік (1,5-3 місяці на рівень)
-              </div>
-
-              <div class="pricing-content__guarantee">
-                <strong>✅ ГАРАНТІЯ результату!</strong> (Level test = 65%)
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price pricing-price--large">
-                  <span class="pricing-price__label">Вартість на рік:</span>
-                  <span class="pricing-price__value">29 900 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ПРЕМІУМ -->
-        <div class="pricing-accordion__item pricing-accordion__item--premium" data-accordion-item data-pricing-item data-pricing-title="ПРЕМІУМ SpeakUp">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">ПРЕМІУМ SpeakUp</span>
-            <span class="pricing-accordion__badge pricing-accordion__badge--premium">ПРЕМІУМ</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Найкрутіша програма: груповий + індивідуальний формат</p>
-
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">60 уроків:</h4>
-                <ul class="pricing-content__list">
-                  <li>20 індивідуальних уроків (50 хв)</li>
-                  <li>20 уроків у групах</li>
-                  <li>20 мультимедійних уроків</li>
-                  <li>1 підручник</li>
-                  <li>Індивідуальний графік</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 4,5 місяці
-              </div>
-
-              <div class="pricing-content__guarantee">
-                <strong>✅ ГАРАНТІЯ результату!</strong> (Level test = 65%)
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price pricing-price--large">
-                  <span class="pricing-price__label">Вартість:</span>
-                  <span class="pricing-price__value">20 900 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Акція 1+1 -->
-        <div class="pricing-accordion__item pricing-accordion__item--sale" data-accordion-item data-pricing-item data-pricing-title="Акція 1+1">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">Акція 1+1</span>
-            <span class="pricing-accordion__badge pricing-accordion__badge--sale">АКЦІЯ</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">2 рівні за ціною одного</p>
-
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">Кожен рівень включає:</h4>
-                <ul class="pricing-content__list">
-                  <li>40 базових занять</li>
-                  <li>3 індивідуальні консультації (15 хв)</li>
-                  <li>8 розмовних клубів</li>
-                  <li>Особистий інтернет акаунт</li>
-                  <li>Інтерактивний підручник у PDF</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__duration">
-                <strong>Тривалість:</strong> 6 місяців (2 рівні)
-              </div>
-
-              <div class="pricing-content__guarantee">
-                <strong>✅ ГАРАНТІЯ результату!</strong> (Level test = 65%)
-              </div>
-
-              <div class="pricing-content__prices">
-                <div class="pricing-price pricing-price--large pricing-price--sale">
-                  <span class="pricing-price__label">2 рівні за:</span>
-                  <span class="pricing-price__value">15 900 грн</span>
-                  <span class="pricing-price__old">31 800 грн</span>
-                </div>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Залишити заявку</button>
-            </div>
-          </div>
-        </div>
-
+        <a href="#" class="button button--primary button--full">Обрати курс для дитини</a>
       </div>
     </div>
 
-    <!-- Стовпчик 3: Дорослі (індивідуальні) -->
-    <div class="pricing-column">
-      <h3 class="pricing-column__title">Дорослі (індивідуальні)</h3>
-      <div class="pricing-accordion" data-accordion-container>
-
-        <!-- Індивідуальне навчання -->
-        <div class="pricing-accordion__item" data-accordion-item data-pricing-item data-pricing-title="Індивідуальне навчання">
-          <button class="pricing-accordion__header" data-accordion-header>
-            <span class="pricing-accordion__title">Індивідуальне навчання</span>
-            <span class="pricing-accordion__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="pricing-accordion__content glass-card" data-accordion-content>
-            <div class="pricing-content">
-              <p class="pricing-content__desc">Конструктор під клієнта - обирайте що вам потрібно</p>
-
-              <div class="pricing-content__includes">
-                <h4 class="pricing-content__subtitle">Варіанти:</h4>
-                <ul class="pricing-content__list">
-                  <li><strong>Пакети:</strong> 10, 25, 50 занять</li>
-                  <li><strong>Тип:</strong> загальна або спеціалізована англійська</li>
-                  <li><strong>Викладач:</strong> вітчизняний або носій мови</li>
-                  <li><strong>Тривалість:</strong> 50 хв або 90 хв</li>
-                </ul>
-              </div>
-
-              <div class="pricing-content__prices-table">
-                <h4 class="pricing-content__subtitle">Вартість загальна англійська:</h4>
-                <table class="pricing-table">
-                  <thead>
-                    <tr>
-                      <th>Тривалість</th>
-                      <th>Локальний викладач</th>
-                      <th>Носій мови</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>50 хв</td>
-                      <td>665 грн</td>
-                      <td>-</td>
-                    </tr>
-                    <tr>
-                      <td>90 хв</td>
-                      <td>990 грн</td>
-                      <td>1 290 грн</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <h4 class="pricing-content__subtitle">Спеціалізована англійська:</h4>
-                <table class="pricing-table">
-                  <thead>
-                    <tr>
-                      <th>Тривалість</th>
-                      <th>Локальний викладач</th>
-                      <th>Носій мови</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>50 хв</td>
-                      <td>950 грн</td>
-                      <td>-</td>
-                    </tr>
-                    <tr>
-                      <td>90 хв</td>
-                      <td>-</td>
-                      <td>1 750 грн</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <p class="pricing-content__note">
-                  <small>Знижки: 10% при повній оплаті онлайн до 16:00<br>
-                  5% при повній оплаті онлайн 16:00-21:00</small>
-                </p>
-              </div>
-
-              <button class="button button--primary button--full" data-consultation-btn>Підібрати програму</button>
-            </div>
-          </div>
+    <!-- Картка 3: Speak Up Premium -->
+    <div class="program-card program-card--premium glass-card">
+      <div class="program-card__image-wrapper">
+        <img src="{% static 'img/speak_premium.png' %}" alt="Speak Up Premium" class="program-card__image" loading="lazy" decoding="async">
+      </div>
+      <div class="program-card__content">
+        <div class="program-card__badge">
+          <span class="program-card__badge-icon">✓</span>
+          <span class="program-card__badge-text">Гарантія результату</span>
         </div>
+        <h3 class="program-card__title">Speak Up Premium</h3>
+        <p class="program-card__description">Ваш індивідуальний шлях до досконалої англійської: максимум привілеїв у одному курсі. Унікальна система персональних занять з викладачем, розмовних груп та мультимедійних тренінгів для комплексного прориву.</p>
 
+        <ul class="program-card__features">
+          <li>Абсолютна гнучкість: ваш особистий графік, який підлаштовується під ваше життя, а не навпаки</li>
+          <li>Подвійна підтримка: робота з викладачем тет-а-тет для розбору складних тем та практика в групах для комунікації</li>
+          <li>Контроль прогресу: регулярні тестування та гарантований результат (Level test = 65% і вище)</li>
+        </ul>
+
+        <a href="#" class="button button--premium button--full">Дізнатися про Premium</a>
       </div>
     </div>
 
